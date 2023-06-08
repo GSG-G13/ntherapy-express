@@ -1,15 +1,20 @@
 module.exports = {
   env: {
     es2021: true,
-    node: true
+    node: true,
   },
-  extends: 'standard-with-typescript',
-  overrides: [
+  plugins: ['@typescript-eslint', 'import', 'prettier'],
+  extends: [
+    'standard-with-typescript',
+    'airbnb-typescript/base',
+    'prettier',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
   ],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
   },
-  rules: {
-  }
-}
+  rules: {},
+};
