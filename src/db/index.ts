@@ -1,22 +1,8 @@
-import { DataTypes, ModelDefined, Sequelize, Optional } from "sequelize";
-const sequelize = new Sequelize("ntherapy", "mohannad", "151984", {
-  host: "localhost",
-  port: 5432,
-  dialect: "postgres",
-});
+import { DataTypes } from 'sequelize';
+import UsersAttributes from '../types/usersAttributes';
+import sequelize from './connection';
 
-interface UserAttributes {
-  id: number;
-  fullName: string;
-  email: string;
-  password: string;
-  phone_number: string;
-  role: string;
-  is_active: boolean;
-}
-
-type UserCreationAttributes = Optional<UserAttributes, "id">;
-const Users: ModelDefined<UserAttributes, UserCreationAttributes> = sequelize.define("users", {
+const Users = sequelize.define<UsersAttributes>('users', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -41,14 +27,13 @@ const Users: ModelDefined<UserAttributes, UserCreationAttributes> = sequelize.de
   },
   role: {
     type: DataTypes.STRING,
-    defaultValue: "client",
+    defaultValue: 'client',
   },
   is_active: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
   },
 });
-async () => await Users.sync();
+(async () => Users.sync())();
 
 export default Users;
-
