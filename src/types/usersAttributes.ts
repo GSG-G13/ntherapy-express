@@ -5,7 +5,7 @@ import {
 interface UsersAttributes extends Model
 <InferAttributes<UsersAttributes>,
 InferCreationAttributes<UsersAttributes>> {
-  id: CreationOptional<number>;
+  id: CreationOptional<number>,
   fullName: string,
   email: string,
   password: string,
