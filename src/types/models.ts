@@ -15,18 +15,5 @@ InferCreationAttributes<UsersAttributes>> {
   createdAt?: CreationOptional<Date>,
   updatedAt?: CreationOptional<Date>,
 }
+
 export default UsersAttributes;
-
-// interface TherapistModel extends Model 
-// <InferAttributes<TherapistModel>,
-// InferCreationAttributes<TherapistModel>> {
-//   id:CreationOptional <number>,
-//   cvPath: string,
-//   img?: string,
-//   bio: string,
-//   hourlyRate: number,
-//   user_id: number,
-//   createdAt?: CreationOptional<Date>,
-//   updatedAt?: CreationOptional<Date>,
-
-// }

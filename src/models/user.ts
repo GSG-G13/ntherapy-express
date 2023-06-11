@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import UsersAttributes from '../types/index';
-import sequelize from './connection';
+import sequelize from '../db/connection';
 
 const User = sequelize.define<UsersAttributes>('user', {
   id: {
@@ -26,7 +26,6 @@ const User = sequelize.define<UsersAttributes>('user', {
   },
   role: {
     type: DataTypes.ENUM,
-    defaultValue: 'client',
   },
   isActive: {
     type: DataTypes.BOOLEAN,
