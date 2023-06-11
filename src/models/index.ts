@@ -1,7 +1,11 @@
 import User from './user';
 import Therapist from './therapist';
+import Appointment from './appointment';
 
 User.hasOne(Therapist);
 Therapist.belongsTo(User);
 
-export { User, Therapist };
+Therapist.hasMany(Appointment);
+Appointment.belongsTo(Therapist);
+
+export { User, Therapist, Appointment };

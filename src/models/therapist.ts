@@ -3,7 +3,7 @@ import { TherapistAttributes } from '../types/index';
 
 import sequelize from '../db/connection';
 
-const Therapist = sequelize.define <TherapistAttributes>('therapist', {
+const Therapist = sequelize.define<TherapistAttributes>('therapist', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,

@@ -16,6 +16,8 @@ module.exports = {
     project: ["./tsconfig.json"],
   },
   overrides: [],
-  rules: {},
+  rules: {
+    'linebreak-style': 0
+  },
   ignorePatterns: ["__tests__/*", "dist/*"],
 };
