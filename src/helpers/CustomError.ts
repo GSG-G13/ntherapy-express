@@ -10,4 +10,11 @@ class CustomError extends Error {
   }
 }
 
-export default CustomError;
+const templateErrors = {
+  BAD_REQUEST: (message: string) => new CustomError(400, message),
+  UNAUTHORIZED: (message: string) => new CustomError(401, message),
+  FORBIDDEN: (message: string) => new CustomError(403, message),
+  NOT_FOUND: (message: string) => new CustomError(404, message),
+};
+
+export { CustomError, templateErrors };

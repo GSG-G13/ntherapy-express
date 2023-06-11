@@ -1,4 +1,3 @@
-import CustomError from './CustomError';
+import { CustomError, templateErrors } from './CustomError';
 
-// eslint-disable-next-line import/prefer-default-export
-export { CustomError };
+export { CustomError, templateErrors };
