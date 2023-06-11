@@ -27,6 +27,15 @@ InferCreationAttributes<TherapistAttributes>> {
   userId?: ForeignKey<UsersAttributes['id']>,
   createdAt?: CreationOptional<Date>,
   updatedAt?: CreationOptional<Date>,
-
 }
-export { UsersAttributes, TherapistAttributes };
+interface AdminAttributes extends Model
+<InferAttributes<AdminAttributes>,
+InferCreationAttributes<AdminAttributes>> {
+  id: CreationOptional<number>,
+  username: string,
+  password: string,
+  createdAt?: CreationOptional<Date>,
+  updatedAt?: CreationOptional<Date>,
+}
+
+export { UsersAttributes, TherapistAttributes, AdminAttributes };
