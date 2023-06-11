@@ -1,3 +1,3 @@
-import UsersAttributes from './models';
+import { UsersAttributes, AdminAttributes } from './models';
 
-export default UsersAttributes;
+export { UsersAttributes, AdminAttributes };
