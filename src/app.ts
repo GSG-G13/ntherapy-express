@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { clientError, serverError } from './middlewares/ErrorMiddleware';
+import { clientError, serverError } from './middlewares';
 
 const app = express();
 
