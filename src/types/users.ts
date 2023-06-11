@@ -9,7 +9,7 @@ InferCreationAttributes<UsersAttributes>> {
   fullName: string,
   email: string,
   password: string,
-  phone_number?: string | undefined,
+  phoneNumber?: string | undefined,
   role: CreationOptional<string>,
   isActive: CreationOptional<boolean>,
   createdAt?: CreationOptional<Date>,

@@ -21,7 +21,7 @@ const User = sequelize.define<UsersAttributes>('user', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  phone_number: {
+  phoneNumber: {
     type: DataTypes.STRING,
   },
   role: {
