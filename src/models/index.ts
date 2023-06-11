@@ -1,4 +1,8 @@
 import User from './user';
 import Admin from './admin';
+import Therapist from './therapist';
 
-export default { User, Admin };
+User.hasOne(Therapist);
+Therapist.belongsTo(User);
+
+export { User, Therapist, Admin };
