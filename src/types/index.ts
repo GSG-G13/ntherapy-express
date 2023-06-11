@@ -1,3 +1,3 @@
-import UsersAttributes from './models';
+import { UsersAttributes, TherapistAttributes } from './models';
 
-export default UsersAttributes;
+export { UsersAttributes, TherapistAttributes };
