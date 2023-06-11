@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { AdminAttributes } from '../types/index';
+import { AdminAttributes } from '../types';
 import sequelize from '../db/connection';
 
 const Admin = sequelize.define<AdminAttributes>('admin', {
