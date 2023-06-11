@@ -20,7 +20,7 @@ interface TherapistAttributes extends Model
 InferCreationAttributes<TherapistAttributes>> {
   id:CreationOptional <number>,
   cvLink: string,
-  profileImg?: string | undefined,
+  profileImg: string,
   major: string,
   bio?: string | undefined,
   hourlyRate: number,
