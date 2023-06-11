@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import { AppointmentsAttributes } from '../types/index';
+import { AppointmentsAttributes } from '../types';
 import sequelize from '../db/connection';
 
 const Appointment = sequelize.define<AppointmentsAttributes>('Appointment', {
