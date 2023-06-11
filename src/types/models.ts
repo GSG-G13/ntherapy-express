@@ -16,4 +16,14 @@ InferCreationAttributes<UsersAttributes>> {
   updatedAt?: CreationOptional<Date>,
 }
 
-export default UsersAttributes;
+interface AdminAttributes extends Model
+<InferAttributes<AdminAttributes>,
+InferCreationAttributes<AdminAttributes>> {
+  id: CreationOptional<number>,
+  username: string,
+  password: string,
+  createdAt?: CreationOptional<Date>,
+  updatedAt?: CreationOptional<Date>,
+}
+
+export { UsersAttributes, AdminAttributes };
