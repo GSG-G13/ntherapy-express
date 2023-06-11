@@ -11,6 +11,8 @@ InferCreationAttributes<UsersAttributes>> {
   password: string,
   phone_number?: string | undefined,
   role: CreationOptional<string>,
-  is_active: CreationOptional<boolean>,
+  isActive: CreationOptional<boolean>,
+  createdAt?: CreationOptional<Date>,
+  updatedAt?: CreationOptional<Date>,
 }
 export default UsersAttributes;

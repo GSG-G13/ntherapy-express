@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
-import UsersAttributes from '../types/usersAttributes';
+import UsersAttributes from '../types/index';
 import sequelize from './connection';
 
-const Users = sequelize.define<UsersAttributes>('users', {
+const User = sequelize.define<UsersAttributes>('user', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -20,7 +20,6 @@ const Users = sequelize.define<UsersAttributes>('users', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: false,
   },
   phone_number: {
     type: DataTypes.STRING,
@@ -29,11 +28,10 @@ const Users = sequelize.define<UsersAttributes>('users', {
     type: DataTypes.STRING,
     defaultValue: 'client',
   },
-  is_active: {
+  isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
   },
 });
-(async () => Users.sync())();
 
-export default Users;
+export default User;

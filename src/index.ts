@@ -5,5 +5,5 @@ import { PORT } from './config';
 const port = PORT || 3000;
 
 app.listen(port, () => {
-  log(`Listening on http://localhost:${port}  on port ${port}`);
+  log(`Listening on http://localhost:${port}`);
 });
