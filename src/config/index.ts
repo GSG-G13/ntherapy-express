@@ -2,9 +2,29 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const { PORT, DB_URL } = process.env;
+const {
+  PORT = 8080, DB_URL, DATABASE_URL, DB_TEST_URL, NODE_ENV = 'development',
+} = process.env;
 
-// eslint-disable-next-line import/prefer-default-export
-export {
-  PORT, DB_URL,
+interface ICONFIG {
+  environemnt: string,
+  PORT: number | string,
+  DB_URL: {
+    [key: string] : string | undefined
+    // developemnt: string,
+    // production: string,
+    // test: string,
+  },
+
+}
+const config: ICONFIG = {
+  DB_URL: {
+    developemnt: DB_URL,
+    production: DATABASE_URL,
+    test: DB_TEST_URL,
+  },
+  environemnt: NODE_ENV,
+  PORT,
 };
+
+export default config;
