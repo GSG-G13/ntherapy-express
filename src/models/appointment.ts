@@ -14,6 +14,7 @@ const Appointment = sequelize.define<AppointmentsAttributes>('appointment', {
   },
   isBooked: {
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
   },
 
 });
