@@ -11,9 +11,7 @@ interface ICONFIG {
   PORT: number | string,
   DB_URL: {
     [key: string] : string | undefined
-    // developemnt: string,
-    // production: string,
-    // test: string,
+
   },
 
 }

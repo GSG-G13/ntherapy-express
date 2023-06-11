@@ -25,7 +25,7 @@ const User = sequelize.define<UsersAttributes>('user', {
     type: DataTypes.STRING,
   },
   role: {
-    type: DataTypes.STRING,
+    type: DataTypes.ENUM,
     defaultValue: 'client',
   },
   isActive: {
