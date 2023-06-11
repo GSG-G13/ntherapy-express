@@ -1,5 +1,5 @@
 import {
-  Model, InferAttributes, InferCreationAttributes, CreationOptional,
+  Model, InferAttributes, InferCreationAttributes, CreationOptional, ForeignKey,
 } from 'sequelize';
 
 interface UsersAttributes extends Model
@@ -15,5 +15,18 @@ InferCreationAttributes<UsersAttributes>> {
   createdAt?: CreationOptional<Date>,
   updatedAt?: CreationOptional<Date>,
 }
+interface TherapistAttributes extends Model
+<InferAttributes<TherapistAttributes>,
+InferCreationAttributes<TherapistAttributes>> {
+  id:CreationOptional <number>,
+  cvLink: string,
+  profileImg: string,
+  major: string,
+  bio?: string | undefined,
+  hourlyRate: number,
+  userId?: ForeignKey<UsersAttributes['id']>,
+  createdAt?: CreationOptional<Date>,
+  updatedAt?: CreationOptional<Date>,
 
-export default UsersAttributes;
+}
+export { UsersAttributes, TherapistAttributes };
