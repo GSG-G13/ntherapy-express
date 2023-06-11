@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import UsersAttributes from '../types/index';
+import { UsersAttributes } from '../types/index';
 import sequelize from '../db/connection';
 
 const User = sequelize.define<UsersAttributes>('user', {
