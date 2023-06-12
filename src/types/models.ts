@@ -15,6 +15,7 @@ InferCreationAttributes<UsersAttributes>> {
   createdAt?: CreationOptional<Date>,
   updatedAt?: CreationOptional<Date>,
 }
+
 interface TherapistAttributes extends Model
 <InferAttributes<TherapistAttributes>,
 InferCreationAttributes<TherapistAttributes>> {
@@ -28,6 +29,17 @@ InferCreationAttributes<TherapistAttributes>> {
   createdAt?: CreationOptional<Date>,
   updatedAt?: CreationOptional<Date>,
 }
+
+interface AppointmentsAttributes extends Model
+<InferAttributes<AppointmentsAttributes>,
+InferCreationAttributes<AppointmentsAttributes>> {
+  id: CreationOptional<number>,
+  therapist_id?: ForeignKey<TherapistAttributes['id']>,
+  datetime: Date,
+  isBooked?: CreationOptional<boolean>,
+  isAvailable?: CreationOptional<boolean>
+}
+
 interface AdminAttributes extends Model
 <InferAttributes<AdminAttributes>,
 InferCreationAttributes<AdminAttributes>> {
@@ -38,4 +50,6 @@ InferCreationAttributes<AdminAttributes>> {
   updatedAt?: CreationOptional<Date>,
 }
 
-export { UsersAttributes, TherapistAttributes, AdminAttributes };
+export {
+  UsersAttributes, TherapistAttributes, AdminAttributes, AppointmentsAttributes,
+};

@@ -1,3 +1,7 @@
-import { UsersAttributes, AdminAttributes, TherapistAttributes } from './models';
+import {
+  UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes,
+} from './models';
 
-export { UsersAttributes, TherapistAttributes, AdminAttributes };
+export {
+  UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes,
+};
