@@ -36,7 +36,8 @@ InferCreationAttributes<AppointmentsAttributes>> {
   id: CreationOptional<number>,
   therapist_id?: ForeignKey<TherapistAttributes['id']>,
   datetime: Date,
-  isBooked: boolean
+  isBooked: boolean,
+  isAvailable:boolean
 }
 
 interface AdminAttributes extends Model
