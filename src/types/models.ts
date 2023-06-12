@@ -57,6 +57,7 @@ InferCreationAttributes<SessionsAttributes>> {
   appointmentId?: ForeignKey<AppointmentsAttributes['id']>,
   userId?: ForeignKey<UsersAttributes['id']>,
   createdAt?: CreationOptional<Date>,
+  updatedAt?: CreationOptional<Date>,
 
 }
 

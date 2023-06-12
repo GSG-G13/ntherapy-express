@@ -8,9 +8,6 @@ const Session = sequelize.define<SessionsAttributes>('session', {
     autoIncrement: true,
     primaryKey: true,
   },
-  createdAt: {
-    type: DataTypes.DATE,
-  },
 
 });
 
