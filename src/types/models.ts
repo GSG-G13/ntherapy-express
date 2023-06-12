@@ -50,6 +50,16 @@ InferCreationAttributes<AdminAttributes>> {
   updatedAt?: CreationOptional<Date>,
 }
 
+interface SessionsAttributes extends Model
+<InferAttributes<SessionsAttributes>,
+InferCreationAttributes<SessionsAttributes>> {
+  id: CreationOptional<number>,
+  appointmentId?: ForeignKey<AppointmentsAttributes['id']>,
+  userId?: ForeignKey<UsersAttributes['id']>,
+  createdAt?: CreationOptional<Date>,
+
+}
+
 export {
-  UsersAttributes, TherapistAttributes, AdminAttributes, AppointmentsAttributes,
+  UsersAttributes, TherapistAttributes, AdminAttributes, AppointmentsAttributes, SessionsAttributes,
 };
