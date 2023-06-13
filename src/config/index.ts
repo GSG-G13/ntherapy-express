@@ -7,7 +7,7 @@ const {
 } = process.env;
 
 interface ICONFIG {
-  environemnt: string,
+  environment: string,
   PORT: number | string,
   DB_URL: {
     [key: string] : string | undefined
@@ -17,11 +17,11 @@ interface ICONFIG {
 }
 const config: ICONFIG = {
   DB_URL: {
-    developemnt: DB_URL,
+    development: DB_URL,
     production: DATABASE_URL,
-    test: DB_TEST_URL,
+    testing: DB_TEST_URL,
   },
-  environemnt: NODE_ENV,
+  environment: NODE_ENV,
   PORT,
 };
 
