@@ -1,4 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 const Users = [
   {
     id: 1,
@@ -122,7 +123,13 @@ const Users = [
   },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Admins = [
+  {
+    id: 1,
+    username: 'admin',
+    password: 'admin',
+  },
+];
 const Therapists = [
   {
     id: 1,
@@ -241,9 +248,17 @@ const Therapists = [
     hourly_rate: 65,
     user_id: 13,
   },
+  {
+    id: 14,
+    cv_path: 's3://bucket-name/cv_454446666664234232.pdf',
+    img: 'https://familydoctor.org/wp-content/uploads/2018/02/41808433_l.jpg',
+    major: 'Mental Health Counselor ',
+    bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
+    hourly_rate: 85,
+    user_id: 14,
+  },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Availability = [
   {
     id: 1,
@@ -277,11 +292,25 @@ const Availability = [
   },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Sessions = [
   {
     id: 1,
     appointment_id: 1,
     user_id: 1,
+  },
+  {
+    id: 2,
+    appointment_id: 2,
+    user_id: 2,
+  },
+  {
+    id: 3,
+    appointment_id: 3,
+    user_id: 3,
+  },
+  {
+    id: 4,
+    appointment_id: 4,
+    user_id: 4,
   },
 ];
