@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const {
-  PORT = 3000, DB_URL, DATABASE_URL, DB_TEST_URL, NODE_ENV = 'development',
+  PORT = 8080, DB_URL, DATABASE_URL, DB_TEST_URL, NODE_ENV = 'development',
 } = process.env;
 
 interface ICONFIG {
@@ -19,7 +19,7 @@ const config: ICONFIG = {
   DB_URL: {
     development: DB_URL,
     production: DATABASE_URL,
-    test: DB_TEST_URL,
+    testing: DB_TEST_URL,
   },
   environment: NODE_ENV,
   PORT,
