@@ -1,4 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 const Users = [
   {
     id: 1,
@@ -104,9 +105,31 @@ const Users = [
     role: 'user',
     is_active: false,
   },
+  {
+    id: 14,
+    full_name: 'Ahmed izz Al-deen',
+    email: 'ahmedizz@gmail.com',
+    phone_number: '0591231231',
+    role: 'user',
+    is_active: true,
+  },
+  {
+    id: 15,
+    full_name: 'Mohammed al shawwa',
+    email: 'moshawwa@gmail.com',
+    phone_number: '0592146028',
+    role: 'user',
+    is_active: true,
+  },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Admins = [
+  {
+    id: 1,
+    username: 'admin',
+    password: 'admin',
+  },
+];
 const Therapists = [
   {
     id: 1,
@@ -116,7 +139,6 @@ const Therapists = [
     bio: "A counselor with a master's degree and several years of supervised clinical work experience. Trained to diagnose and provide individual and group counseling. ",
     hourly_rate: 10,
     user_id: 1,
-
   },
   {
     id: 2,
@@ -126,7 +148,6 @@ const Therapists = [
     bio: " A counselor with a master's degree in psychology, counseling or a related field. Trained to diagnose and provide individual and group counseling ",
     hourly_rate: 20,
     user_id: 2,
-
   },
   {
     id: 3,
@@ -227,15 +248,69 @@ const Therapists = [
     hourly_rate: 65,
     user_id: 13,
   },
+  {
+    id: 14,
+    cv_path: 's3://bucket-name/cv_454446666664234232.pdf',
+    img: 'https://familydoctor.org/wp-content/uploads/2018/02/41808433_l.jpg',
+    major: 'Mental Health Counselor ',
+    bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
+    hourly_rate: 85,
+    user_id: 14,
+  },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Availability = [
   {
     id: 1,
     therapist_id: 1,
     datetime: '6/2/2023 11:00',
     isbooked: 'false',
+  },
+  {
+    id: 2,
+    therapist_id: 1,
+    datetime: '6/2/2023 12:00',
+    isbooked: 'false',
+  },
+  {
+    id: 3,
+    therapist_id: 1,
+    datetime: '6/2/2023 13:00',
+    isbooked: 'false',
+  },
+  {
+    id: 4,
+    therapist_id: 1,
+    datetime: '6/2/2023 14:00',
+    isbooked: 'false',
+  },
+  {
+    id: 5,
+    therapist_id: 1,
+    datetime: '6/2/2023 15:00',
+    isbooked: 'false',
+  },
+];
 
+const Sessions = [
+  {
+    id: 1,
+    appointment_id: 1,
+    user_id: 1,
+  },
+  {
+    id: 2,
+    appointment_id: 2,
+    user_id: 2,
+  },
+  {
+    id: 3,
+    appointment_id: 3,
+    user_id: 3,
+  },
+  {
+    id: 4,
+    appointment_id: 4,
+    user_id: 4,
   },
 ];
