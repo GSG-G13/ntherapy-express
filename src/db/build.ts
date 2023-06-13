@@ -15,6 +15,8 @@ const buildDB = async () => {
   await Session.bulkCreate(Sessions);
 };
 
-buildDB();
+if (process.env.BUILD) {
+  buildDB();
+}
 
 export default buildDB;
