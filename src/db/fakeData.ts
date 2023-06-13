@@ -116,7 +116,6 @@ const Therapists = [
     bio: "A counselor with a master's degree and several years of supervised clinical work experience. Trained to diagnose and provide individual and group counseling. ",
     hourly_rate: 10,
     user_id: 1,
-
   },
   {
     id: 2,
@@ -126,7 +125,6 @@ const Therapists = [
     bio: " A counselor with a master's degree in psychology, counseling or a related field. Trained to diagnose and provide individual and group counseling ",
     hourly_rate: 20,
     user_id: 2,
-
   },
   {
     id: 3,
@@ -236,6 +234,29 @@ const Availability = [
     therapist_id: 1,
     datetime: '6/2/2023 11:00',
     isbooked: 'false',
-
+  },
+  {
+    id: 2,
+    therapist_id: 1,
+    datetime: '6/2/2023 12:00',
+    isbooked: 'false',
+  },
+  {
+    id: 3,
+    therapist_id: 1,
+    datetime: '6/2/2023 13:00',
+    isbooked: 'false',
+  },
+  {
+    id: 4,
+    therapist_id: 1,
+    datetime: '6/2/2023 14:00',
+    isbooked: 'false',
+  },
+  {
+    id: 5,
+    therapist_id: 1,
+    datetime: '6/2/2023 15:00',
+    isbooked: 'false',
   },
 ];
