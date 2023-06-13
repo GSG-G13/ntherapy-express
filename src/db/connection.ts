@@ -8,7 +8,6 @@ if (!DB_URL) {
   throw Error('no database found');
 }
 
-console.log(config.environment);
 const sequelize = new Sequelize(DB_URL, {
   dialect: 'postgres',
   dialectOptions: {
