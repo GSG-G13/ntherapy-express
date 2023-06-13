@@ -420,32 +420,32 @@ const Appointments = [
 const Sessions = [
   {
     id: 1,
-    appointment_id: 1,
+    appointmentId: 1,
     userId: 1,
   },
   {
     id: 2,
-    appointment_id: 2,
+    appointmentId: 2,
     userId: 3,
   },
   {
     id: 3,
-    appointment_id: 3,
+    appointmentId: 3,
     userId: 3,
   },
   {
     id: 4,
-    appointment_id: 4,
+    appointmentId: 4,
     userId: 3,
   },
   {
     id: 5,
-    appointment_id: 5,
+    appointmentId: 5,
     userId: 4,
   },
   {
     id: 6,
-    appointment_id: 6,
+    appointmentId: 6,
     userId: 4,
   },
 
