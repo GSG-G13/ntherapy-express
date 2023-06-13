@@ -34,7 +34,7 @@ interface AppointmentsAttributes extends Model
 <InferAttributes<AppointmentsAttributes>,
 InferCreationAttributes<AppointmentsAttributes>> {
   id: CreationOptional<number>,
-  therapist_id?: ForeignKey<TherapistAttributes['id']>,
+  therapistId?: ForeignKey<TherapistAttributes['id']>,
   datetime: Date,
   isBooked?: CreationOptional<boolean>,
   isAvailable?: CreationOptional<boolean>

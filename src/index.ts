@@ -1,9 +1,10 @@
 import { log } from 'console';
 import app from './app';
-import { PORT } from './config';
+import config from './config';
+import sequelize from './db/connection';
 
-const port = PORT || 3000;
-
-app.listen(port, () => {
-  log(`Listening on http://localhost:${port}`);
+sequelize.sync().then(() => {
+  app.listen(config.PORT, () => {
+    log(`Listening on http://localhost:${config.PORT}`);
+  });
 });

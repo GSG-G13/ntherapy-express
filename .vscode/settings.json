@@ -16,4 +16,5 @@
   ],
   "editor.tabSize": 2,
   "files.eol": "\n",
+  "dotenv.enableAutocloaking": false,
 }
