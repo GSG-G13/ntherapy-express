@@ -104,6 +104,22 @@ const Users = [
     role: 'user',
     is_active: false,
   },
+  {
+    id: 14,
+    full_name: 'Ahmed izz Al-deen',
+    email: 'ahmedizz@gmail.com',
+    phone_number: '0591231231',
+    role: 'user',
+    is_active: true,
+  },
+  {
+    id: 15,
+    full_name: 'Mohammed al shawwa',
+    email: 'moshawwa@gmail.com',
+    phone_number: '0592146028',
+    role: 'user',
+    is_active: true,
+  },
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -258,5 +274,14 @@ const Availability = [
     therapist_id: 1,
     datetime: '6/2/2023 15:00',
     isbooked: 'false',
+  },
+];
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Sessions = [
+  {
+    id: 1,
+    appointment_id: 1,
+    user_id: 1,
   },
 ];
