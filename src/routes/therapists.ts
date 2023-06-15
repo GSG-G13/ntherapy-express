@@ -1,0 +1,8 @@
+import express from 'express';
+import getAllTherapists from '../controllers';
+
+const therapists = express.Router();
+
+therapists.get('/therapists', getAllTherapists);
+export default therapists;
+// http://localhost:8080/therapists?q=Al&page=0
