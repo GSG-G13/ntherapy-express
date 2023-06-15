@@ -7,8 +7,7 @@ import buildb from '../src/db/build'
 beforeAll(buildb);
 afterAll(() => connection.close())
 
-
-const appointment = describe("GET appointment Router with therapist id and appointments date", () => {
+ describe("GET appointment Router with therapist id and appointments date", () => {
   it('Should return a Success Response with 200 status and result attributes',async () => {
   
     const response = await request(app).get(`/appointments/4?date=2023-06-18`);
@@ -55,3 +54,4 @@ const appointment = describe("GET appointment Router with therapist id and appoi
   });
   })
 });
+
