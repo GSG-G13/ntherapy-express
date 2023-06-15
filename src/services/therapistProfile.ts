@@ -1,9 +1,17 @@
+import { User } from '../models';
 import therapist from '../models/therapist';
+// import { TherapistAttributes } from '../types';
 
 const getTherapistData = async (id: string) => {
-  const therapistdata = await therapist.findByPk(id);
-  const data = therapistdata?.toJSON();
-  return data;
+  const therapistData = await therapist.findByPk(id, {
+    include: [{
+      model: User,
+      attributes: ['fullName', 'isActive', 'email'],
+
+    },
+    ],
+  });
+  return therapistData;
 };
 
 export default getTherapistData;
