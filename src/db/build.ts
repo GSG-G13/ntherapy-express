@@ -21,7 +21,7 @@ const buildDB = async () => {
   log('Appointments created');
   await Session.bulkCreate(Sessions);
   log('Sessions created');
-  // process.exit();
+  if (!(process.env.NODE_ENV === 'testing'))process.exit();
 };
 
 if (process.env.BUILD) {
