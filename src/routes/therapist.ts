@@ -3,6 +3,6 @@ import getTherapistById from '../controllers';
 
 const router = express.Router();
 
-router.get('/therapist/:id', getTherapistById);
+router.get('/:id', getTherapistById);
 
 export default router;

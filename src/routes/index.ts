@@ -1,3 +1,8 @@
-import getTherapistData from './therapist';
+import express from 'express';
+import therapistRouter from './therapist';
 
-export default getTherapistData;
+const router = express.Router();
+
+router.use('/therapists', therapistRouter);
+
+export default router;

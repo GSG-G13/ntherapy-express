@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_ENV=development  nodemon src/index.ts",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "test": "cross-env NODE_ENV=testing jest"
+    "test": "cross-env NODE_ENV=testing jest index.ts"
   },
   "repository": {
     "type": "git",
