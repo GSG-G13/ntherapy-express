@@ -3,7 +3,6 @@ import { Op } from 'sequelize';
 import Appointment from '../models/appointment';
 import sequelize from '../db/connection';
 
-
 const getAppointments = async (
   req: Request,
   res: Response,
@@ -24,11 +23,9 @@ const getAppointments = async (
         ],
       },
     });
-
     if (!query.length) {
       throw new Error('no data found');
     }
-
     res.json({ data: query, message: 'OK!' });
   } catch (err) {
     next(err);

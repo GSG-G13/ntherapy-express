@@ -7,42 +7,41 @@ import buildb from '../src/db/build'
 beforeAll(buildb);
 afterAll(() => connection.close())
 
-
-const appointment = describe("GET appointment Router with therapist id and appointments date", () => {
+ describe('GET appointment Router with therapist id and appointments date', () => {
   it('Should return a Success Response with 200 status and result attributes',async () => {
   
     const response = await request(app).get(`/appointments/4?date=2023-06-18`);
   
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      "data": [
+      'data': [
           {
-              "id": 16,
-              "datetime": "2023-06-18T08:00:00.000Z",
-              "therapistId": 4
+              'id': 16,
+              'datetime': '2023-06-18T08:00:00.000Z',
+              'therapistId': 4
           },
           {
-              "id": 17,
-              "datetime": "2023-06-18T09:00:00.000Z",
-              "therapistId": 4
+              'id': 17,
+              'datetime': '2023-06-18T09:00:00.000Z',
+              'therapistId': 4
           },
           {
-              "id": 18,
-              "datetime": "2023-06-18T10:00:00.000Z",
-              "therapistId": 4
+              'id': 18,
+              'datetime': '2023-06-18T10:00:00.000Z',
+              'therapistId': 4
           },
           {
-              "id": 19,
-              "datetime": "2023-06-18T11:00:00.000Z",
-              "therapistId": 4
+              'id': 19,
+              'datetime': '2023-06-18T11:00:00.000Z',
+              'therapistId': 4
           },
           {
-              "id": 20,
-              "datetime": "2023-06-18T12:00:00.000Z",
-              "therapistId": 4
+              'id': 20,
+              'datetime': '2023-06-18T12:00:00.000Z',
+              'therapistId': 4
           }
       ],
-      "message": "OK!"
+      'message': 'OK!'
   });
   })
 
@@ -51,7 +50,8 @@ const appointment = describe("GET appointment Router with therapist id and appoi
   
     expect(response.status).toBe(500);
     expect(response.body).toEqual({
-      "message": "Server Error"
+      'message': 'Server Error'
   });
   })
 });
+
