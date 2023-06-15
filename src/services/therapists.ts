@@ -16,7 +16,7 @@ const getAllTherapist = async (name: string, page: number, limit: number) => {
         },
       },
     ],
-    attributes: ['profileImg', 'major', 'hourlyRate'],
+    attributes: ['profileImg', 'major', 'hourlyRate', 'userId'],
     limit: 8,
     offset,
   });
