@@ -7,7 +7,7 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
     const pageNumber = parseInt(page as string, 2) || 1;
     const limit = 8;
 
-    const therapists = await getAllTherapist(q as string, pageNumber, limit);
+    const therapists = await getAllTherapist(q as string || ' ', pageNumber, limit);
 
     if (!therapists.length) {
       res.status(204).json({});

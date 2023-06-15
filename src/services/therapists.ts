@@ -3,7 +3,6 @@ import { Therapist, User } from '../models';
 
 const getAllTherapist = async (name: string, page: number, limit: number) => {
   const offset = (page - 1) * limit; // for one page
-
   const therapist = await Therapist.findAll({
     include: [
       {
