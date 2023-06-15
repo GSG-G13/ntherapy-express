@@ -1,9 +1,3 @@
-// import express, { Request, Response } from 'express';
+import getTherapistData from './therapist';
 
-// const router = express.Router();
-
-// router.get('/test', (req: Request, res: Response) => {
-//   res.send('hi');
-// });
-
-// export default router;
+export default getTherapistData;

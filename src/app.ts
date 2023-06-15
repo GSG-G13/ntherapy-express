@@ -1,6 +1,6 @@
 import express from 'express';
 import { clientError, serverError } from './middlewares';
-import router from './routes/therapist';
+import router from './routes';
 
 const app = express();
 
