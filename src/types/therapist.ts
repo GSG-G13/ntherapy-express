@@ -1,8 +1,8 @@
 import { TherapistAttributes, UsersAttributes } from './models';
 
-interface TherapistWithOptional extends TherapistAttributes {
+interface TherapistWithUserOptional extends TherapistAttributes {
   user?: UsersAttributes,
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export { TherapistWithOptional };
+export { TherapistWithUserOptional };

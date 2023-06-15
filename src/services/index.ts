@@ -1,3 +1,3 @@
-import Therapist from './therapistProfile';
+import findTherapistById from './therapistProfile';
 
-export default Therapist;
+export default findTherapistById;

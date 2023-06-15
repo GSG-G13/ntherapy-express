@@ -2,9 +2,9 @@ import {
   UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes, SessionsAttributes,
 } from './models';
 
-import { TherapistWithOptional } from './tharapist';
+import { TherapistWithUserOptional } from './therapist';
 
 export {
   UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes, SessionsAttributes,
-  TherapistWithOptional,
+  TherapistWithUserOptional,
 };
