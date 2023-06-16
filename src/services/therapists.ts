@@ -1,6 +1,19 @@
 import { Op } from 'sequelize';
 import { Therapist, User } from '../models';
 import { THERAPISTS_LIMIT } from '../db/connection';
+import therapist from '../models/therapist';
+
+const getTherapistById = async (id: string) => {
+  const therapistData = await therapist.findByPk(id, {
+    include: [{
+      model: User,
+      attributes: ['fullName', 'isActive', 'email'],
+
+    },
+    ],
+  });
+  return therapistData;
+};
 
 const getAllTherapist = async (name: string, page: number, limit: number) => {
   const offset = (page - 1) * THERAPISTS_LIMIT;
@@ -25,4 +38,4 @@ const getAllTherapist = async (name: string, page: number, limit: number) => {
   return therapists;
 };
 
-export default getAllTherapist;
+export { getTherapistById, getAllTherapist };

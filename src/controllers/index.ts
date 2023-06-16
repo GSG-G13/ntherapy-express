@@ -1,3 +1,3 @@
-import getAllTherapists from './therapists';
+import { findTherapistById, getAllTherapists } from './therapists';
 
-export default getAllTherapists;
+export { findTherapistById, getAllTherapists };

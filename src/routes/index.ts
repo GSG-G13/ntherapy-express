@@ -1,8 +1,8 @@
-import express, { Router } from 'express';
-import therapists from './therapists';
+import express from 'express';
+import therapistRouter from './therapist';
 
-const app = express();
+const router = express.Router();
 
-app.use(Router);
+router.use('/therapists', therapistRouter);
 
-export default therapists;
+export default router;

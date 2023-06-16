@@ -25,4 +25,5 @@ const buildDB = async () => {
     process.exit();
   }
 };
+
 export default buildDB;
