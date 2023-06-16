@@ -9,11 +9,14 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
 
     const therapists = await getAllTherapist(q as string || ' ', pageNumber, THERAPISTS_LIMIT);
 
-    if (!therapists.length) {
-      res.status(204).json({});
+    if (therapists.length === 0) {
+      return res.status(204).json({ message: 'No therapists found' });
     }
 
-    res.status(200).json(therapists);
+    res.json({
+      message: 'Success',
+      data: therapists,
+    });
   } catch (error) {
     next(error);
   }
