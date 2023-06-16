@@ -24,8 +24,4 @@ const buildDB = async () => {
   if (!(process.env.NODE_ENV === 'testing'))process.exit();
 };
 
-if (process.env.BUILD) {
-  buildDB();
-}
-
 export default buildDB;

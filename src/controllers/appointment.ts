@@ -11,9 +11,9 @@ const getAppointments = async (
     const { therapistId } = req.params;
     const query = await appointmentQuery(therapistId, date);
     if (!query.length) { return res.json({ data: query, message: 'sorry but no appointments found' }); }
-    res.json({ data: query, message: 'appointment successful' });
+    return res.json({ data: query, message: 'appointment successful' });
   } catch (err) {
-    next(err);
+    return next(err);
   }
 };
 
