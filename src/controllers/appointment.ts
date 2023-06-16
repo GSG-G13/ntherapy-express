@@ -1,32 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
-import { Op } from 'sequelize';
-import Appointment from '../models/appointment';
-import sequelize from '../db/connection';
+import appointmentQuery from '../services/appointment';
 
 const getAppointments = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const { date } = req.query;
-  const { therpaistId } = req.params;
   try {
-    const query = await Appointment.findAll({
-      attributes: ['id', 'datetime', 'therapistId'],
-      where: {
-        [Op.and]: [
-          { therapistId: +therpaistId },
-          sequelize.where(
-            sequelize.fn('date', sequelize.col('datetime')),
-            date,
-          ),
-        ],
-      },
-    });
-    if (!query.length) {
-      throw new Error('no data found');
-    }
-    res.json({ data: query, message: 'OK!' });
+    const { date } = req.query;
+    const { therapistId } = req.params;
+    const query = await appointmentQuery(therapistId, date);
+    if (!query.length) { return res.json({ data: query, message: 'sorry but no appointments found' }); }
+    res.json({ data: query, message: 'appointment successful' });
   } catch (err) {
     next(err);
   }

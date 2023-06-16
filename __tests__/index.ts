@@ -45,12 +45,12 @@ afterAll(() => connection.close())
   });
   })
 
-  it('Should return a FAIL Response with 500 status and result attributes',async () => {
+  it('Should return a FAIL Response with 200 status and result attributes',async () => {
     const response = await request(app).get(`/appointments/5?date=2023-06-18`);
   
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      'message': 'Server Error'
+      'message': 'no appointments found'
   });
   })
 });

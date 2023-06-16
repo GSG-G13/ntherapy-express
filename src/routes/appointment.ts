@@ -2,6 +2,6 @@ import { Router } from 'express';
 import appointments from '../controllers/appointment';
 
 const router = Router();
-router.get('/:therpaistId', appointments);
+router.get('/:therapistId', appointments);
 
 export default router;
