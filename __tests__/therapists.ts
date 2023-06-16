@@ -1,7 +1,7 @@
 import request from 'supertest';
 import app from '.././src/app';
-import buildDB from "../src/db/build";
-import dbConnection from "../src/db/connection";
+import buildDB from '../src/db/build';
+import dbConnection from '../src/db/connection';
 
 beforeAll(buildDB);
 afterAll(() => dbConnection.close());

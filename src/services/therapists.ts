@@ -1,9 +1,10 @@
 import { Op } from 'sequelize';
 import { Therapist, User } from '../models';
+import { THERAPISTS_LIMIT } from '../db/connection';
 
 const getAllTherapist = async (name: string, page: number, limit: number) => {
-  const offset = (page - 1) * limit; // for one page
-  const therapist = await Therapist.findAll({
+  const offset = (page - 1) * THERAPISTS_LIMIT;
+  const therapists = await Therapist.findAll({
     include: [
       {
         model: User,
@@ -17,11 +18,11 @@ const getAllTherapist = async (name: string, page: number, limit: number) => {
       },
     ],
     attributes: ['profileImg', 'major', 'hourlyRate', 'userId'],
-    limit: 8,
+    limit,
     offset,
   });
 
-  return therapist;
+  return therapists;
 };
 
 export default getAllTherapist;
