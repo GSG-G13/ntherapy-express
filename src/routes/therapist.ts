@@ -1,8 +1,8 @@
 import express from 'express';
-import therapistRouter from './therapist';
+import getTherapistById from '../controllers';
 
 const router = express.Router();
 
-router.use('/therapists', therapistRouter);
+router.get('/:id', getTherapistById);
 
 export default router;

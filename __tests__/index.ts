@@ -1,5 +1,10 @@
-import jest from 'jest';
+import buildDB from "../src/db/build";
+import dbConnection from "../src/db/connection";
+import therapistTest from './therapist';
 
-test('add', () => {
-  expect(15).toBe(15);
-});
+
+beforeAll(buildDB);
+afterAll(() => dbConnection.close());
+
+describe('Therapist Route', therapistTest);
+
