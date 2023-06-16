@@ -23,11 +23,11 @@ const therapistTest = () => {
     });
 
     it('should return  list of therapists  on the query ', async () => {
-        const response = await request(app).get('/therapists').query({ q: 'Al', page: 0 });
+        const response = await request(app).get('/api/v1/therapists').query({ q: 'Al', page: 0 });
         expect(response.status).toBe(200);
     });
     it('should return  list of the first 8  therapists  on the query ', async () => {
-        const response = await request(app).get('/therapists').query({ q: ' ', page: 0 });
+        const response = await request(app).get('/api/v1/therapists').query({ q: ' ', page: 0 });
         expect(response.status).toBe(200);
     });
 }
