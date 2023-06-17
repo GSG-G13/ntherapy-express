@@ -29,7 +29,7 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
     const { q, page } = req.query;
     const pageNumber = Number(page) || 1;
 
-    const therapists = await getAllTherapist(q as string || ' ', pageNumber);
+    const therapists = await getAllTherapist(q as string || '', pageNumber);
 
     res.json({
       message: 'Success',
