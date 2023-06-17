@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/GSG-G13/ntherapy-express#readme",
   "dependencies": {
+    "@types/nodemailer": "^6.4.8",
     "bcrypt": "^5.1.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
