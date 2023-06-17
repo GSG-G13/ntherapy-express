@@ -15,7 +15,7 @@ const getTherapistById = async (id: string) => {
   return therapistData;
 };
 
-const getAllTherapist = async (name: string, page: number, limit: number) => {
+const getAllTherapist = async (name: string, page: number) => {
   const offset = (page - 1) * THERAPISTS_LIMIT;
   const therapists = await Therapist.findAll({
     include: [
