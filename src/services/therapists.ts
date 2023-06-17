@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { Therapist, User } from '../models';
-import { THERAPISTS_LIMIT } from '../db/connection';
+import { THERAPISTS_LIMIT } from '../config';
 import therapist from '../models/therapist';
 
 const getTherapistById = async (id: string) => {

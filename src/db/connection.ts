@@ -16,6 +16,4 @@ const sequelize = new Sequelize(DB_URL, {
   logging: false,
 });
 
-export const THERAPISTS_LIMIT = 8;
-
 export default sequelize;

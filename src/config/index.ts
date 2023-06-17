@@ -24,5 +24,6 @@ const config: ICONFIG = {
   environment: NODE_ENV,
   PORT,
 };
+export const THERAPISTS_LIMIT = 8;
 
 export default config;
