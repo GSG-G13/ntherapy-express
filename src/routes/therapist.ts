@@ -1,8 +1,9 @@
 import express from 'express';
-import getTherapistById from '../controllers';
+import { findTherapistById, getAllTherapists } from '../controllers';
 
 const router = express.Router();
 
-router.get('/:id', getTherapistById);
+router.get('/:id', findTherapistById);
+router.get('/', getAllTherapists);
 
 export default router;

@@ -1,3 +1,3 @@
-import therapistController from './therapist';
+import { findTherapistById, getAllTherapists } from './therapists';
 
-export default therapistController;
+export { findTherapistById, getAllTherapists };

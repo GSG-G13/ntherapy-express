@@ -20,7 +20,21 @@ const therapistTest = () => {
         const id = '1';
         const response = await request(app).get(`/api/v1/therapists/${id}`);
         expect(response.status).toBe(404);
-    })
+    });
+
+    it('should return  list of therapists  on the query ', async () => {
+        const response = await request(app).get('/api/v1/therapists').query({ q: 'Al', page: 1 });
+        expect(response.status).toBe(200);
+    });
+    it('should return  list of the first 8  therapists  on the query ', async () => {
+        const response = await request(app).get('/api/v1/therapists').query({ q: '', page: 1 });
+        expect(response.status).toBe(200);
+    });
+    it('should return Page number should be a valid number ', async () => {
+        const response = await request(app).get('/api/v1/therapists').query({ q: '', page: "M" });
+        expect(response.status).toBe(400);
+    });
+    
 }
 
 export default therapistTest;
