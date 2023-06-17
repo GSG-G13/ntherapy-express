@@ -4,7 +4,7 @@ import app from '.././src/app';
 const appointmentRouteTest = () => {
     it('Should return a Success Response with 200 status and result attributes',async () => {
   
-        const response = await request(app).get(`/appointments/4?date=2023-06-18`);
+        const response = await request(app).get(`/api/v1/appointments/4?date=2023-06-18`);
       
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
@@ -50,7 +50,7 @@ const appointmentRouteTest = () => {
       })
     
       it('Should return a FAIL Response with 200 status and result attributes',async () => {
-        const response = await request(app).get(`/appointments/4`);
+        const response = await request(app).get(`/api/v1/appointments/4`);
       
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
