@@ -1,0 +1,2 @@
+const THERAPISTS_LIMIT = 8;
+export default THERAPISTS_LIMIT;

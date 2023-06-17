@@ -30,7 +30,7 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
     const pageNumber = Number(page);
 
     // eslint-disable-next-line no-restricted-globals
-    if (isNaN(pageNumber)) {
+    if (isNaN(pageNumber) || pageNumber < 1) {
       throw templateErrors.BAD_REQUEST('Page number should be a valid number');
     }
 
