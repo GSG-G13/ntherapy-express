@@ -3,17 +3,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const {
-  PORT = 8080, DB_URL, DATABASE_URL, DB_TEST_URL, NODE_ENV = 'development',
+  PORT = 8080, DB_URL, DATABASE_URL, DB_TEST_URL, NODE_ENV = 'development', SECRET_KEY,
 } = process.env;
 
 interface ICONFIG {
   environment: string,
   PORT: number | string,
   DB_URL: {
-    [key: string] : string | undefined
-
+    [key: string]: string | undefined
   },
-
+  SECRET_KEY: string | undefined
 }
 const config: ICONFIG = {
   DB_URL: {
@@ -23,6 +22,7 @@ const config: ICONFIG = {
   },
   environment: NODE_ENV,
   PORT,
+  SECRET_KEY,
 };
 
 export default config;

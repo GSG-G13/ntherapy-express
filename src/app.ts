@@ -1,8 +1,14 @@
+import dotenv from 'dotenv';
+
 import express from 'express';
+import bearerToken from 'express-bearer-token';
 import { clientError, serverError } from './middlewares';
 import router from './routes';
 
+dotenv.config();
+
 const app = express();
+app.use(bearerToken());
 
 app.use('/api/v1', router);
 app.use(clientError);
