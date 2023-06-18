@@ -32,29 +32,38 @@ const token = {
   token_type: TOKEN_TYPE,
   expiry_date: EXPIRY_DATE,
 };
-const credentials = {
+const credential = {
   redirect_uris: ['http://localhost:8080'],
 };
 const oAuth2Client = new google.auth.OAuth2(
   web.client_id,
   web.client_secret,
-  credentials.redirect_uris[0],
+  credential.redirect_uris[0],
 );
-oAuth2Client.setCredentials(JSON.parse(JSON.stringify(token)));
+
+const credits = JSON.parse(JSON.stringify(token));
+oAuth2Client.setCredentials(credits);
 const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
 
-const generateMeeting = async (
-  {
-    therapistEmail,
-    userEmail,
-    startDate,
-    endDate,
-  }:Imeeting,
-) => {
+const tokenExpirationDate = 604800000 + (parseInt(credits.expiry_date, 10));
+const currentDate = Date.now();
+
+console.log('tokenExpirationDate', new Date(tokenExpirationDate));
+console.log(currentDate > tokenExpirationDate, 'currentDate > tokenExpirationDate');
+console.log('currentDate', new Date(currentDate));
+
+const generateMeeting = async ({
+  therapistEmail, userEmail, startDate, endDate,
+}: Imeeting) => {
   if (!ACCESS_TOKEN) {
     throw new Error('No access token');
   }
-  const event:calendar_v3.Schema$Event = {
+
+  if (currentDate > tokenExpirationDate) {
+    const { credentials } = await oAuth2Client.refreshAccessToken();
+    oAuth2Client.setCredentials(credentials);
+  }
+  const event: calendar_v3.Schema$Event = {
     summary: 'Therapy Session',
     location: 'Online',
     description: 'Therapy Session',
