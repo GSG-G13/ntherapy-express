@@ -1,8 +1,10 @@
 import { log } from 'console';
 import sequelize from './connection';
+
 import {
   Users, Therapists, Sessions, Appointments, Admins,
 } from './fakeData';
+
 import {
   User, Therapist, Admin, Appointment, Session,
 } from '../models';
@@ -25,5 +27,7 @@ const buildDB = async () => {
     process.exit();
   }
 };
-
+if (process.env.BUILD) {
+  buildDB();
+}
 export default buildDB;

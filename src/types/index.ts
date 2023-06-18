@@ -3,8 +3,11 @@ import {
 } from './models';
 
 import { TherapistWithUserOptional, Imeeting } from './therapist';
+import {
+  Decode, RequestWithUserRole, RolesForSelect, Roles,
+} from './checkauth';
 
 export {
   UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes, SessionsAttributes,
-  TherapistWithUserOptional, Imeeting,
+  TherapistWithUserOptional, Decode, RequestWithUserRole, RolesForSelect, Roles, Imeeting,
 };
