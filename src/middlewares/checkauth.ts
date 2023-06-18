@@ -1,10 +1,13 @@
-/* eslint-disable max-len */
 import { Response, NextFunction } from 'express';
 import { templateErrors } from '../helpers';
 import verifyToken from '../helpers/jwtverify';
 import { Decode, RequestWithUserRole, Roles } from '../types';
 
-const checkAuth = (role: Roles) => async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+const checkAuth = (role: Roles) => async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { token } = req;
     if (token) {
