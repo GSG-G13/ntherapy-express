@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-
 import { ValidationError } from 'yup';
-import { getAppointmentsPerDateService } from '../services';
+import { getAppointmentsPerDateService, getAppointmentById, updateIsAvailable } from '../services';
 import { templateErrors, getAppointmentSchema } from '../helpers';
+import { RequestWithUserRole } from '../types';
 
 const getAppointments = async (
   req: Request,
@@ -24,7 +24,7 @@ const getAppointments = async (
       data,
       message: 'appointment successful',
     });
-  } catch (err:unknown) {
+  } catch (err: unknown) {
     if (err instanceof ValidationError) {
       return next(templateErrors.BAD_REQUEST('Validation Error'));
     }
@@ -32,4 +32,32 @@ const getAppointments = async (
   }
 };
 
-export default getAppointments;
+const updateAvailable = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const userData = req.user;
+
+    if (!userData?.therapistId) {
+      throw templateErrors.UNAUTHORIZED('Unauthorized');
+    }
+
+    const appointmentData = await getAppointmentById(id);
+    if (appointmentData?.isBooked) {
+      throw templateErrors.BAD_REQUEST('this appointment is booked');
+    }
+
+    if (appointmentData?.therapistId?.toString() === userData?.therapistId) {
+      const data = await updateIsAvailable(id);
+      res.json({ data, message: 'update Available successful' });
+    } else {
+      throw templateErrors.UNAUTHORIZED('Unauthorized ');
+    }
+  } catch (error: unknown) {
+    if (error instanceof ValidationError) {
+      return next(templateErrors.BAD_REQUEST('Validation Error'));
+    }
+    next(error);
+  }
+};
+
+export { getAppointments, updateAvailable };
