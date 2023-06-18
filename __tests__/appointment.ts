@@ -58,6 +58,46 @@ const appointmentRouteTest = () => {
             "message": "sorry but no appointments found"
       });
       })
+    it('Should return This appointment is booked with status 400', async () => {
+        const id = '1';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGhlcmFwaXN0IiwidXNlcklkIjoiNSIsInRoZXJhcGlzdElkIjoiMiJ9.gGlnqHx0QN93rw87HdavQH-QN1kA3mQ6yALwl9M2L_w';
+
+        const response = await request(app)
+            .put(`/api/v1/appointments/${id}`)
+            .set('Authorization', `Bearer ${token}`);
+
+        expect(response.status).toBe(400);
+        expect(response.body).toEqual({
+            message: 'this appointment is booked'
+        });
+    });
+    it('Should return update Available successful with status 200', async () => {
+        const id = '9';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGhlcmFwaXN0IiwidXNlcklkIjoiNSIsInRoZXJhcGlzdElkIjoiMiJ9.gGlnqHx0QN93rw87HdavQH-QN1kA3mQ6yALwl9M2L_w';
+
+        const response = await request(app)
+            .put(`/api/v1/appointments/${id}`)
+            .set('Authorization', `Bearer ${token}`);
+
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({
+            data: [1],
+            message: 'update Available successful'
+        });
+    });
+    it('Should return  Unauthorized if Therapist doesn’t own the appointment  and return  status 401', async () => {
+        const id = '11';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGhlcmFwaXN0IiwidXNlcklkIjoiNSIsInRoZXJhcGlzdElkIjoiMiJ9.gGlnqHx0QN93rw87HdavQH-QN1kA3mQ6yALwl9M2L_w';
+
+        const response = await request(app)
+            .put(`/api/v1/appointments/${id}`)
+            .set('Authorization', `Bearer ${token}`);
+
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({
+            message: 'Unauthorized '
+        });
+    });
 }
 
 export default appointmentRouteTest

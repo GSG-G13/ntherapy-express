@@ -24,7 +24,7 @@ const getAppointments = async (
       data,
       message: 'appointment successful',
     });
-  } catch (err: unknown) {
+  } catch (err) {
     if (err instanceof ValidationError) {
       return next(templateErrors.BAD_REQUEST('Validation Error'));
     }
@@ -48,11 +48,10 @@ const updateAvailable = async (req: RequestWithUserRole, res: Response, next: Ne
 
     if (appointmentData?.therapistId?.toString() === userData?.therapistId) {
       const data = await updateIsAvailable(id);
-      res.json({ data, message: 'update Available successful' });
-    } else {
-      throw templateErrors.UNAUTHORIZED('Unauthorized ');
+      return res.json({ data, message: 'update Available successful' });
     }
-  } catch (error: unknown) {
+    throw templateErrors.UNAUTHORIZED('Unauthorized ');
+  } catch (error) {
     if (error instanceof ValidationError) {
       return next(templateErrors.BAD_REQUEST('Validation Error'));
     }
