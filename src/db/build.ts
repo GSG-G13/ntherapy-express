@@ -1,8 +1,10 @@
 import { log } from 'console';
 import sequelize from './connection';
+
 import {
   Users, Therapists, Sessions, Appointments, Admins,
 } from './fakeData';
+
 import {
   User, Therapist, Admin, Appointment, Session,
 } from '../models';
@@ -21,11 +23,11 @@ const buildDB = async () => {
   log('Appointments created');
   await Session.bulkCreate(Sessions);
   log('Sessions created');
-  if (!(process.env.NODE_ENV === 'testing'))process.exit();
-
   if (process.env.BUILD) {
-    buildDB();
+    process.exit();
   }
 };
-
+if (process.env.BUILD) {
+  buildDB();
+}
 export default buildDB;
