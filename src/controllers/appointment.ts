@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 
+import { ValidationError } from 'yup';
 import { getAppointmentsPerDateService } from '../services';
 import { templateErrors, getAppointmentSchema } from '../helpers';
 
@@ -23,11 +24,9 @@ const getAppointments = async (
       data,
       message: 'appointment successful',
     });
-  } catch (err) {
-    let message = 'ValidationError';
-    if (err instanceof Error) message = err.message;
-    if ((message === 'ValidationError')) {
-      return next(templateErrors.BAD_REQUEST(message));
+  } catch (err:unknown) {
+    if (err instanceof ValidationError) {
+      return next(templateErrors.BAD_REQUEST('Validation Error'));
     }
     return next(err);
   }
