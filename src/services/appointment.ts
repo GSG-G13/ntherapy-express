@@ -33,4 +33,21 @@ const getAppointmentsPerDateService = async (
   return appointments;
 };
 
-export default getAppointmentsPerDateService;
+const getAppointmentById = async (id: string) => {
+  const appointment = await Appointment.findByPk(id);
+  return appointment;
+};
+
+const updateIsAvailable = async (id: string, isAvailable: boolean) => {
+  const afterUpdate = await Appointment.update(
+    {
+      isAvailable: !isAvailable,
+    },
+    {
+      where: { id },
+    },
+  );
+  return afterUpdate;
+};
+
+export { getAppointmentsPerDateService, getAppointmentById, updateIsAvailable };
