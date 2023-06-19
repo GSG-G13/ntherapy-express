@@ -2,12 +2,12 @@ import {
   UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes, SessionsAttributes,
 } from './models';
 
-import { TherapistWithUserOptional } from './therapist';
+import { TherapistWithUserOptional, Imeeting } from './therapist';
 import {
   Decode, RequestWithUserRole, RolesForSelect, Roles,
 } from './checkauth';
 
 export {
   UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes, SessionsAttributes,
-  TherapistWithUserOptional, Decode, RequestWithUserRole, RolesForSelect, Roles,
+  TherapistWithUserOptional, Decode, RequestWithUserRole, RolesForSelect, Roles, Imeeting,
 };
