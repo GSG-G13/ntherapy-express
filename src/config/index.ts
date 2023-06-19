@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const {
-  PORT = 8080, DB_URL, DATABASE_URL, DB_TEST_URL, NODE_ENV = 'development', SECRET_KEY,
+  PORT = 8080, DB_URL, DATABASE_URL, DB_TEST_URL, NODE_ENV = 'development', SECRET_KEY, MAILERUSER, MAILERPASS,
 } = process.env;
 
 interface ICONFIG {
@@ -12,7 +12,10 @@ interface ICONFIG {
   DB_URL: {
     [key: string]: string | undefined
   },
-  SECRET_KEY: string | undefined
+  SECRET_KEY: string | undefined,
+  MAILER: {
+    [key: string]: string | undefined
+  }
 }
 const config: ICONFIG = {
   DB_URL: {
@@ -23,6 +26,10 @@ const config: ICONFIG = {
   environment: NODE_ENV,
   PORT,
   SECRET_KEY,
+  MAILER: {
+    user: MAILERUSER,
+    pass: MAILERPASS,
+  },
 };
 
 export default config;
