@@ -12,4 +12,9 @@ const getAppointmentSchema = yup.object({
   }),
 });
 
-export default getAppointmentSchema;
+const updateAvailableSchema = yup.object({
+  therapistId: yup.number().required(),
+  isAvailable: yup.boolean().required(),
+});
+
+export { getAppointmentSchema, updateAvailableSchema };

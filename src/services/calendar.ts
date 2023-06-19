@@ -48,10 +48,6 @@ const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
 const tokenExpirationDate = 604800000 + (parseInt(credits.expiry_date, 10));
 const currentDate = Date.now();
 
-console.log('tokenExpirationDate', new Date(tokenExpirationDate));
-console.log(currentDate > tokenExpirationDate, 'currentDate > tokenExpirationDate');
-console.log('currentDate', new Date(currentDate));
-
 const generateMeeting = async ({
   therapistEmail, userEmail, startDate, endDate,
 }: Imeeting) => {
