@@ -4,5 +4,11 @@ interface TherapistWithUserOptional extends TherapistAttributes {
   user?: UsersAttributes,
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { TherapistWithUserOptional };
+interface Imeeting {
+  therapistEmail: string,
+  userEmail: string,
+  startDate: string,
+  endDate: string,
+}
+
+export { TherapistWithUserOptional, Imeeting };
