@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import config from '../src/config';
 
 dotenv.config();
-
+console.log(config.TOKEN_TEST_THERAPIST);
 const appointmentRouteTest = () => {
     it('Should return a Success Response with 200 status and result attributes',async () => {
   
