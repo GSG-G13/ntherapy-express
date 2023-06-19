@@ -18,7 +18,7 @@ module.exports = {
   overrides: [],
   rules: {
     'linebreak-style': 0,
-    "consistent-return": "off"
+    "consistent-return": "off",
   },
   ignorePatterns: ["__tests__/*", "dist/*"],
 };
