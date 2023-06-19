@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ValidationError } from 'yup';
 import { getAppointmentsPerDateService, getAppointmentById, updateIsAvailable } from '../services';
-import { templateErrors, getAppointmentSchema } from '../helpers';
+import { templateErrors, getAppointmentSchema, updateAvailableSchema } from '../helpers';
 import { RequestWithUserRole } from '../types';
 
 const getAppointments = async (
@@ -37,20 +37,24 @@ const updateAvailable = async (req: RequestWithUserRole, res: Response, next: Ne
     const { id } = req.params;
     const userData = req.user;
 
-    if (!userData?.therapistId) {
-      throw templateErrors.UNAUTHORIZED('Unauthorized');
+    const appointmentData = await getAppointmentById(id);
+    const isAvailable = appointmentData?.isAvailable;
+    if (!appointmentData) {
+      throw templateErrors.BAD_REQUEST('appointment doesn\'t exist');
+    }
+    const therapistId = userData?.therapistId;
+    const data = await updateAvailableSchema.validate({ therapistId, isAvailable });
+
+    if (appointmentData?.therapistId?.toString() !== therapistId) {
+      throw templateErrors.UNAUTHORIZED('Unauthorized ');
     }
 
-    const appointmentData = await getAppointmentById(id);
     if (appointmentData?.isBooked) {
       throw templateErrors.BAD_REQUEST('this appointment is booked');
     }
 
-    if (appointmentData?.therapistId?.toString() === userData?.therapistId) {
-      const data = await updateIsAvailable(id);
-      return res.json({ data, message: 'update Available successful' });
-    }
-    throw templateErrors.UNAUTHORIZED('Unauthorized ');
+    await updateIsAvailable(id, data.isAvailable);
+    return res.json({ data: null, message: 'update Available successful' });
   } catch (error) {
     if (error instanceof ValidationError) {
       return next(templateErrors.BAD_REQUEST('Validation Error'));

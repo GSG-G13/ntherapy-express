@@ -1,5 +1,9 @@
 import request from 'supertest';
 import app from '.././src/app';
+import dotenv from 'dotenv';
+import config from '../src/config';
+
+dotenv.config();
 
 const appointmentRouteTest = () => {
     it('Should return a Success Response with 200 status and result attributes',async () => {
@@ -59,8 +63,8 @@ const appointmentRouteTest = () => {
       });
       })
     it('Should return This appointment is booked with status 400', async () => {
-        const id = '1';
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGhlcmFwaXN0IiwidXNlcklkIjoiNSIsInRoZXJhcGlzdElkIjoiMiJ9.gGlnqHx0QN93rw87HdavQH-QN1kA3mQ6yALwl9M2L_w';
+        const id = '6';
+        const token = config.TOKEN_TEST_THERAPIST;
 
         const response = await request(app)
             .put(`/api/v1/appointments/${id}`)
@@ -73,7 +77,7 @@ const appointmentRouteTest = () => {
     });
     it('Should return update Available successful with status 200', async () => {
         const id = '9';
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGhlcmFwaXN0IiwidXNlcklkIjoiNSIsInRoZXJhcGlzdElkIjoiMiJ9.gGlnqHx0QN93rw87HdavQH-QN1kA3mQ6yALwl9M2L_w';
+        const token = config.TOKEN_TEST_THERAPIST;
 
         const response = await request(app)
             .put(`/api/v1/appointments/${id}`)
@@ -81,13 +85,13 @@ const appointmentRouteTest = () => {
 
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
-            data: [1],
+            data: null,
             message: 'update Available successful'
         });
     });
     it('Should return  Unauthorized if Therapist doesn’t own the appointment  and return  status 401', async () => {
         const id = '11';
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGhlcmFwaXN0IiwidXNlcklkIjoiNSIsInRoZXJhcGlzdElkIjoiMiJ9.gGlnqHx0QN93rw87HdavQH-QN1kA3mQ6yALwl9M2L_w';
+        const token = config.TOKEN_TEST_THERAPIST;
 
         const response = await request(app)
             .put(`/api/v1/appointments/${id}`)
