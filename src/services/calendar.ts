@@ -2,63 +2,72 @@ import { google, calendar_v3 } from 'googleapis';
 import { Imeeting } from '../types';
 import config from '../config';
 
-const {
-  CLIENT_SECRET,
-  CLIENT_ID,
-  REDIRECT_URIS,
-  AUTH_URI,
-  AUTH_PROVIDER_X509_CERT_URL,
-  PROJECT_ID,
-  ACCESS_TOKEN,
-  REFRESH_TOKEN,
-  SCOPE,
-  TOKEN_TYPE,
-  EXPIRY_DATE,
-} = config;
+class OAuthClient extends google.auth.OAuth2 {
+  constructor() {
+    const {
+      CLIENT_SECRET,
+      CLIENT_ID,
+      REDIRECT_URIS,
+      AUTH_URI,
+      AUTH_PROVIDER_X509_CERT_URL,
+      PROJECT_ID,
+      ACCESS_TOKEN,
+      REFRESH_TOKEN,
+      SCOPE,
+      TOKEN_TYPE,
+      EXPIRY_DATE,
+    } = config;
 
-const web = {
-  client_id: CLIENT_ID,
-  project_id: PROJECT_ID,
-  auth_uri: AUTH_URI,
-  auth_provider_x509_cert_url: AUTH_PROVIDER_X509_CERT_URL,
-  client_secret: CLIENT_SECRET,
-  redirect_uri: REDIRECT_URIS,
-};
+    const web = {
+      client_id: CLIENT_ID,
+      project_id: PROJECT_ID,
+      auth_uri: AUTH_URI,
+      auth_provider_x509_cert_url: AUTH_PROVIDER_X509_CERT_URL,
+      client_secret: CLIENT_SECRET,
+      redirect_uri: REDIRECT_URIS,
+    };
 
-const token = {
-  access_token: ACCESS_TOKEN,
-  refresh_token: REFRESH_TOKEN,
-  scope: SCOPE,
-  token_type: TOKEN_TYPE,
-  expiry_date: EXPIRY_DATE,
-};
-const credential = {
-  redirect_uris: ['http://localhost:8080'],
-};
-const oAuth2Client = new google.auth.OAuth2(
-  web.client_id,
-  web.client_secret,
-  credential.redirect_uris[0],
-);
+    const credential = {
+      redirect_uris: ['http://localhost:8080'],
+    };
 
-const credits = JSON.parse(JSON.stringify(token));
-oAuth2Client.setCredentials(credits);
-const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
+    super(web.client_id, web.client_secret, credential.redirect_uris[0]);
 
-const tokenExpirationDate = 604800000 + (parseInt(credits.expiry_date, 10));
-const currentDate = Date.now();
+    const credits = {
+      access_token: ACCESS_TOKEN,
+      refresh_token: REFRESH_TOKEN,
+      scope: SCOPE,
+      token_type: TOKEN_TYPE,
+      expiry_date: EXPIRY_DATE,
+    };
+
+    this.setCredentials(JSON.parse(JSON.stringify(credits)));
+  }
+
+  isTokenExpiring() : boolean {
+    return this.isTokenExpiring();
+  }
+}
 
 const generateMeeting = async ({
-  therapistEmail, userEmail, startDate, endDate,
+  therapistEmail,
+  userEmail,
+  startDate,
+  endDate,
 }: Imeeting) => {
-  if (!ACCESS_TOKEN) {
+  const oAuth2Client = new OAuthClient();
+
+  if (!oAuth2Client.credentials.access_token) {
     throw new Error('No access token');
   }
 
-  if (currentDate > tokenExpirationDate) {
+  if (oAuth2Client.isTokenExpiring()) {
     const { credentials } = await oAuth2Client.refreshAccessToken();
     oAuth2Client.setCredentials(credentials);
   }
+
+  const calendar = google.calendar({ version: 'v3', auth: oAuth2Client });
+
   const event: calendar_v3.Schema$Event = {
     summary: 'Therapy Session',
     location: 'Online',
@@ -88,6 +97,7 @@ const generateMeeting = async ({
     conferenceDataVersion: 1,
     requestBody: event,
   });
+
   return res.data;
 };
 
