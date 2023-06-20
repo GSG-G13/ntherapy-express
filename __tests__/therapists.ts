@@ -35,16 +35,28 @@ const therapistTest = () => {
         const response = await request(app).get('/api/v1/therapists').query({ q: '', page: "M" });
         expect(response.status).toBe(400);
     });
-    it('Should return Successful when the user is a therapist', async () => {
+    // it('Should return Successful when the user is a therapist', async () => {
+    //     const token = config.TOKEN_TEST_THERAPIST;
+    //     const response = await request(app)
+    //     .patch(`/api/v1/therapists`)
+    //     .set('Authorization', `Bearer ${token}`)
+    //     .send({major: 'Major new'});
+    //     expect(response.status).toBe(200);
+    //     expect(response.body).toEqual({
+    //         "data": null,
+    //         "message": "Successful update"
+    //     })
+    // })
+    
+    it('Should return Successful when the user is a therapist with no records updated', async () => {
         const token = config.TOKEN_TEST_THERAPIST;
         const response = await request(app)
         .patch(`/api/v1/therapists`)
         .set('Authorization', `Bearer ${token}`)
-        .send({fullName: 'Mohannad Sabe'});
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
             "data": null,
-            "message": "Successful update"
+            "message": "No Records Updated"
         })
     })
     

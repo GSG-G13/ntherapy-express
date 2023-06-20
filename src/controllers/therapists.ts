@@ -61,6 +61,7 @@ const updateTherapistProfile = async (
       Number(user?.therapistId),
       Number(user?.userId),
     );
+
     if (isTherapistUpdated || isUserUpdated) {
       return res.json({ data: null, message: 'Successful update' });
     }
