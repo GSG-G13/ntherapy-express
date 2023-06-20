@@ -15,35 +15,35 @@ const appointmentRouteTest = () => {
             "data": [
                 {
                     "id": 16,
-                    "datetime": new Date("2023-06-18T08:00:00.000Z").toISOString(),
+                    "datetime": new Date("2023-06-18T08:00:00.000Z").toUTCString(),
                     "therapistId": 4,
                     "isBooked": false,
                     "isAvailable": true
                 },
                 {
                     "id": 17,
-                    "datetime": new Date("2023-06-18T09:00:00.000Z").toISOString(),
+                    "datetime": new Date("2023-06-18T09:00:00.000Z").toUTCString(),
                     "therapistId": 4,
                     "isBooked": false,
                     "isAvailable": true
                 },
                 {
                     "id": 18,
-                    "datetime": new Date("2023-06-18T10:00:00.000Z").toISOString(),
+                    "datetime": new Date("2023-06-18T10:00:00.000Z").toUTCString(),
                     "therapistId": 4,
                     "isBooked": false,
                     "isAvailable": true
                 },
                 {
                     "id": 19,
-                    "datetime": new Date("2023-06-18T11:00:00.000Z").toISOString(),
+                    "datetime": new Date("2023-06-18T11:00:00.000Z").toUTCString(),
                     "therapistId": 4,
                     "isBooked": false,
                     "isAvailable": true
                 },
                 {
                     "id": 20,
-                    "datetime": new Date("2023-06-18T12:00:00.000Z").toISOString(),
+                    "datetime": new Date("2023-06-18T12:00:00.000Z").toUTCString(),
                     "therapistId": 4,
                     "isBooked": false,
                     "isAvailable": true
