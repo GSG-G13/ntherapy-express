@@ -3,6 +3,7 @@ import { Therapist, User } from '../models';
 import THERAPISTS_LIMIT from '../config/constants';
 import therapist from '../models/therapist';
 import { Payload } from '../types';
+import { templateErrors } from '../helpers';
 
 const getTherapistById = async (id: string) => {
   const therapistData = await therapist.findByPk(id, {
@@ -39,16 +40,18 @@ const getAllTherapist = async (name: string, page: number) => {
   return therapists;
 };
 
-const updateTherapist = async (data: Payload, therapistId:number) => {
+const updateTherapist = async (data: Payload, therapistId:number, userID: number) => {
+  const user = await User.findAll({ where: { id: userID }, attributes: ['isActive'] });
+  if (!user?.[0].isActive) {
+    throw templateErrors.UNAUTHORIZED('unauthorized');
+  }
   let isUserUpdated;
   if ('fullName' in data || 'phoneNumber' in data) {
-    const user = await Therapist.findOne({ where: { id: therapistId } });
-    const userID = user?.userId;
     isUserUpdated = await User.update(data, { where: { id: userID } });
   }
   const updateProfile = await Therapist.update(data, { where: { id: therapistId } });
 
-  return { updateProfile, isUserUpdated };
+  return { isTherapistUpdated: updateProfile[0], isUserUpdated };
 };
 
 export { getTherapistById, getAllTherapist, updateTherapist };
