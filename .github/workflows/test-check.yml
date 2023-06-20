@@ -19,7 +19,7 @@ jobs:
     # Define the cache key using the Node.js version and the package-lock.json file
     defaults:
       run:
-        working-directory: backend
+        working-directory: .
         shell: bash
 
     steps:
