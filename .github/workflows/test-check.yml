@@ -23,9 +23,9 @@ jobs:
         image: postgres:13-alpine
         # Provide the password for postgres
         env:
-          POSTGRES_PASSWORD: 123456 # we can replace it when we add secrets to github ${{ secrets.POSTGRES_PASSWORD }}
-          POSTGRES_USER: ntherapy_user # we can replace it when we add secrets to github ${{ secrets.POSTGRES_USER }}
-          POSTGRES_DB: ntherapy_test  # we can replace it when we add secrets to github ${{ secrets.POSTGRES_DB }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_USER:  ${{ secrets.POSTGRES_USER }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
 
         # Set health checks to wait until postgres has started
         options: >-
@@ -50,7 +50,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('backend/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ matrix.node }}-${{ hashFiles('./package-lock.json') }}
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -69,8 +69,7 @@ jobs:
         env:
           # The hostname used to communicate with the PostgreSQL service container
           DB_TEST_URL: ${{ secrets.DB_TEST_URL }}
-          SECRET_KEY : ntherapy_very_top_secret_789 
-          TOKEN_TEST_THERAPIST : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGhlcmFwaXN0IiwidXNlcklkIjoiNSIsInRoZXJhcGlzdElkIjoiMiJ9.gGlnqHx0QN93rw87HdavQH-QN1kA3mQ6yALwl9M2L_w
+          SECRET_KEY : ${{ secrets.SECRET_KEY }}
+          TOKEN_TEST_THERAPIST : ${{secrets.TOKEN_TEST_THERAPIST}}
           TZ : "Asia/Jerusalem"
-          # we can replace it when we add secrets to github ${{ secrets.TEST_URL }}
           # @LinaYahya
