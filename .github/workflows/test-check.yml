@@ -59,7 +59,7 @@ jobs:
         env:
           # The hostname used to communicate with the PostgreSQL service container
           DB_TEST_URL: postgres://ntherapy_user:123456@localhost:5432/ntherapy_test
-          SECRET_KEY : ntherapy_very_top_secret_789 # we can replace it when we add secrets to github ${{ secrets.SECRET_KEY }}
+          SECRET_KEY : ntherapy_very_top_secret_789 
           TOKEN_TEST_THERAPIST : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoidGhlcmFwaXN0IiwidXNlcklkIjoiNSIsInRoZXJhcGlzdElkIjoiMiJ9.gGlnqHx0QN93rw87HdavQH-QN1kA3mQ6yALwl9M2L_w
           # we can replace it when we add secrets to github ${{ secrets.TEST_URL }}
           # @LinaYahya
