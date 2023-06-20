@@ -13,7 +13,7 @@ jobs:
     # Docker Hub image that `container-job` executes in
     strategy:
       matrix:
-        node: [16 , 18]
+        node: [18]
 
     name: Node ${{ matrix.node }} sample
 
