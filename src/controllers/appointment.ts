@@ -1,7 +1,15 @@
 import { NextFunction, Request, Response } from 'express';
 import { ValidationError } from 'yup';
-import { getAppointmentsPerDateService, getAppointmentById, updateIsAvailable } from '../services';
-import { templateErrors, getAppointmentSchema, updateAvailableSchema } from '../helpers';
+import {
+  getAppointmentsPerDateService,
+  getAppointmentById,
+  updateIsAvailable,
+} from '../services';
+import {
+  templateErrors,
+  getAppointmentSchema,
+  updateAvailableSchema,
+} from '../helpers';
 import { RequestWithUserRole } from '../types';
 
 const getAppointments = async (
@@ -32,7 +40,11 @@ const getAppointments = async (
   }
 };
 
-const updateAvailable = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+const updateAvailable = async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { id } = req.params;
     const userData = req.user;
@@ -40,10 +52,13 @@ const updateAvailable = async (req: RequestWithUserRole, res: Response, next: Ne
     const appointmentData = await getAppointmentById(id);
     const isAvailable = appointmentData?.isAvailable;
     if (!appointmentData) {
-      throw templateErrors.BAD_REQUEST('appointment doesn\'t exist');
+      throw templateErrors.BAD_REQUEST("appointment doesn't exist");
     }
     const therapistId = userData?.therapistId;
-    const data = await updateAvailableSchema.validate({ therapistId, isAvailable });
+    const data = await updateAvailableSchema.validate({
+      therapistId,
+      isAvailable,
+    });
 
     if (appointmentData?.therapistId?.toString() !== therapistId) {
       throw templateErrors.UNAUTHORIZED('Unauthorized ');
@@ -62,5 +77,11 @@ const updateAvailable = async (req: RequestWithUserRole, res: Response, next: Ne
     next(error);
   }
 };
-
+const addAppointment = async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
+  const userData = req.user;
+};
 export { getAppointments, updateAvailable };

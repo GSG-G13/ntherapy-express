@@ -6,5 +6,6 @@ import { checkAuth } from '../middlewares';
 const router = Router();
 router.get('/:therapistId', getAppointments);
 router.put('/:id', checkAuth(RolesForSelect.therapist), updateAvailable);
+router.post('/appointment', checkAuth(RolesForSelect.therapist));
 
 export default router;

@@ -1,7 +1,9 @@
 import { Op } from 'sequelize';
+import moment, { Duration } from 'moment';
 import { Appointment, Therapist, User } from '../models';
 import sequelize from '../db/connection';
 import { templateErrors } from '../helpers';
+import { Appointment as AppointmentType } from '../types';
 
 const getAppointmentsPerDateService = async (
   therapistId: string,
@@ -50,4 +52,80 @@ const updateIsAvailable = async (id: string, isAvailable: boolean) => {
   return afterUpdate;
 };
 
-export { getAppointmentsPerDateService, getAppointmentById, updateIsAvailable };
+function generateAppointments(
+  start: string,
+  end: string,
+  timeRanges: string[],
+  therapistId:number,
+): AppointmentType[] {
+  const startDate = moment(start, 'YYYY-MM-DD');
+  const endDate = moment(end, 'YYYY-MM-DD');
+  const appointments: AppointmentType[] = [];
+
+  const availableTimeRanges: Duration[][] = timeRanges.map((range) => {
+    const [startTime, endTime] = range.split('-');
+    const startMoment = moment(startTime, 'HH:mm');
+    const endMoment = moment(endTime, 'HH:mm');
+
+    if (endMoment.isBefore(startMoment)) {
+      return [
+        moment.duration(startMoment.diff(moment().startOf('day'))),
+        moment.duration(endMoment.diff(moment().startOf('day').add(1, 'day'))),
+      ];
+    }
+
+    return [moment.duration(startMoment.diff(moment().startOf('day'))), moment.duration(endMoment.diff(moment().startOf('day')))];
+  });
+
+  const currentDate = startDate.clone().startOf('day');
+
+  while (currentDate.isSameOrBefore(endDate, 'day')) {
+    const availableRanges = availableTimeRanges.map((range) => {
+      const startTime = currentDate.clone().startOf('day').add(range[0]);
+      const endTime = currentDate.clone().startOf('day').add(range[1]);
+
+      return { startTime, endTime };
+    });
+
+    const hourRange = moment.duration(1, 'hour');
+
+    availableRanges.forEach(({ startTime, endTime }) => {
+      const currentTime = startTime.clone();
+
+      while (currentTime.isBefore(endTime)) {
+        appointments.push({
+          therapistId,
+          datetime: currentTime.clone().toDate(),
+          isBooked: false,
+          isAvailable: true,
+        });
+        currentTime.add(hourRange);
+      }
+    });
+
+    currentDate.add(1, 'day');
+  }
+
+  return appointments;
+}
+
+const addAppointment = async (
+  therapistId:string,
+  startDate:string,
+  endDate:string,
+  timeRanges:string[],
+) => {
+  const appointments = generateAppointments(
+    startDate,
+    endDate,
+    timeRanges,
+    parseInt(therapistId, 10),
+  );
+
+  // const appointment = await Appointment.bulkCreate(appointments);
+  return appointments;
+};
+console.log(generateAppointments('2021-08-01', '2021-08-03', ['08:00-12:00', '13:00-17:00'], 1));
+export {
+  getAppointmentsPerDateService, getAppointmentById, updateIsAvailable, addAppointment,
+};

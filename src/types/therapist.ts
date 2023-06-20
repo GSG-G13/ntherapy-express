@@ -11,4 +11,11 @@ interface Imeeting {
   endDate: string,
 }
 
-export { TherapistWithUserOptional, Imeeting };
+interface Appointment {
+  therapistId: number;
+  datetime: Date;
+  isBooked: boolean;
+  isAvailable: boolean;
+}
+
+export { TherapistWithUserOptional, Imeeting, Appointment };
