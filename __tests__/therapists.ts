@@ -49,7 +49,7 @@ const therapistTest = () => {
     })
     
     it('Should return failed when the user is  not therapist', async () => {
-        const token = config.TOKEN_TEST_THERAPIST;
+        
         const response = await request(app) 
         .patch(`/api/v1/therapists`)
         .send({fullName: 'Mohannad Sabe'});
