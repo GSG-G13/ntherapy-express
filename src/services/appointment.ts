@@ -126,7 +126,7 @@ const addAppointment = async (
   const appointment = await Appointment.bulkCreate(appointments);
   return appointment;
 };
-addAppointment('1', '2023-06-20', '2022-06-22', ['08:00-12:00', '13:00-17:00']);
+
 export {
   getAppointmentsPerDateService, getAppointmentById, updateIsAvailable, addAppointment,
 };
