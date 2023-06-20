@@ -94,6 +94,7 @@ function generateAppointments(
 
       while (currentTime.isBefore(endTime)) {
         appointments.push({
+          id: 21 + appointments.length + 1,
           therapistId,
           datetime: currentTime.clone().toDate(),
           isBooked: false,
@@ -122,10 +123,10 @@ const addAppointment = async (
     parseInt(therapistId, 10),
   );
 
-  // const appointment = await Appointment.bulkCreate(appointments);
-  return appointments;
+  const appointment = await Appointment.bulkCreate(appointments);
+  return appointment;
 };
-console.log(generateAppointments('2021-08-01', '2021-08-03', ['08:00-12:00', '13:00-17:00'], 1));
+addAppointment('1', '2023-06-20', '2022-06-22', ['08:00-12:00', '13:00-17:00']);
 export {
   getAppointmentsPerDateService, getAppointmentById, updateIsAvailable, addAppointment,
 };

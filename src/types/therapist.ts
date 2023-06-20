@@ -12,6 +12,7 @@ interface Imeeting {
 }
 
 interface Appointment {
+  id: number;
   therapistId: number;
   datetime: Date;
   isBooked: boolean;
