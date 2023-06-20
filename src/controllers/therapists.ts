@@ -57,7 +57,7 @@ const updateTherapistProfile = async (
     const { body } = req;
     const data = await therapistInfoSchema.validate(body);
     const { updateProfile, isUserUpdated } = await updateTherapist(data, Number(user?.therapistId));
-    if (updateProfile || isUserUpdated) return res.json({ data: updateProfile, message: 'Successful update' });
+    if (updateProfile || isUserUpdated) return res.json({ data: null, message: 'Successful update' });
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return next(templateErrors.BAD_REQUEST(error.message));

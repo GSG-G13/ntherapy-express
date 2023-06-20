@@ -10,5 +10,5 @@ router.get('/test-auth', checkAuth(RolesForSelect.user), (req, res) => {
 });
 router.get('/', getAllTherapists);
 router.get('/:id', findTherapistById);
-router.patch('/:id', checkAuth(RolesForSelect.therapist), updateTherapistProfile);
+router.patch('/', checkAuth(RolesForSelect.therapist), updateTherapistProfile);
 export default router;

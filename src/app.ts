@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import bearerToken from 'express-bearer-token';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 import cors from 'cors';
 import { clientError, serverError } from './middlewares';

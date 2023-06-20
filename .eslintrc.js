@@ -19,6 +19,9 @@ module.exports = {
   rules: {
     'linebreak-style': 0,
     "consistent-return": "off",
+    "curly": [
+      "error"
+    ]
   },
   ignorePatterns: ["__tests__/*", "dist/*"],
 };
