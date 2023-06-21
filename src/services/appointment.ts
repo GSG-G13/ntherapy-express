@@ -3,7 +3,7 @@ import moment, { Duration } from 'moment';
 import { Appointment, Therapist, User } from '../models';
 import sequelize from '../db/connection';
 import { templateErrors } from '../helpers';
-import { Appointment as AppointmentType } from '../types';
+import { Appointment as AppointmentType, TimeRange } from '../types';
 
 const getAppointmentsPerDateService = async (
   therapistId: string,
@@ -52,20 +52,20 @@ const updateIsAvailable = async (id: string, isAvailable: boolean) => {
   return afterUpdate;
 };
 
-function generateAppointments(
+const generateAppointments = (
   start: string,
   end: string,
-  timeRanges: string[],
+  timeRanges: TimeRange[],
   therapistId:number,
-): AppointmentType[] {
+): AppointmentType[] => {
   const startDate = moment(start, 'YYYY-MM-DD');
   const endDate = moment(end, 'YYYY-MM-DD');
   const appointments: AppointmentType[] = [];
 
   const availableTimeRanges: Duration[][] = timeRanges.map((range) => {
-    const [startTime, endTime] = range.split('-');
-    const startMoment = moment(startTime, 'HH:mm');
-    const endMoment = moment(endTime, 'HH:mm');
+    const { from, to } = range;
+    const startMoment = moment.utc(from, 'HH:mm');
+    const endMoment = moment.utc(to, 'HH:mm');
 
     if (endMoment.isBefore(startMoment)) {
       return [
@@ -94,11 +94,8 @@ function generateAppointments(
 
       while (currentTime.isBefore(endTime)) {
         appointments.push({
-          id: 21 + appointments.length + 1,
           therapistId,
           datetime: currentTime.clone().toDate(),
-          isBooked: false,
-          isAvailable: true,
         });
         currentTime.add(hourRange);
       }
@@ -108,13 +105,13 @@ function generateAppointments(
   }
 
   return appointments;
-}
+};
 
 const addAppointment = async (
   therapistId:string,
   startDate:string,
   endDate:string,
-  timeRanges:string[],
+  timeRanges:TimeRange[],
 ) => {
   const appointments = generateAppointments(
     startDate,
@@ -123,10 +120,17 @@ const addAppointment = async (
     parseInt(therapistId, 10),
   );
 
-  const appointment = await Appointment.bulkCreate(appointments);
+  const appointment = await Appointment.bulkCreate(appointments, {
+    returning: true,
+    fields: ['therapistId', 'datetime'],
+    ignoreDuplicates: true,
+  });
   return appointment;
 };
-
+const range = [{ from: '08:00', to: '12:00' }, { from: '14:00', to: '18:00' }];
+addAppointment('1', '2023-06-20', '2023-06-22', range)
+  .then((res) => console.log(res))
+  .catch((err:Error) => console.log(err));
 export {
   getAppointmentsPerDateService, getAppointmentById, updateIsAvailable, addAppointment,
 };
