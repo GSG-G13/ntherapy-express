@@ -126,33 +126,7 @@ const addAppointment = async (
   });
   return appointment;
 };
-/*
-Documtation: of the function addAppointment
-@param {string} therapistId - The id of the therapist
-@param {string} startDate - The start date of the appointment
-@param {string} endDate - The end date of the appointment
-@param {TimeRange[]} timeRanges - The time ranges of the appointment
-@returns {Promise<AppointmentType[]>} - The appointments created
 
-Documentation: of the function generateAppointments
-@param {string} start - The start date of the appointment
-@param {string} end - The end date of the appointment
-@param {TimeRange[]} timeRanges - The time ranges of the appointment
-@param {number} therapistId - The id of the therapist
-@returns {AppointmentType[]} - The appointments created
-
-Example of the function generateAppointments
-const range = [{ from: '08:00', to: '12:00' }, { from: '14:00', to: '18:00' }];
-generateAppointments('2023-06-20', '2023-06-22', range, 1)
-  .then((res) => console.log(res))
-  .catch((err:Error) => console.log(err));
-
-  - All time ranges must be in the same day
-  - The start date must be before the end date
-  - The time ranges must be in order
-  - The time ranges must be in the same day
-
-  */
 export {
   getAppointmentsPerDateService, getAppointmentById, updateIsAvailable, addAppointment,
 };
