@@ -122,8 +122,7 @@ const addAppointment = async (
 
   const appointment = await Appointment.bulkCreate(appointments, {
     returning: true,
-    fields: ['therapistId', 'datetime'],
-    ignoreDuplicates: true,
+    updateOnDuplicate: ['id'],
   });
   return appointment;
 };

@@ -11,7 +11,7 @@ import {
 
 const buildDB = async () => {
   log('Building database...');
-  await sequelize.sync({ force: true });
+  await sequelize.sync({ force: true, alter: true });
   log('Database built');
   await Admin.bulkCreate(Admins);
   log('Admins created');
