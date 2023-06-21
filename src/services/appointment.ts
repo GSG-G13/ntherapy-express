@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import moment, { Duration } from 'moment';
+import moment from 'moment';
 import { Appointment, Therapist, User } from '../models';
 import sequelize from '../db/connection';
 import { templateErrors } from '../helpers';
@@ -58,31 +58,17 @@ const generateAppointments = (
   timeRanges: TimeRange[],
   therapistId:number,
 ): AppointmentType[] => {
-  const startDate = moment(start, 'YYYY-MM-DD');
-  const endDate = moment(end, 'YYYY-MM-DD');
+  const startDate = moment.utc(start, 'YYYY-MM-DD');
+  const endDate = moment.utc(end, 'YYYY-MM-DD');
   const appointments: AppointmentType[] = [];
 
-  const availableTimeRanges: Duration[][] = timeRanges.map((range) => {
-    const { from, to } = range;
-    const startMoment = moment.utc(from, 'HH:mm');
-    const endMoment = moment.utc(to, 'HH:mm');
-
-    if (endMoment.isBefore(startMoment)) {
-      return [
-        moment.duration(startMoment.diff(moment().startOf('day'))),
-        moment.duration(endMoment.diff(moment().startOf('day').add(1, 'day'))),
-      ];
-    }
-
-    return [moment.duration(startMoment.diff(moment().startOf('day'))), moment.duration(endMoment.diff(moment().startOf('day')))];
-  });
-
-  const currentDate = startDate.clone().startOf('day');
+  const currentDate = startDate.clone().startOf('day').utc();
 
   while (currentDate.isSameOrBefore(endDate, 'day')) {
-    const availableRanges = availableTimeRanges.map((range) => {
-      const startTime = currentDate.clone().startOf('day').add(range[0]);
-      const endTime = currentDate.clone().startOf('day').add(range[1]);
+    const availableRanges = timeRanges.map((range) => {
+      const { from, to } = range;
+      const startTime = currentDate.clone().add(from, 'hours');
+      const endTime = currentDate.clone().add(to, 'hours');
 
       return { startTime, endTime };
     });
