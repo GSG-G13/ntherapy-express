@@ -17,4 +17,17 @@ const updateAvailableSchema = yup.object({
   isAvailable: yup.boolean().required(),
 });
 
-export { getAppointmentSchema, updateAvailableSchema };
+const addAppointmentSchema = yup.object().shape({
+  date: yup.object().shape({
+    from: yup.date().required(),
+    to: yup.date().required(),
+  }),
+  time: yup.array().of(
+    yup.object().shape({
+      from: yup.string().matches(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/).required(),
+      to: yup.string().matches(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/).required(),
+    }),
+  ),
+});
+
+export { getAppointmentSchema, updateAvailableSchema, addAppointmentSchema };

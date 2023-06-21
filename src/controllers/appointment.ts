@@ -5,13 +5,15 @@ import {
   getAppointmentsPerDateService,
   getAppointmentById,
   updateIsAvailable,
+  addAppointment as addAppointmentService,
 } from '../services';
 import {
   templateErrors,
   getAppointmentSchema,
   updateAvailableSchema,
 } from '../helpers';
-import { RequestWithUserRole } from '../types';
+import { Decode, RequestWithUserRole, TimeRange } from '../types';
+import { addAppointmentSchema } from '../helpers/validation/appointments';
 
 const getAppointments = async (
   req: Request,
@@ -83,6 +85,27 @@ const addAppointment = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const userData = req.user;
+  try {
+    const userData = req.user;
+    const { date, time } = req.body;
+    const therapistId = userData?.therapistId as string;
+    await addAppointmentSchema.validate({ date, time });
+    const { from, to } = date as TimeRange;
+    const data = await addAppointmentService(
+      therapistId,
+      from,
+      to,
+      time,
+    );
+    if (!data.length) {
+      throw templateErrors.BAD_REQUEST('Invalid Range');
+    }
+    return res.status(201).json({ data, message: 'appointments added successfuly' });
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
 };
-export { getAppointments, updateAvailable };
+export { getAppointments, updateAvailable, addAppointment };

@@ -8,6 +8,10 @@ import router from './routes';
 dotenv.config();
 
 const app = express();
+app.use([
+  express.json(),
+  express.urlencoded({ extended: true }),
+]);
 app.use(bearerToken());
 
 app.use('/api/v1', router);

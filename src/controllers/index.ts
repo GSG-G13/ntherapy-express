@@ -1,6 +1,7 @@
 import { findTherapistById, getAllTherapists } from './therapists';
-import { getAppointments, updateAvailable } from './appointment';
+import { getAppointments, updateAvailable, addAppointment } from './appointment';
 
 export {
   findTherapistById, getAllTherapists, getAppointments, updateAvailable,
+  addAppointment,
 };
