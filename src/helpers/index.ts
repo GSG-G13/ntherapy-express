@@ -1,7 +1,7 @@
 import { CustomError, templateErrors } from './CustomError';
 
-import { getAppointmentSchema, updateAvailableSchema } from './validation';
+import { getAppointmentSchema, updateAvailableSchema, therapistInfoSchema } from './validation';
 
 export {
-  CustomError, templateErrors, getAppointmentSchema, updateAvailableSchema,
+  CustomError, templateErrors, getAppointmentSchema, updateAvailableSchema, therapistInfoSchema,
 };
