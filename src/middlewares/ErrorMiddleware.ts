@@ -9,7 +9,7 @@ const clientError = (req: Request, res: Response) => {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const serverError: ErrorRequestHandler = (error, req, res, next) => {
   // eslint-disable-next-line no-console
-  console.log(error);
+  console.log(error.message);
   if (error.status) {
     res.status(error.status).json({ message: error.message });
   } else {
