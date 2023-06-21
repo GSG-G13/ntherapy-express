@@ -14,8 +14,6 @@ app.use(cors());
 app.use(express.json());
 app.use(bearerToken());
 app.use(morgan('dev'));
-
-
 app.use('/api/v1', router);
 app.use(clientError);
 app.use(serverError);
