@@ -2,7 +2,9 @@ import {
   UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes, SessionsAttributes,
 } from './models';
 
-import { TherapistWithUserOptional, Imeeting } from './therapist';
+import {
+  TherapistWithUserOptional, Imeeting, Appointment, TimeRange, AddAppointment,
+} from './therapist';
 import Payload from './payload';
 import {
   Decode, RequestWithUserRole, RolesForSelect, Roles,
@@ -10,5 +12,6 @@ import {
 
 export {
   UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes, SessionsAttributes,
-  TherapistWithUserOptional, Decode, RequestWithUserRole, RolesForSelect, Roles, Imeeting, Payload,
+  TherapistWithUserOptional, Decode, RequestWithUserRole, RolesForSelect, Roles, Imeeting,
+  Appointment, TimeRange, Payload, AddAppointment,
 };
