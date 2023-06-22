@@ -3,6 +3,7 @@ import * as yup from 'yup';
 import { getTherapistById, getAllTherapist, updateTherapist } from '../services';
 import { templateErrors, therapistInfoSchema } from '../helpers';
 import { TherapistWithUserOptional, RequestWithUserRole } from '../types';
+import THERAPISTS_LIMIT from '../config/constants';
 
 const findTherapistById = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
@@ -35,11 +36,17 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
       throw templateErrors.BAD_REQUEST('Page number should be a valid number');
     }
 
-    const therapists = await getAllTherapist(q as string || '', pageNumber);
+    const { therapists, totalCount } = await getAllTherapist(q as string || '', pageNumber);
+    // const pageSize = therapists.length;
+    const totalPages = Math.ceil(totalCount / THERAPISTS_LIMIT);
 
     res.json({
       message: 'Success',
       data: therapists,
+      pagination: {
+        currentPage: pageNumber,
+        totalPages,
+      },
     });
   } catch (error) {
     next(error);

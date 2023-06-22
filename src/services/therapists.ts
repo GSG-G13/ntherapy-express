@@ -36,8 +36,22 @@ const getAllTherapist = async (name: string, page: number) => {
     limit: THERAPISTS_LIMIT,
     offset,
   });
+  const totalCount = await Therapist.count({
+    include: [
+      {
+        model: User,
+        attributes: ['fullName', 'isActive'],
+        where: {
+          isActive: true,
+          fullName: {
+            [Op.like]: `%${name}%`,
+          },
+        },
+      },
+    ],
+  });
 
-  return therapists;
+  return { therapists, totalCount };
 };
 
 const updateTherapist = async (data: Payload, therapistId:number, userID: number) => {
