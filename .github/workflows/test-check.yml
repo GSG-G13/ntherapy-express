@@ -71,5 +71,5 @@ jobs:
           DB_TEST_URL: ${{ secrets.DB_TEST_URL }}
           SECRET_KEY : ${{ secrets.SECRET_KEY }}
           TOKEN_TEST_THERAPIST : ${{secrets.TOKEN_TEST_THERAPIST}}
-          TZ : "Asia/Jerusalem"
+          # TZ : "Asia/Jerusalem"
           # @LinaYahya
