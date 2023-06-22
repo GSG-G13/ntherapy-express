@@ -7,7 +7,7 @@ const Users = [
   {
 
     fullName: 'yasser Amro',
-    email: 'ly2302189@gmail.com',
+    email: 'yasser@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05988822228',
     role: 'client',
