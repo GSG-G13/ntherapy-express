@@ -18,10 +18,10 @@ const checkAuth = (role: Roles) => async (
       }
       next();
     } else {
-      throw templateErrors.UNAUTHORIZED('Unauthorized ');
+      throw templateErrors.UNAUTHORIZED('Unauthorized');
     }
   } catch (error) {
-    next(templateErrors.UNAUTHORIZED('Unauthorized '));
+    next(templateErrors.UNAUTHORIZED('Unauthorized'));
   }
 };
 

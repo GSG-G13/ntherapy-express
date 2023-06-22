@@ -1,8 +1,8 @@
-import { findTherapistById, getAllTherapists } from './therapists';
-import { getAppointments, updateAvailable } from './appointment';
+import { findTherapistById, getAllTherapists, updateTherapistProfile } from './therapists';
+import { getAppointments, updateAvailable, addAppointment } from './appointment';
 import createSessionController from './session';
 
 export {
   findTherapistById, getAllTherapists, getAppointments, updateAvailable,
-  createSessionController,
+  addAppointment, updateTherapistProfile, createSessionController,
 };

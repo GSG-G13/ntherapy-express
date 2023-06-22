@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import { getTherapistById, getAllTherapist } from '../services';
-import { templateErrors } from '../helpers';
-import { TherapistWithUserOptional } from '../types';
+import * as yup from 'yup';
+import { getTherapistById, getAllTherapist, updateTherapist } from '../services';
+import { templateErrors, therapistInfoSchema } from '../helpers';
+import { TherapistWithUserOptional, RequestWithUserRole } from '../types';
 
 const findTherapistById = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
@@ -45,4 +46,32 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
   }
 };
 
-export { findTherapistById, getAllTherapists };
+const updateTherapistProfile = async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { user } = req;
+
+    const { body } = req;
+    const data = await therapistInfoSchema.validate(body);
+    const { isTherapistUpdated, isUserUpdated } = await updateTherapist(
+      data,
+      Number(user?.therapistId),
+      Number(user?.userId),
+    );
+
+    if (isTherapistUpdated || isUserUpdated) {
+      return res.json({ data: null, message: 'Successful update' });
+    }
+    res.json({ data: null, message: 'No Records Updated' });
+  } catch (error) {
+    if (error instanceof yup.ValidationError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
+};
+
+export { findTherapistById, getAllTherapists, updateTherapistProfile };

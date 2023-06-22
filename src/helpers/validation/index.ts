@@ -1,4 +1,6 @@
-import { getAppointmentSchema, updateAvailableSchema } from './appointments';
+import { getAppointmentSchema, updateAvailableSchema, addAppointmentSchema } from './appointments';
+import therapistInfoSchema from './therapist';
 
-// eslint-disable-next-line import/prefer-default-export
-export { getAppointmentSchema, updateAvailableSchema };
+export {
+  getAppointmentSchema, updateAvailableSchema, therapistInfoSchema, addAppointmentSchema,
+};
