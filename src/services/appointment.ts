@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Appointment, Therapist, User } from '../models';
 import sequelize from '../db/connection';
 import { templateErrors } from '../helpers';
-import { Appointment as AppointmentType, TimeRange } from '../types';
+import { AddAppointment, Appointment as AppointmentType, TimeRange } from '../types';
 import { HOUR_RANGE } from '../config/constants';
 
 const getAppointmentsPerDateService = async (
@@ -52,33 +52,43 @@ const updateIsAvailable = async (id: string, isAvailable: boolean) => {
   );
   return afterUpdate;
 };
+/*
+  @Description This function generates appointments based on the given time ranges.
+  @param {AddAppointment} - The appointment data.
+  @returns {AppointmentType[]} - An array of appointments.
+  {AddAppointment} start - The start date. @type {string}
+  {AddAppointment} end - The end date. @type {string}
+  {AddAppointment} timeRanges - An array of time ranges. @type {TimeRange[]}
+  {AddAppointment} therapistId - The therapist id. @type {number}
 
+  ** all the times are in UTC format.
+
+  */
 const generateAppointments = (
   {
     start,
     end,
     timeRanges,
     therapistId,
-  }: {
-    start: string,
-    end: string,
-    timeRanges: TimeRange[],
-    therapistId: number,
-  },
+  }: AddAppointment,
 ): AppointmentType[] => {
   const startDate = moment.utc(start, 'YYYY-MM-DD');
   const endDate = moment.utc(end, 'YYYY-MM-DD');
   const appointments: AppointmentType[] = [];
 
   const currentDate = startDate.clone().startOf('day').utc();
-
+  /*
+    @Description This loop generates appointments for each day between the start and end date.
+    @Input The current date.
+    @returns {AppointmentType[]} - An array of appointments.
+  */
   while (currentDate.isSameOrBefore(endDate, 'day')) {
     const availableRanges = timeRanges.map((range) => {
       const { from, to } = range;
       const startTime = currentDate.clone().add(from, 'hours');
       const endTime = currentDate.clone().add(to, 'hours');
 
-      if (endTime.isBefore(startTime)) {
+      if (endTime.isBefore(startTime)) { // handle the case when the end time is in the next day.
         endTime.add(1, 'day');
       }
 

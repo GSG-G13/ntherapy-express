@@ -21,7 +21,14 @@ interface TimeRange {
   to: string;
 }
 
+interface AddAppointment {
+  start: string,
+  end: string,
+  timeRanges: TimeRange[],
+  therapistId: number,
+}
+
 export {
   TherapistWithUserOptional, Imeeting, Appointment,
-  TimeRange,
+  TimeRange, AddAppointment,
 };
