@@ -19,7 +19,7 @@ const getTherapistById = async (id: string) => {
 
 const getAllTherapist = async (name: string, page: number) => {
   const offset = (page - 1) * THERAPISTS_LIMIT;
-  const therapists = await Therapist.findAll({
+  const therapists = await Therapist.findAndCountAll({
     include: [
       {
         model: User,
@@ -36,22 +36,8 @@ const getAllTherapist = async (name: string, page: number) => {
     limit: THERAPISTS_LIMIT,
     offset,
   });
-  const totalCount = await Therapist.count({
-    include: [
-      {
-        model: User,
-        attributes: ['fullName', 'isActive'],
-        where: {
-          isActive: true,
-          fullName: {
-            [Op.like]: `%${name}%`,
-          },
-        },
-      },
-    ],
-  });
 
-  return { therapists, totalCount };
+  return { therapists, totalPages: Math.ceil(therapists.count / THERAPISTS_LIMIT) };
 };
 
 const updateTherapist = async (data: Payload, therapistId:number, userID: number) => {
