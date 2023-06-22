@@ -4,6 +4,7 @@ import { Appointment, Therapist, User } from '../models';
 import sequelize from '../db/connection';
 import { templateErrors } from '../helpers';
 import { Appointment as AppointmentType, TimeRange } from '../types';
+import { HOUR_RANGE } from '../config/constants';
 
 const getAppointmentsPerDateService = async (
   therapistId: string,
@@ -53,10 +54,17 @@ const updateIsAvailable = async (id: string, isAvailable: boolean) => {
 };
 
 const generateAppointments = (
-  start: string,
-  end: string,
-  timeRanges: TimeRange[],
-  therapistId:number,
+  {
+    start,
+    end,
+    timeRanges,
+    therapistId,
+  }: {
+    start: string,
+    end: string,
+    timeRanges: TimeRange[],
+    therapistId: number,
+  },
 ): AppointmentType[] => {
   const startDate = moment.utc(start, 'YYYY-MM-DD');
   const endDate = moment.utc(end, 'YYYY-MM-DD');
@@ -70,10 +78,12 @@ const generateAppointments = (
       const startTime = currentDate.clone().add(from, 'hours');
       const endTime = currentDate.clone().add(to, 'hours');
 
+      if (endTime.isBefore(startTime)) {
+        endTime.add(1, 'day');
+      }
+
       return { startTime, endTime };
     });
-
-    const hourRange = moment.duration(1, 'hour');
 
     availableRanges.forEach(({ startTime, endTime }) => {
       const currentTime = startTime.clone();
@@ -83,7 +93,7 @@ const generateAppointments = (
           therapistId,
           datetime: currentTime.clone().toDate(),
         });
-        currentTime.add(hourRange);
+        currentTime.add(HOUR_RANGE);
       }
     });
 
@@ -94,21 +104,22 @@ const generateAppointments = (
 };
 
 const addAppointment = async (
-  therapistId:string,
+  therapistId:number,
   startDate:string,
   endDate:string,
   timeRanges:TimeRange[],
 ) => {
   const appointments = generateAppointments(
-    startDate,
-    endDate,
-    timeRanges,
-    parseInt(therapistId, 10),
+    {
+      start: startDate,
+      end: endDate,
+      timeRanges,
+      therapistId,
+    },
   );
 
   const appointment = await Appointment.bulkCreate(appointments, {
     returning: true,
-    updateOnDuplicate: ['id'],
   });
   return appointment;
 };

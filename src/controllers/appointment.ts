@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 import { ValidationError } from 'yup';
 import {
@@ -11,9 +10,9 @@ import {
   templateErrors,
   getAppointmentSchema,
   updateAvailableSchema,
+  addAppointmentSchema,
 } from '../helpers';
-import { Decode, RequestWithUserRole, TimeRange } from '../types';
-import { addAppointmentSchema } from '../helpers/validation/appointments';
+import { RequestWithUserRole, TimeRange } from '../types';
 
 const getAppointments = async (
   req: Request,
@@ -90,9 +89,9 @@ const addAppointment = async (
     const { date, time } = req.body;
     const therapistId = userData?.therapistId as string;
     await addAppointmentSchema.validate({ date, time });
-    const { from, to } = date as TimeRange;
+    const { from, to } : TimeRange = date;
     const data = await addAppointmentService(
-      therapistId,
+      parseInt(therapistId, 10),
       from,
       to,
       time,
