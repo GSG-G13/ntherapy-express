@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { Therapist, User } from '../models';
-import THERAPISTS_LIMIT from '../config/constants';
+import { THERAPISTS_LIMIT } from '../config/constants';
 import therapist from '../models/therapist';
 import { Payload } from '../types';
 import { templateErrors } from '../helpers';

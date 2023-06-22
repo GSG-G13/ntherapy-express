@@ -1,8 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
 import { ValidationError } from 'yup';
-import { getAppointmentsPerDateService, getAppointmentById, updateIsAvailable } from '../services';
-import { templateErrors, getAppointmentSchema, updateAvailableSchema } from '../helpers';
-import { RequestWithUserRole } from '../types';
+import {
+  getAppointmentsPerDateService,
+  getAppointmentById,
+  updateIsAvailable,
+  addAppointment as addAppointmentService,
+} from '../services';
+import {
+  templateErrors,
+  getAppointmentSchema,
+  updateAvailableSchema,
+  addAppointmentSchema,
+} from '../helpers';
+import { RequestWithUserRole, TimeRange } from '../types';
 
 const getAppointments = async (
   req: Request,
@@ -32,7 +42,11 @@ const getAppointments = async (
   }
 };
 
-const updateAvailable = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+const updateAvailable = async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
   try {
     const { id } = req.params;
     const userData = req.user;
@@ -40,10 +54,13 @@ const updateAvailable = async (req: RequestWithUserRole, res: Response, next: Ne
     const appointmentData = await getAppointmentById(id);
     const isAvailable = appointmentData?.isAvailable;
     if (!appointmentData) {
-      throw templateErrors.BAD_REQUEST('appointment doesn\'t exist');
+      throw templateErrors.BAD_REQUEST("appointment doesn't exist");
     }
     const therapistId = userData?.therapistId;
-    const data = await updateAvailableSchema.validate({ therapistId, isAvailable });
+    const data = await updateAvailableSchema.validate({
+      therapistId,
+      isAvailable,
+    });
 
     if (appointmentData?.therapistId?.toString() !== therapistId) {
       throw templateErrors.UNAUTHORIZED('Unauthorized ');
@@ -62,5 +79,32 @@ const updateAvailable = async (req: RequestWithUserRole, res: Response, next: Ne
     next(error);
   }
 };
-
-export { getAppointments, updateAvailable };
+const addAppointment = async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const userData = req.user;
+    const { date, time } = req.body;
+    const therapistId = userData?.therapistId as string;
+    await addAppointmentSchema.validate({ date, time });
+    const { from, to } : TimeRange = date;
+    const data = await addAppointmentService(
+      parseInt(therapistId, 10),
+      from,
+      to,
+      time,
+    );
+    if (!data.length) {
+      throw templateErrors.BAD_REQUEST('Invalid Range');
+    }
+    return res.status(201).json({ data, message: 'appointments added successfuly' });
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
+};
+export { getAppointments, updateAvailable, addAppointment };
