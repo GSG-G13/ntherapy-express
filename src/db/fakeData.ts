@@ -293,132 +293,132 @@ const Therapists = [
 const Appointments = [
   {
     therapistId: 1,
-    datetime: new Date('2023-06-18T12:00:00'),
+    datetime: new Date('2023-06-18T12:00:00.000Z'),
     isBooked: true,
     isAvailable: true,
   },
   {
     therapistId: 1,
-    datetime: new Date('2023-06-18T12:30:00'),
+    datetime: new Date('2023-06-18T12:30:00.000Z'),
     isBooked: true,
     isAvailable: true,
   },
   {
     therapistId: 1,
-    datetime: new Date('2023-06-18T13:00:00'),
+    datetime: new Date('2023-06-18T13:00:00.000Z'),
     isBooked: true,
     isAvailable: true,
   },
   {
     therapistId: 1,
-    datetime: new Date('2023-06-18T14:00:00'),
+    datetime: new Date('2023-06-18T14:00:00.000Z'),
     isBooked: true,
     isAvailable: true,
   },
   {
     therapistId: 1,
-    datetime: new Date('2023-06-18T15:00:00'),
+    datetime: new Date('2023-06-18T15:00:00.000Z'),
     isBooked: true,
     isAvailable: true,
   },
   {
     therapistId: 2,
-    datetime: new Date('2023-06-18T12:00:00'),
+    datetime: new Date('2023-06-18T12:00:00.000Z'),
     isBooked: true,
     isAvailable: true,
   },
   {
     therapistId: 2,
-    datetime: new Date('2023-06-18T12:30:00'),
+    datetime: new Date('2023-06-18T12:30:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
     therapistId: 2,
-    datetime: new Date('2023-06-18T13:00:00'),
+    datetime: new Date('2023-06-18T13:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
     therapistId: 2,
-    datetime: new Date('2023-06-18T14:00:00'),
+    datetime: new Date('2023-06-18T14:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 2,
-    datetime: new Date('2023-06-18T15:00:00'),
+    datetime: new Date('2023-06-18T15:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 3,
-    datetime: new Date('2023-06-18T11:00:00'),
+    datetime: new Date('2023-06-18T11:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 3,
-    datetime: new Date('2023-06-18T12:00:00'),
+    datetime: new Date('2023-06-18T12:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 3,
-    datetime: new Date('2023-06-18T13:00:00'),
+    datetime: new Date('2023-06-18T13:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 3,
-    datetime: new Date('2023-06-18T14:00:00'),
+    datetime: new Date('2023-06-18T14:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 3,
-    datetime: new Date('2023-06-18T15:00:00'),
+    datetime: new Date('2023-06-18T15:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 4,
-    datetime: new Date('2023-06-18T11:00:00'),
+    datetime: new Date('2023-06-18T11:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 4,
-    datetime: new Date('2023-06-18T12:00:00'),
+    datetime: new Date('2023-06-18T12:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 4,
-    datetime: new Date('2023-06-18T13:00:00'),
+    datetime: new Date('2023-06-18T13:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 4,
-    datetime: new Date('2023-06-18T14:00:00'),
+    datetime: new Date('2023-06-18T14:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
   {
 
     therapistId: 4,
-    datetime: new Date('2023-06-18T15:00:00'),
+    datetime: new Date('2023-06-18T15:00:00.000Z'),
     isBooked: false,
     isAvailable: true,
   },
