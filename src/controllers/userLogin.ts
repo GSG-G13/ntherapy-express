@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { User } from '../models';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors } from '../helpers';
+import { LoginByEmail } from '../services';
 
 dotenv.config();
 
@@ -15,10 +15,7 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
   try {
     await userLoginSchema.validate({ email, password });
 
-    const user = await User.findOne({
-      attributes: ['email', 'password'],
-      where: { email },
-    });
+    const user = await LoginByEmail(email);
 
     if (!user) {
       throw templateErrors.NOT_FOUND('user not found');

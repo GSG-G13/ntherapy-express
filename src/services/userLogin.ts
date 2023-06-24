@@ -1,16 +1,12 @@
 import { User } from '../models';
 
-interface UserData {
-  email: string;
-}
-
-const Login = async (userData: UserData) => {
-  const { email } = userData;
-
-  return User.findOne({
-    attributes: ['id', 'email', 'password'],
+const LoginByEmail = async (email: string) => {
+  const user = await User.findOne({
+    attributes: ['email', 'password'],
     where: { email },
   });
+
+  return user;
 };
 
-export default Login;
+export default LoginByEmail;
