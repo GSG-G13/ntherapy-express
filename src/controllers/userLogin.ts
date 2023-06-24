@@ -1,14 +1,15 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { User } from '../models';
 import { userLoginSchema } from '../helpers/validation';
+import { templateErrors } from '../helpers';
 
 dotenv.config();
 
-const userLoginController = async (req: Request, res: Response) => {
+const userLoginController = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
 
   try {
@@ -20,21 +21,13 @@ const userLoginController = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      res.status(404).json({
-        error: true,
-        message: 'User not found',
-      });
-      return;
+      throw templateErrors.NOT_FOUND('user not found');
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      res.status(401).json({
-        error: true,
-        message: 'Invalid password',
-      });
-      return;
+      throw templateErrors.UNAUTHORIZED('The password is invalid');
     }
     const secretKey = process.env.SECRET_KEY || '';
     const token = jwt.sign({ email: user.email }, secretKey, { expiresIn: '1h' });
@@ -44,10 +37,7 @@ const userLoginController = async (req: Request, res: Response) => {
       message: 'user logged in successfully',
     });
   } catch (err) {
-    res.status(500).json({
-      error: true,
-      message: 'Internal server error',
-    });
+    next(err);
   }
 };
 
