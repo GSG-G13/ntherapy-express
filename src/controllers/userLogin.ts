@@ -1,7 +1,12 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { User } from '../models';
 import { userLoginSchema } from '../helpers/validation';
+
+dotenv.config();
 
 const userLoginController = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -31,6 +36,9 @@ const userLoginController = async (req: Request, res: Response) => {
       });
       return;
     }
+    const secretKey = process.env.SECRET_KEY || '';
+    const token = jwt.sign({ email: user.email }, secretKey, { expiresIn: '1h' });
+    console.log(token);
 
     res.status(200).json({
       error: false,
