@@ -40,11 +40,8 @@ const userLoginController = async (req: Request, res: Response) => {
     const token = jwt.sign({ email: user.email }, secretKey, { expiresIn: '1h' });
     console.log(token);
 
-    res.status(200).json({
-      error: false,
-      data: {
-        user,
-      },
+    res.json({
+      message: 'user logged in successfully',
     });
   } catch (err) {
     res.status(500).json({
