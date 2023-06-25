@@ -1,13 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import jwt, { Secret } from 'jsonwebtoken';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors } from '../helpers';
 import { LoginByEmail } from '../services';
 import config from '../config';
-
-dotenv.config();
 
 const userLoginController = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -26,10 +23,8 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
     if (!passwordMatch) {
       throw templateErrors.UNAUTHORIZED('The password is invalid');
     }
-    if (!config.SECRET_KEY) {
-      throw templateErrors.FORBIDDEN('No secret key found');
-    }
-    const token = jwt.sign({ email: user.email }, config.SECRET_KEY, { expiresIn: '1h' });
+
+    const token = jwt.sign({ email: user.email }, config.SECRET_KEY as Secret, { expiresIn: '1h' });
 
     res.json({
       message: 'user logged in successfully',
