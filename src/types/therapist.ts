@@ -9,8 +9,8 @@ interface AppointmentWithTherapistOptional extends AppointmentsAttributes {
 }
 
 interface Imeeting {
-  therapistEmail: string,
-  userEmail: string,
+  therapistEmail: string | undefined,
+  userEmail: string | undefined,
   startDate: string,
   endDate: string,
 }
