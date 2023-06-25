@@ -11,6 +11,7 @@ const getClientSecret = async (session_price: number, userId: string | undefined
   const user = await User.findByPk(userId, {
     attributes: ['email'],
   });
+
   const userEmail = user?.email;
   const paymentIntent = await stripeInstance.paymentIntents.create({
     amount: session_price,
