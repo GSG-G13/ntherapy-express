@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import config from '../config';
+import { User } from '../models';
 
 const apiKey = config.API_KEY;
 const stripeInstance = new Stripe(apiKey as string, {
@@ -7,12 +8,15 @@ const stripeInstance = new Stripe(apiKey as string, {
 });
 
 const getClientSecret = async (session_price: number, userId: string | undefined) => {
-  console.log(userId);
+  const user = await User.findByPk(userId, {
+    attributes: ['email'],
+  });
+  const userEmail = user?.email;
   const paymentIntent = await stripeInstance.paymentIntents.create({
     amount: session_price,
     currency: 'usd',
     payment_method_types: ['card'],
-    receipt_email: user_email,
+    receipt_email: userEmail,
   });
 
   return paymentIntent;
