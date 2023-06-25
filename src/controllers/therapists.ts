@@ -40,7 +40,7 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
     res.json({
       message: 'Success',
       data: {
-        therapists,
+        ...therapists,
         pagination: {
           currentPage: pageNumber,
           totalPages,
