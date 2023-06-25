@@ -7,7 +7,7 @@ import { templateErrors } from '../helpers';
 import { LoginByEmail } from '../services';
 import config from '../config';
 
-const userLoginController = async (req: Request, res: Response, next: NextFunction) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
 
   try {
@@ -43,4 +43,4 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
   }
 };
 
-export default userLoginController;
+export default login;
