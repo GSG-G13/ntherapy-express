@@ -40,8 +40,16 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       throw templateErrors.BAD_REQUEST('Wrong email or password');
     }
 
-    const token = jwt.sign(payload, config.SECRET_KEY as Secret, { expiresIn: '1h' });
-
+    const token = await new Promise((resolve, reject) => {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+      jwt.sign(payload, config.SECRET_KEY as Secret, { expiresIn: '1h' }, (err, token) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(token);
+        }
+      });
+    });
     res.json({
       message: 'User logged in successfully',
       token,
