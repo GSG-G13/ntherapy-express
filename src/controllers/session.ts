@@ -1,6 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { RequestWithUserRole, AppointmentWithTherapistOptional } from '../types';
 import generateMeeting from '../services/calendar';
+import { templateErrors } from '../helpers';
 import { bookAppointment } from '../services';
 import { User } from '../models';
 
@@ -17,13 +18,18 @@ const createSessionController = async (
     | null = await bookAppointment(appointmentId);
 
     const therapistEmail = appointment?.therapist?.user?.email;
-
+    if (!therapistEmail) {
+      throw templateErrors.BAD_REQUEST('The Therapist email is not available');
+    }
     const user = await User.findOne({
       attributes: ['email'],
       where: { id: userData?.userId },
     });
 
     const userEmail = user?.email;
+    if (!userEmail) {
+      throw templateErrors.BAD_REQUEST('The Therapist email is not available');
+    }
 
     await generateMeeting({
       therapistEmail,
