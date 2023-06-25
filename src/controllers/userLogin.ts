@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { userLoginSchema } from '../helpers/validation';
@@ -26,12 +25,14 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
     if (!passwordMatch) {
       throw templateErrors.UNAUTHORIZED('The password is invalid');
     }
-    const secretKey = process.env.SECRET_KEY || '';
-    const token = jwt.sign({ email: user.email }, secretKey, { expiresIn: '1h' });
-    console.log(token);
+    if (!process.env.SECRET_KEY) {
+      throw templateErrors.FORBIDDEN('No secret key found');
+    } // i am not sure if it is true
+    const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
     res.json({
       message: 'user logged in successfully',
+      token,
     });
   } catch (err) {
     next(err);
