@@ -15,7 +15,11 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
     const user = await LoginByEmail(email);
 
     if (!user) {
-      throw templateErrors.BAD_REQUEST('wrong email or password');
+      throw templateErrors.BAD_REQUEST('Wrong email or password');
+    }
+
+    if (user && !user.isActive) {
+      throw templateErrors.BAD_REQUEST('Your account is not activated yet. Please check your email for activation instructions.');
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
