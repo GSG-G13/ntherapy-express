@@ -40,7 +40,6 @@ const createSessionController = async (
 
     res.json({
       message: 'Success',
-      userEmail,
     });
   } catch (error) {
     next(error);
