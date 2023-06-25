@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
+import * as yup from 'yup';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors } from '../helpers';
 import { LoginByEmail } from '../services';
@@ -35,6 +36,9 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
       token,
     });
   } catch (err) {
+    if (err instanceof yup.ValidationError) {
+      return next(templateErrors.BAD_REQUEST(err.message));
+    }
     next(err);
   }
 };
