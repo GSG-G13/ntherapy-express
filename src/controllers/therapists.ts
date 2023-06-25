@@ -39,10 +39,12 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
 
     res.json({
       message: 'Success',
-      data: therapists,
-      pagination: {
-        currentPage: pageNumber,
-        totalPages,
+      data: {
+        ...therapists,
+        pagination: {
+          currentPage: pageNumber,
+          totalPages,
+        },
       },
     });
   } catch (error) {
