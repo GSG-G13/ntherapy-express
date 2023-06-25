@@ -12,5 +12,4 @@ router.use('/appointments', appointmentsRouter);
 router.use('/therapists', therapistRouter);
 router.post('/payment-intent', checkAuth(RolesForSelect.user), findClientSecret);
 router.use('/session', sessionRouter);
-
 export default router;

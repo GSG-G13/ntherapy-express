@@ -8,6 +8,8 @@ const {
   CLIENT_SECRET, CLIENT_ID, REFRESH_TOKEN, ACCESS_TOKEN, SCOPE,
   TOKEN_TYPE, EXPIRY_DATE, REDIRECT_URIS, PROJECT_ID, AUTH_URI, TOKEN_URI,
   AUTH_PROVIDER_X509_CERT_URL, SECRET_KEY, TOKEN_TEST_THERAPIST, API_KEY, MAILERUSER, MAILERPASS,
+  AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, REGION,
+  BUCKET_NAME,
 } = process.env;
 
 interface ICONFIG {
@@ -34,6 +36,10 @@ interface ICONFIG {
   AUTH_PROVIDER_X509_CERT_URL: string | undefined | string[],
   TOKEN_TEST_THERAPIST: string | undefined,
   API_KEY:string | undefined,
+  AWS_ACCESS_KEY_ID:string | undefined,
+  AWS_SECRET_ACCESS_KEY:string | undefined,
+  REGION:string | undefined,
+  BUCKET_NAME:string | undefined
 }
 const config: ICONFIG = {
   DB_URL: {
@@ -62,6 +68,10 @@ const config: ICONFIG = {
   },
   TOKEN_TEST_THERAPIST,
   API_KEY,
+  AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY,
+  REGION,
+  BUCKET_NAME,
 
 };
 
