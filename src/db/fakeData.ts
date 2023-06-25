@@ -364,7 +364,7 @@ const Appointments = [
     therapistId: 3,
     datetime: new Date('2023-06-18T12:00:00.000Z'),
     isBooked: false,
-    isAvailable: true,
+    isAvailable: false,
   },
   {
 
