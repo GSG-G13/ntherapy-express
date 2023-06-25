@@ -1,7 +1,7 @@
 import { templateErrors } from '../helpers';
 import { Appointment, Therapist, User } from '../models';
 
-const bookedAppointment = async (appointmentId: number) => {
+const bookAppointment = async (appointmentId: number) => {
   const appointment = await Appointment.findOne({
     where: {
       id: appointmentId,
@@ -31,4 +31,4 @@ const bookedAppointment = async (appointmentId: number) => {
   return appointment;
 };
 
-export default bookedAppointment;
+export default bookAppointment;

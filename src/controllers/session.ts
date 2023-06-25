@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import { RequestWithUserRole, AppointmentWithTherapistOptional } from '../types';
 import generateMeeting from '../services/calendar';
 import { templateErrors } from '../helpers';
-import { bookedAppointment } from '../services';
+import { bookAppointment } from '../services';
 import { User } from '../models';
 
 const createSessionController = async (
@@ -15,7 +15,7 @@ const createSessionController = async (
     const { appointmentId } = req.body;
 
     const appointment: AppointmentWithTherapistOptional
-    | null = await bookedAppointment(appointmentId);
+    | null = await bookAppointment(appointmentId);
 
     const therapistEmail = appointment?.therapist?.user?.email;
     if (!therapistEmail) {

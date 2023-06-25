@@ -3,9 +3,9 @@ import {
   getAppointmentsPerDateService, getAppointmentById, updateIsAvailable,
   addAppointment,
 } from './appointment';
-import bookedAppointment from './session';
+import bookAppointment from './session';
 
 export {
   getTherapistById, getAllTherapist, getAppointmentsPerDateService, getAppointmentById
-  , updateIsAvailable, addAppointment, updateTherapist, bookedAppointment,
+  , updateIsAvailable, addAppointment, updateTherapist, bookAppointment,
 };
