@@ -1,7 +1,11 @@
-import { TherapistAttributes, UsersAttributes } from './models';
+import { AppointmentsAttributes, TherapistAttributes, UsersAttributes } from './models';
 
 interface TherapistWithUserOptional extends TherapistAttributes {
   user?: UsersAttributes,
+}
+
+interface AppointmentWithTherapistOptional extends AppointmentsAttributes {
+  therapist?: TherapistWithUserOptional,
 }
 
 interface Imeeting {
@@ -30,5 +34,5 @@ interface AddAppointment {
 
 export {
   TherapistWithUserOptional, Imeeting, Appointment,
-  TimeRange, AddAppointment,
+  TimeRange, AddAppointment, AppointmentWithTherapistOptional,
 };
