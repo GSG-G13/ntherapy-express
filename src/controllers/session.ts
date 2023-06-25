@@ -17,23 +17,13 @@ const createSessionController = async (
     const appointment: AppointmentWithTherapistOptional
     | null = await BookedAppointment(appointmentId);
 
-    if (!appointment) {
-      throw templateErrors.BAD_REQUEST('The requested appointment is not available.');
-    }
-    if (!userData) {
-      throw templateErrors.UNAUTHORIZED('user not found');
-    }
-
-    appointment.isBooked = true;
-    await appointment.save();
-
     const therapistEmail = appointment?.therapist?.user?.email;
     if (!therapistEmail) {
       throw templateErrors.BAD_REQUEST('The Therapist email is not available');
     }
     const user = await User.findOne({
       attributes: ['email'],
-      where: { id: userData.userId },
+      where: { id: userData?.userId },
     });
 
     const userEmail = user?.email;
