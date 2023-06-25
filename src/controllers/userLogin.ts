@@ -23,16 +23,27 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       throw templateErrors.BAD_REQUEST('Your account is not activated yet. Please check your email for activation instructions.');
     }
 
+    const payload: {
+      userId: string,
+      role: string,
+    } = {
+      role: user.role,
+      userId: user.id.toString(),
+    };
+
+    if (user.role === 'therapist') {
+      payload.userId = user.id.toString();
+    }
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      throw templateErrors.BAD_REQUEST('wrong email or password');
+      throw templateErrors.BAD_REQUEST('Wrong email or password');
     }
 
-    const token = jwt.sign({ email: user.email }, config.SECRET_KEY as Secret, { expiresIn: '1h' });
+    const token = jwt.sign(payload, config.SECRET_KEY as Secret, { expiresIn: '1h' });
 
     res.json({
-      message: 'user logged in successfully',
+      message: 'User logged in successfully',
       token,
     });
   } catch (err) {
