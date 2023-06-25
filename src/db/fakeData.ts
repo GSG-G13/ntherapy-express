@@ -10,7 +10,7 @@ const Users = [
     email: 'yasser@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05988822228',
-    role: 'client',
+    role: 'user',
     isActive: true,
   },
   {
@@ -28,7 +28,7 @@ const Users = [
     email: 'Mohammed@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05988855228',
-    role: 'client',
+    role: 'user',
     isActive: true,
   },
   {
@@ -37,7 +37,7 @@ const Users = [
     email: 'Ahmed@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05922225228',
-    role: 'client',
+    role: 'user',
     isActive: true,
   },
   {
@@ -82,7 +82,7 @@ const Users = [
     email: 'mo.alagha@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '0591234567',
-    role: 'client',
+    role: 'user',
     isActive: true,
   },
   {
@@ -91,7 +91,7 @@ const Users = [
     email: 'foad@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05912121212',
-    role: 'client',
+    role: 'user',
     isActive: false,
   },
   {
@@ -118,7 +118,7 @@ const Users = [
     email: 'Abdsqsq@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05911110422',
-    role: 'client',
+    role: 'user',
     isActive: false,
   },
   {
@@ -127,7 +127,7 @@ const Users = [
     email: 'ahmedizz@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '0591231231',
-    role: 'client',
+    role: 'user',
     isActive: true,
   },
   {
@@ -136,7 +136,7 @@ const Users = [
     email: 'moshawwa@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '0592146028',
-    role: 'client',
+    role: 'user',
     isActive: true,
   },
 ];
