@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors } from '../helpers';
 import { LoginByEmail } from '../services';
+import config from '../config';
 
 dotenv.config();
 
@@ -25,10 +26,10 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
     if (!passwordMatch) {
       throw templateErrors.UNAUTHORIZED('The password is invalid');
     }
-    if (!process.env.SECRET_KEY) {
+    if (!config.SECRET_KEY) {
       throw templateErrors.FORBIDDEN('No secret key found');
-    } // i am not sure if it is true
-    const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY, { expiresIn: '1h' });
+    }
+    const token = jwt.sign({ email: user.email }, config.SECRET_KEY, { expiresIn: '1h' });
 
     res.json({
       message: 'user logged in successfully',
