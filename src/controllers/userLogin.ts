@@ -26,7 +26,7 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
-      throw templateErrors.UNAUTHORIZED('The password is invalid');
+      throw templateErrors.BAD_REQUEST('wrong email or password');
     }
 
     const token = jwt.sign({ email: user.email }, config.SECRET_KEY as Secret, { expiresIn: '1h' });
