@@ -21,8 +21,6 @@ const BookedAppointment = async (appointmentId: number) => {
     ],
   });
 
-  console.log(appointment);
-
   if (!appointment) {
     throw templateErrors.BAD_REQUEST('The requested appointment is not available.');
   }
