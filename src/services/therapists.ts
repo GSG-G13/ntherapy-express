@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { Therapist, User } from '../models';
-import THERAPISTS_LIMIT from '../config/constants';
+import { THERAPISTS_LIMIT } from '../config/constants';
 import therapist from '../models/therapist';
 import { Payload } from '../types';
 import { templateErrors } from '../helpers';
@@ -19,7 +19,7 @@ const getTherapistById = async (id: string) => {
 
 const getAllTherapist = async (name: string, page: number) => {
   const offset = (page - 1) * THERAPISTS_LIMIT;
-  const therapists = await Therapist.findAll({
+  const therapists = await Therapist.findAndCountAll({
     include: [
       {
         model: User,
@@ -37,7 +37,7 @@ const getAllTherapist = async (name: string, page: number) => {
     offset,
   });
 
-  return therapists;
+  return { therapists, totalPages: Math.ceil(therapists.count / THERAPISTS_LIMIT) };
 };
 
 const updateTherapist = async (data: Payload, therapistId:number, userID: number) => {

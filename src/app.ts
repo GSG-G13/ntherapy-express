@@ -10,9 +10,11 @@ import router from './routes';
 dotenv.config();
 
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use([
+  cors(),
+  express.json(),
+  express.urlencoded({ extended: true }),
+]);
 app.use(bearerToken());
 app.use(morgan('dev'));
 app.use('/api/v1', router);

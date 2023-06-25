@@ -6,13 +6,13 @@ const stripeInstance = new Stripe(apiKey as string, {
   apiVersion: '2022-11-15',
 });
 
-const calculateOrderAmount = () => 1400;
-
-const getClientSecret = async () => {
+const getClientSecret = async (session_price: number, userId: string | undefined) => {
+  console.log(userId);
   const paymentIntent = await stripeInstance.paymentIntents.create({
-    amount: calculateOrderAmount(),
+    amount: session_price,
     currency: 'usd',
     payment_method_types: ['card'],
+    receipt_email: user_email,
   });
 
   return paymentIntent;
