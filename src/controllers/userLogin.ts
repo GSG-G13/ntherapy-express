@@ -15,7 +15,7 @@ const userLoginController = async (req: Request, res: Response, next: NextFuncti
     const user = await LoginByEmail(email);
 
     if (!user) {
-      throw templateErrors.NOT_FOUND('user not found');
+      throw templateErrors.BAD_REQUEST('wrong email or password');
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
