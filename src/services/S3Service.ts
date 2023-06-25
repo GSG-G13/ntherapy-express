@@ -26,6 +26,4 @@ const createPresignedUrl = async (key?:string) => {
   return getSignedUrl(client, command, { expiresIn: 60 });
 };
 
-createPresignedUrl('13e5effa4e3ac6c386490413185b7286').then((url) => console.log(url));
-
 export default createPresignedUrl;
