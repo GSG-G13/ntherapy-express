@@ -35,11 +35,17 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
       throw templateErrors.BAD_REQUEST('Page number should be a valid number');
     }
 
-    const therapists = await getAllTherapist(q as string || '', pageNumber);
+    const { therapists, totalPages } = await getAllTherapist(q as string || '', pageNumber);
 
     res.json({
       message: 'Success',
-      data: therapists,
+      data: {
+        ...therapists,
+        pagination: {
+          currentPage: pageNumber,
+          totalPages,
+        },
+      },
     });
   } catch (error) {
     next(error);

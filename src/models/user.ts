@@ -26,7 +26,7 @@ const User = sequelize.define<UsersAttributes>('user', {
   },
   role: {
     type: DataTypes.ENUM,
-    values: ['client', 'therapist'],
+    values: ['user', 'therapist'],
   },
   isActive: {
     type: DataTypes.BOOLEAN,
