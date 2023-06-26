@@ -4,6 +4,11 @@ import * as yup from 'yup';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
 import { LoginByEmail } from '../services';
+import { TherapistAttributes, UsersAttributes } from '../types';
+
+interface TherapistAndUser extends UsersAttributes {
+  therapist?:TherapistAttributes
+}
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -11,9 +16,14 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await userLoginSchema.validate({ email, password });
 
-    const user = await LoginByEmail(email);
+    const user:TherapistAndUser | null = await LoginByEmail(email);
 
     if (!user) {
+      throw templateErrors.BAD_REQUEST('Wrong email or password');
+    }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
       throw templateErrors.BAD_REQUEST('Wrong email or password');
     }
 
@@ -22,28 +32,26 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     const payload: {
-      userId: string,
+      userId: number,
       role: string,
+      therapistId?: number
     } = {
       role: user.role,
-      userId: user.id.toString(),
+      userId: user.id,
     };
 
     if (user.role === 'therapist') {
-      payload.userId = user.id.toString();
+      payload.therapistId = user?.therapist?.id as number;
     }
-    const passwordMatch = await bcrypt.compare(password, user.password);
 
-    if (!passwordMatch) {
-      throw templateErrors.BAD_REQUEST('Wrong email or password');
-    }
-    const expiresIn = '1h';
+    console.log(user?.therapist?.id);
 
-    const token = await generateToken(user.role, user.id.toString(), expiresIn);
+    const token = await generateToken(payload);
 
     res.json({
       message: 'User logged in successfully',
       token,
+      user,
     });
   } catch (err) {
     if (err instanceof yup.ValidationError) {
