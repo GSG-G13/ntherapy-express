@@ -4,11 +4,7 @@ import * as yup from 'yup';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
 import { loginByEmail } from '../services';
-import { TherapistAttributes, UsersAttributes, IPayload } from '../types';
-
-interface TherapistAndUser extends UsersAttributes {
-  therapist?:TherapistAttributes
-}
+import { TherapistAndUser, IPayload } from '../types';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
