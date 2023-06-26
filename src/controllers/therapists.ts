@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import * as yup from 'yup';
-import { getTherapistById, getAllTherapist, updateTherapist } from '../services';
+import {
+  getTherapistById, getAllTherapist, updateTherapist, createPresignedUrl,
+} from '../services';
 import { templateErrors, therapistInfoSchema } from '../helpers';
 import { TherapistWithUserOptional, RequestWithUserRole } from '../types';
 
@@ -80,4 +82,29 @@ const updateTherapistProfile = async (
   }
 };
 
-export { findTherapistById, getAllTherapists, updateTherapistProfile };
+const updateProfileImg = async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { user } = req;
+    const therapist = await getTherapistById(user?.therapistId as string);
+    const profileImgKey = therapist?.profileImg?.split('/')[3];
+    const url = await createPresignedUrl(profileImgKey as string);
+    res.json({
+      data: {
+        url,
+        message: 'the link will expire within 60s',
+
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+export {
+  findTherapistById, getAllTherapists, updateTherapistProfile, updateProfileImg,
+};
