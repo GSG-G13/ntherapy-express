@@ -60,7 +60,7 @@ const Users = [
   },
   {
 
-    fullName: 'Basel Al-ghazal',
+    fullName: 'Lina Yahya',
     email: 'aya@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05922005228',
@@ -69,7 +69,7 @@ const Users = [
   },
   {
 
-    fullName: 'Waleed Al-Yass',
+    fullName: 'Lama Al-Agha ',
     email: 'Waleedaaa@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05922555228',
