@@ -1,7 +1,6 @@
 import { User, Therapist } from '../models';
-// import { RolesForSelect } from '../types';
 
-const LoginByEmail = async (email: string) => {
+const loginByEmail = async (email: string) => {
   const user = await User.findOne({
     attributes: ['id', 'email', 'password', 'isActive', 'role'],
     where: { email },
@@ -12,4 +11,4 @@ const LoginByEmail = async (email: string) => {
   return user;
 };
 
-export default LoginByEmail;
+export default loginByEmail;

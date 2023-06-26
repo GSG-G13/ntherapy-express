@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import * as yup from 'yup';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
-import { LoginByEmail } from '../services';
+import { loginByEmail } from '../services';
 import { TherapistAttributes, UsersAttributes } from '../types';
 
 interface TherapistAndUser extends UsersAttributes {
@@ -16,7 +16,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await userLoginSchema.validate({ email, password });
 
-    const user:TherapistAndUser | null = await LoginByEmail(email);
+    const user:TherapistAndUser | null = await loginByEmail(email);
 
     if (!user) {
       throw templateErrors.BAD_REQUEST('Wrong email or password');
