@@ -27,7 +27,7 @@ const getAllTherapist = async (name: string, page: number) => {
         where: {
           isActive: true,
           fullName: {
-            [Op.like]: `%${name}%`,
+            [Op.iLike]: `%${name}%`,
           },
         },
       },
