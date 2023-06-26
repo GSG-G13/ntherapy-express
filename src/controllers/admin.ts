@@ -2,9 +2,8 @@ import { Response, NextFunction } from 'express';
 import * as yup from 'yup';
 import bcrypt from 'bcrypt';
 import { RequestWithUserRole } from '../types';
-import { adminLoginSchema } from '../helpers/validation';
+import { adminLoginSchema, templateErrors, generateToken } from '../helpers';
 import { getAdmin } from '../services';
-import { templateErrors, generateToken } from '../helpers';
 
 const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
