@@ -1,11 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
-import jwt, { Secret } from 'jsonwebtoken';
 import * as yup from 'yup';
 import { userLoginSchema } from '../helpers/validation';
-import { templateErrors } from '../helpers';
+import { templateErrors, generateToken } from '../helpers';
 import { LoginByEmail } from '../services';
-import config from '../config';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -39,17 +37,10 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     if (!passwordMatch) {
       throw templateErrors.BAD_REQUEST('Wrong email or password');
     }
+    const expiresIn = '1h';
 
-    const token = await new Promise((resolve, reject) => {
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      jwt.sign(payload, config.SECRET_KEY as Secret, { expiresIn: '1h' }, (err, token) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(token);
-        }
-      });
-    });
+    const token = await generateToken(user.role, user.id.toString(), expiresIn);
+
     res.json({
       message: 'User logged in successfully',
       token,
