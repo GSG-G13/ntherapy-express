@@ -15,7 +15,7 @@ const Users = [
   },
   {
 
-    fullName: 'ali Ahmed',
+    fullName: 'Ali Ahmed',
     email: 'ali@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '0598877228',
@@ -42,7 +42,7 @@ const Users = [
   },
   {
 
-    fullName: 'wassem Al-eeee',
+    fullName: 'Wassem Abu Swada',
     email: 'wassem@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '059223125228',
@@ -51,7 +51,7 @@ const Users = [
   },
   {
 
-    fullName: 'wassem Al-eeee',
+    fullName: 'Ahmed Abu Jaber',
     email: 'wassem5555@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '059223125228',
@@ -60,7 +60,7 @@ const Users = [
   },
   {
 
-    fullName: 'aya Al-eeee',
+    fullName: 'Lina Yahya',
     email: 'aya@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05922005228',
@@ -69,7 +69,7 @@ const Users = [
   },
   {
 
-    fullName: 'Waleed Al-Yass',
+    fullName: 'Lama Al-Agha ',
     email: 'Waleedaaa@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05922555228',
@@ -77,25 +77,25 @@ const Users = [
     isActive: true,
   },
   {
-
+    // 9
     fullName: 'Mohammmed Al-Agha ',
     email: 'mo.alagha@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '0591234567',
-    role: 'user',
+    role: 'therapist',
     isActive: true,
   },
   {
-
+    // 10
     fullName: 'foad Abu-Swada',
     email: 'foad@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05912121212',
-    role: 'user',
+    role: 'therapist',
     isActive: false,
   },
   {
-
+    // 11
     fullName: 'Ahmed Al-hesssen',
     email: 'wassemaaa@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
@@ -104,8 +104,8 @@ const Users = [
     isActive: true,
   },
   {
-
-    fullName: 'wassem Al-eeee',
+    // 12
+    fullName: 'Ibrahim Al-hesssen',
     email: 'wassemsmk@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '059223125228',
@@ -113,30 +113,57 @@ const Users = [
     isActive: true,
   },
   {
-
-    fullName: 'Abd Abu-Swada',
+    // 13
+    fullName: 'Khaleel Al-Nbhan',
     email: 'Abdsqsq@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '05911110422',
-    role: 'user',
+    role: 'therapist',
     isActive: false,
   },
   {
-
+    // 14
     fullName: 'Ahmed izz Al-deen',
     email: 'ahmedizz@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '0591231231',
-    role: 'user',
+    role: 'therapist',
     isActive: true,
   },
   {
-
+    // 15
     fullName: 'Mohammed al shawwa',
     email: 'moshawwa@gmail.com',
     password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
     phoneNumber: '0592146028',
-    role: 'user',
+    role: 'therapist',
+    isActive: true,
+  },
+  {
+    // 16
+    fullName: 'Mohammed al Sabeea',
+    email: 'moAhmed@gmail.com',
+    password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
+    phoneNumber: '+970592146028',
+    role: 'therapist',
+    isActive: true,
+  },
+  {
+    // 17
+    fullName: 'Mohammed al Sabeea',
+    email: 'moSabee@gmail.com',
+    password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
+    phoneNumber: '+970592146028',
+    role: 'therapist',
+    isActive: true,
+  },
+  {
+    // 18
+    fullName: 'Mohammed al Najar',
+    email: 'monjjr@gmail.com',
+    password: '$2a$12$41IN/lwDh2kzQZ.3xyc7rOq4A9EoxyZFYpb/x3Km7//6p/ap6tLUK',
+    phoneNumber: '+970592146028',
+    role: 'therapist',
     isActive: true,
   },
 ];
@@ -152,7 +179,7 @@ const Therapists = [
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/08aa93b187471a9cf0096bbf5ab9c378',
     major: 'Mental Health Counselor',
     bio: "A counselor with a master's degree and several years of supervised clinical work experience. Trained to diagnose and provide individual and group counseling. ",
     hourlyRate: 10,
@@ -162,7 +189,7 @@ const Therapists = [
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/16cebf52777cec808b09cc79d7108d62',
     major: 'Licensed Professional Counselor',
     bio: " A counselor with a master's degree in psychology, counseling or a related field. Trained to diagnose and provide individual and group counseling ",
     hourlyRate: 20,
@@ -172,7 +199,7 @@ const Therapists = [
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://www.felixhospital.com/sites/default/files/2022-11/dr-dk-gupta.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/1e0c8c3b036eb07823184efb3853d383',
     major: 'Nurse Psychotherapist ',
     bio: ' registered nurse who is trained in the practice of psychiatric and mental health nursing. Trained to diagnose and provide individual and group counseling. ',
     hourlyRate: 30,
@@ -182,7 +209,7 @@ const Therapists = [
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://www.felixhospital.com/sites/default/files/2022-11/dr-dk-gupta.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/252ef7db0443cd6ae3c2c069952557d4',
     major: 'Marital and Family Therapist ',
     bio: " counselor with a master's degree, with special education and training in marital and family therapy. Trained to diagnose and provide individual and group counseling.  ",
     hourlyRate: 40,
@@ -192,7 +219,7 @@ const Therapists = [
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/37844d2b919f1dd60612f1b5cbeb3752',
     major: 'Pastoral Counselor  ',
     bio: ' clergy with training in clinical pastoral education. Trained to diagnose and provide individual and group counseling.   ',
     hourlyRate: 50,
@@ -201,8 +228,7 @@ const Therapists = [
   {
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
-    profileImg:
-      'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
+    profileImg: 'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/6239c9b39ea932e6da5893fcf18781a5',
     major: 'Clinical Social Worker  ',
     bio: "  A counselor with a master's degree in social work from an accredited graduate program. Trained to make diagnoses A counselor with a master's degree in social work from an accredited graduate program. Trained to make diagnoses,   ",
     hourlyRate: 60,
@@ -212,7 +238,7 @@ const Therapists = [
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/81b3bd532d2d6f1cd58529be67f4091e',
     major: 'Pastoral Counselor  ',
     bio: ' clergy with training in clinical pastoral education. Trained to diagnose and provide individual and group counseling.   ',
     hourlyRate: 70,
@@ -221,20 +247,9 @@ const Therapists = [
   {
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
-    profileImg:
-      'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
+    profileImg: 'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/9645540871ca5c7e7f1cf1339442bf87',
     major: 'Psychiatrist  ',
     bio: ' A medical doctor with special training in the diagnosis and treatment of mental and emotional illnesses.  A psychiatrist can prescribe medication, but they often do not counsel patients.   ',
-    hourlyRate: 71,
-    userId: 8,
-  },
-  {
-    cvLink:
-      'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
-    profileImg:
-      'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
-    major: 'Psychiatric or Mental Health Nurse Practitioner  ',
-    bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
     hourlyRate: 71,
     userId: 9,
   },
@@ -242,7 +257,17 @@ const Therapists = [
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://t4.ftcdn.net/jpg/02/60/04/09/360_F_260040900_oO6YW1sHTnKxby4GcjCvtypUCWjnQRg5.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/a79af3e3e72aad1dee5b4ede216cfa03',
+    major: 'Psychiatric or Mental Health Nurse Practitioner  ',
+    bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
+    hourlyRate: 71,
+    userId: 13,
+  },
+  {
+    cvLink:
+      'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
+    profileImg:
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/b24067a5322eb4f6d85cfbdcc5f19ecc',
     major: 'Clinical Psychologist  ',
     bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
     hourlyRate: 69,
@@ -252,41 +277,41 @@ const Therapists = [
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://familydoctor.org/wp-content/uploads/2018/02/41808433_l.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/b86dc79313734a0bd879e8731c91ee3f',
     major: 'Nurse Psychotherapist ',
     bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
     hourlyRate: 68,
-    userId: 11,
+    userId: 15,
   },
   {
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://www.felixhospital.com/sites/default/files/2022-11/dr-dk-gupta.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/da71b77215a99bf8e476a4db1517e702',
     major: 'Psychiatrist ',
     bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
     hourlyRate: 65,
-    userId: 12,
+    userId: 16,
   },
   {
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://familydoctor.org/wp-content/uploads/2018/02/41808433_l.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/171684674ca9ec368d70cbdc4e70bf66',
     major: 'Mental Health Counselor ',
     bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
     hourlyRate: 65,
-    userId: 13,
+    userId: 17,
   },
   {
     cvLink:
       'https://drive.google.com/file/d/1jthZD5IlhwMn5IBUoQ-IPj3vnsuVsXf9/view?usp=sharing',
     profileImg:
-      'https://familydoctor.org/wp-content/uploads/2018/02/41808433_l.jpg',
+      'https://ntherapy-ahmed-murtaja.s3.amazonaws.com/567dfb18afc072ad812c1b2153ea4606',
     major: 'Mental Health Counselor ',
     bio: ' A registered nurse practitioner with a graduate degree and specialized training in the diagnosis and treatment of mental and emotional illness.    ',
     hourlyRate: 85,
-    userId: 14,
+    userId: 18,
   },
 ];
 
