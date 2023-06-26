@@ -8,7 +8,6 @@ import { clientError, serverError } from './middlewares';
 import router from './routes';
 
 dotenv.config();
-
 const app = express();
 app.use([
   cors(),

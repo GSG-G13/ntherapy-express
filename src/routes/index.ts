@@ -16,5 +16,4 @@ router.use('/admin', adminRouter);
 router.use('/auth', userRouter);
 router.post('/payment-intent', checkAuth(RolesForSelect.user), findClientSecret);
 router.use('/session', sessionRouter);
-
 export default router;
