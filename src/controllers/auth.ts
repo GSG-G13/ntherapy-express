@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
 import { loginByEmail } from '../services';
-import { TherapistAttributes, UsersAttributes } from '../types';
+import { TherapistAttributes, UsersAttributes, IPayload } from '../types';
 
 interface TherapistAndUser extends UsersAttributes {
   therapist?:TherapistAttributes
@@ -31,11 +31,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       throw templateErrors.BAD_REQUEST('Your account is not activated yet. Please check your email for activation instructions.');
     }
 
-    const payload: {
-      userId: number,
-      role: string,
-      therapistId?: number
-    } = {
+    const payload: IPayload = {
       role: user.role,
       userId: user.id,
     };
@@ -48,7 +44,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
     res.json({
       message: 'User logged in successfully',
-      token,
+      data: { access_token: token },
     });
   } catch (err) {
     if (err instanceof yup.ValidationError) {
