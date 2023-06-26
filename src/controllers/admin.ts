@@ -3,8 +3,7 @@ import * as yup from 'yup';
 import bcrypt from 'bcrypt';
 import { RequestWithUserRole } from '../types';
 import { adminLoginSchema } from '../helpers/validation';
-import { Admin } from '../models';
-
+import { getAdmin } from '../services';
 import { templateErrors, generateToken } from '../helpers';
 
 const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
@@ -12,8 +11,8 @@ const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFun
 
   try {
     await adminLoginSchema.validate({ username, password });
+    const admin = await getAdmin(username);
 
-    const admin = await Admin.findOne({ where: { username } });
     if (!admin) {
       throw templateErrors.BAD_REQUEST(' wrong username or password');
     }
