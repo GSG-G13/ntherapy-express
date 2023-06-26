@@ -44,8 +44,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       payload.therapistId = user?.therapist?.id as number;
     }
 
-    console.log(user?.therapist?.id);
-
     const token = await generateToken(payload);
 
     res.json({
