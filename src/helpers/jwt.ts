@@ -1,12 +1,6 @@
 import { verify, Secret, sign } from 'jsonwebtoken';
 import config from '../config';
-
-interface IPayload {
-  role: string;
-  userId?: number;
-  therapistId?: number;
-  adminId?: number;
-}
+import { IPayload } from '../types';
 
 const verifyToken = (token: string) => new Promise((resolve, reject) => {
   verify(token, config.SECRET_KEY as Secret, (error: Error | null, decoded) => {

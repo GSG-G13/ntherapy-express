@@ -5,7 +5,7 @@ import {
 import {
   TherapistWithUserOptional, Imeeting, Appointment, TimeRange, AddAppointment,
 } from './therapist';
-import Payload from './payload';
+import { Payload, IPayload } from './payload';
 import {
   Decode, RequestWithUserRole, RolesForSelect, Roles,
 } from './checkauth';
@@ -13,5 +13,5 @@ import {
 export {
   UsersAttributes, TherapistAttributes, AppointmentsAttributes, AdminAttributes, SessionsAttributes,
   TherapistWithUserOptional, Decode, RequestWithUserRole, RolesForSelect, Roles, Imeeting,
-  Appointment, TimeRange, Payload, AddAppointment,
+  Appointment, TimeRange, Payload, AddAppointment, IPayload,
 };
