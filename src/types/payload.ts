@@ -6,5 +6,11 @@ interface Payload {
   cvLink?: string;
   hourlyRate?: number;
 }
+interface IPayload {
+  role: string;
+  userId?: number;
+  therapistId?: number;
+  adminId?: number;
+}
 
-export default Payload;
+export { Payload, IPayload };

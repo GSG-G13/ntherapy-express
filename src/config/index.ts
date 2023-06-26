@@ -7,7 +7,7 @@ const {
   PORT = 8080, DB_URL, DATABASE_URL, DB_TEST_URL, NODE_ENV = 'development',
   CLIENT_SECRET, CLIENT_ID, REFRESH_TOKEN, ACCESS_TOKEN, SCOPE,
   TOKEN_TYPE, EXPIRY_DATE, REDIRECT_URIS, PROJECT_ID, AUTH_URI, TOKEN_URI,
-  AUTH_PROVIDER_X509_CERT_URL, SECRET_KEY, TOKEN_TEST_THERAPIST, MAILERUSER, MAILERPASS,
+  AUTH_PROVIDER_X509_CERT_URL, SECRET_KEY, TOKEN_TEST_THERAPIST, API_KEY, MAILERUSER, MAILERPASS,
 } = process.env;
 
 interface ICONFIG {
@@ -33,6 +33,7 @@ interface ICONFIG {
   TOKEN_URI: string | undefined | string[],
   AUTH_PROVIDER_X509_CERT_URL: string | undefined | string[],
   TOKEN_TEST_THERAPIST: string | undefined,
+  API_KEY:string | undefined,
 }
 const config: ICONFIG = {
   DB_URL: {
@@ -60,6 +61,7 @@ const config: ICONFIG = {
     pass: MAILERPASS,
   },
   TOKEN_TEST_THERAPIST,
+  API_KEY,
 
 };
 

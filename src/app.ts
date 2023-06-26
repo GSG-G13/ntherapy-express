@@ -11,11 +11,11 @@ dotenv.config();
 
 const app = express();
 app.use([
+  cors(),
   express.json(),
   express.urlencoded({ extended: true }),
 ]);
 app.use(bearerToken());
-app.use(cors());
 app.use(morgan('dev'));
 app.use('/api/v1', router);
 app.use(clientError);
