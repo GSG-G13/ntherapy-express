@@ -32,7 +32,11 @@ interface AddAppointment {
   therapistId: number,
 }
 
+interface TherapistAndUser extends UsersAttributes {
+  therapist?:TherapistAttributes
+}
+
 export {
   TherapistWithUserOptional, Imeeting, Appointment,
-  TimeRange, AddAppointment, AppointmentWithTherapistOptional,
+  TimeRange, AddAppointment, AppointmentWithTherapistOptional, TherapistAndUser,
 };
