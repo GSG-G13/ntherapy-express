@@ -11,7 +11,7 @@ import createPresignedUrl from './S3Service';
 
 export {
   getTherapistById, getAllTherapist, getAppointmentsPerDateService, getAppointmentById
-  , updateIsAvailable, addAppointment, updateTherapist, getClientSecret, bookAppointment,
-  loginByEmail, getAdmin,
+  , updateIsAvailable, addAppointment, updateTherapist, getClientSecret, bookAppointment, getAdmin,
   createPresignedUrl,
+  loginByEmail,
 };
