@@ -14,5 +14,4 @@ router.use('/therapists', therapistRouter);
 router.use('/auth', userRouter);
 router.post('/payment-intent', checkAuth(RolesForSelect.user), findClientSecret);
 router.use('/session', sessionRouter);
-
 export default router;
