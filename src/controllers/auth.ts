@@ -49,7 +49,6 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     res.json({
       message: 'User logged in successfully',
       token,
-      user,
     });
   } catch (err) {
     if (err instanceof yup.ValidationError) {
