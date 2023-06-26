@@ -1,5 +1,5 @@
 import { CustomError, templateErrors } from './CustomError';
-import generateToken from './generateToken';
+import { generateToken, verifyToken } from './jwt';
 
 import {
   getAppointmentSchema, updateAvailableSchema, therapistInfoSchema, addAppointmentSchema,
@@ -8,5 +8,5 @@ import {
 export {
   CustomError, templateErrors, getAppointmentSchema, updateAvailableSchema, therapistInfoSchema,
   addAppointmentSchema,
-  generateToken,
+  generateToken, verifyToken,
 };
