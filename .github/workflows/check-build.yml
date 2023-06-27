@@ -1,0 +1,43 @@
+name: TypeScript Build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run TypeScript build
+        run: npx tsc
+
+      - name: Check for build errors
+        id: check-errors
+        run: echo "::set-output name=errors::$(npx tsc --noEmit --pretty)"
+
+      - name: Add comment to branch if errors found
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: "TypeScript build errors found:\n\n${{ steps.check-errors.outputs.errors }}"
+            })
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: steps.check-errors.outputs.errors != ''
