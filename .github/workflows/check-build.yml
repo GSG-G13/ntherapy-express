@@ -24,18 +24,16 @@ jobs:
 
       - name: Check for build errors
         id: check-errors
-        run: echo "::set-output name=errors::$(npx tsc --noEmit --pretty --noErrorTruncation --skipLibCheck)"
+        run: echo "::set-output name=errors::$(npx tsc --noEmit --pretty --noErrorTruncation)"
 
       - name: Add comment to branch if errors found
-        uses: actions/github-script@v4
+        uses: peter-evans/create-or-update-comment@v1
         with:
-          script: |
-            github.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: context.sha,
-              body: "TypeScript build errors found:\n\n${{ steps.check-errors.outputs.errors }}"
-            })
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.number }}
+          body: |
+            **TypeScript Build Errors**
+
+            ```
+            ${{ steps.check-errors.outputs.errors }}
+            ```
         if: steps.check-errors.outputs.errors != ''
