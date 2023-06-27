@@ -18,7 +18,7 @@ const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFun
     const passwordMatch = await bcrypt.compare(password, admin?.password);
 
     if (!passwordMatch) {
-      throw templateErrors.BAD_REQUEST('username or password');
+      throw templateErrors.BAD_REQUEST('wrong username or password');
     }
 
     const payload = {
