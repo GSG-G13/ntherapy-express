@@ -22,18 +22,4 @@ jobs:
         run: npm install
 
       - name: Run TypeScript build
-        run: npx tsc --noEmit --pretty --noErrorTruncation
-
-      - name: Add label to branch if errors found
-        uses: actions/labeler@v4
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          configuration-path: |
-            [
-              {
-                "label": "tsc error",
-                "patterns": ["${{ steps.check-errors.outputs.errors }}"]
-              }
-            ]
-        if: steps.check-errors.outputs.errors != ''
-      
+        run: npx tsc --noEmit --pretty
