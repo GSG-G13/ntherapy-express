@@ -50,4 +50,19 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const register = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { body } = req;
+    const data = await userLoginSchema.validate(body);
+    res.json({ data, message: 'Successful registration' });
+  } catch (error) {
+    if (error instanceof yup.ValidationError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
+};
+
+export { login, register };
+
 export default login;
