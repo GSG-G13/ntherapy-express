@@ -22,11 +22,11 @@ jobs:
         run: npm install
 
       - name: Run TypeScript build
-        run: npx tsc
+        run: npx tsc --noEmit --pretty
 
       - name: Check for build errors
         id: check-errors
-        run: echo "::set-output name=errors::$(npx tsc --noEmit --pretty)"
+        run: echo "::set-output name=errors::$(npx tsc --noEmit --pretty --noErrorTruncation --skipLibCheck)"
 
       - name: Add comment to branch if errors found
         uses: actions/github-script@v4
@@ -39,5 +39,5 @@ jobs:
               body: "TypeScript build errors found:\n\n${{ steps.check-errors.outputs.errors }}"
             })
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         if: steps.check-errors.outputs.errors != ''
