@@ -1,10 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import * as yup from 'yup';
-import { userLoginSchema } from '../helpers/validation';
+import { userLoginSchema, userRegisterSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
 import { loginByEmail } from '../services';
 import { TherapistAndUser, IPayload } from '../types';
+import { registerTherapist, registerUser } from '../services/auth';
+import mailer from '../services/nodemailer';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -53,8 +55,29 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 const register = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { body } = req;
-    const data = await userLoginSchema.validate(body);
-    res.json({ data, message: 'Successful registration' });
+    await userRegisterSchema.validate(body);
+    if (body.role === 'therapist') {
+      const user = await registerTherapist(body);
+      await mailer({
+        from: 'ntherapypro@gmail.com',
+        to: user.email,
+        subject: 'Account Activation',
+        text: `
+         Hello ${user.fullName}, 
+         Your Account Created Successfully 
+         We will Review Your Account And Let You Know When You Are Activated
+         Thank You
+         Ntherapy Team
+         `,
+      });
+      return res.json({
+        message: 'User registered successfully',
+      });
+    }
+    await registerUser(body);
+    return res.json({
+      message: 'User registered successfully',
+    });
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return next(templateErrors.BAD_REQUEST(error.message));
@@ -64,5 +87,3 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export { login, register };
-
-export default login;

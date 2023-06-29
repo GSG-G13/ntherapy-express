@@ -5,9 +5,10 @@ import { getAppointments, updateAvailable, addAppointment } from './appointment'
 import { login } from './auth';
 import createSessionController from './session';
 import findClientSecret from './payment';
+import s3upload from './s3upload';
 
 export {
   findTherapistById, getAllTherapists, updateTherapistProfile, getAppointments, updateAvailable,
   addAppointment, findClientSecret, createSessionController, updateProfileImg,
-  login,
+  login, s3upload,
 };
