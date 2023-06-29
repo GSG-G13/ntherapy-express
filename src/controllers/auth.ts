@@ -76,7 +76,6 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
       const emailBody = mailGenerator.generate(email);
       const emailText = mailGenerator.generatePlaintext(email);
       await mailer({
-        from: 'ntherapypro@gmail.com',
         to: user.email,
         subject: 'Account Activation',
         text: emailText,
