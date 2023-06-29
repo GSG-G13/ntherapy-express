@@ -33,10 +33,10 @@ const registerTherapist = async ({
   const user = await registerUser({
     fullName, email, password, role, phoneNumber,
   });
-  const therapist = await Therapist.create({
+  await Therapist.create({
     cvLink, profileImg, major, hourlyRate, userId: user.id,
   });
-  return therapist;
+  return user;
 };
 
 export { loginByEmail, registerTherapist, registerUser };

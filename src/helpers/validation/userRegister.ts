@@ -28,6 +28,11 @@ const userRegisterSchema = Yup.object().shape({
     then: (fieldSchema) => fieldSchema.required('Profile image is required'),
     otherwise: (fieldSchema) => fieldSchema,
   }),
+  phoneNumber: Yup.string().when('role', {
+    is: 'therapist',
+    then: (fieldSchema) => fieldSchema.required('Phone number is required'),
+    otherwise: (fieldSchema) => fieldSchema,
+  }),
 });
 
 export default userRegisterSchema;

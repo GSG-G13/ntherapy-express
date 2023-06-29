@@ -83,7 +83,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
         html: emailBody,
       });
       return res.json({
-        message: 'User registered successfully',
+        message: 'Therapist registered successfully , please check your email for more details',
       });
     }
     await registerUser(body);
