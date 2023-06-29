@@ -1,12 +1,15 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response } from 'express';
 import bcrypt from 'bcrypt';
 import * as yup from 'yup';
 import { userLoginSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
 import { loginByEmail } from '../services';
-import { TherapistAndUser, IPayload } from '../types';
+import {
+  TherapistAndUser, IPayload, RequestWithUserRole,
+} from '../types';
+import { Therapist, User } from '../models';
 
-const login = async (req: Request, res: Response, next: NextFunction) => {
+const login = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
 
   try {
@@ -49,5 +52,38 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 };
+const getAuth = async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
+  let data;
+  if (req.user?.role === 'therapist') {
+    const therapist = await Therapist.findOne({
+      attributes: ['id', 'profileImg'],
 
-export default login;
+      where: {
+        id: req.user?.userId,
+      },
+    });
+    data = therapist;
+  } else if (req.user?.role === 'user') {
+    const user = await User.findOne({
+      attributes: ['fullName', 'role', 'id'],
+      where: {
+        id: req.user?.userId,
+      },
+    });
+    data = user;
+  }
+  try {
+    res.json({
+      msg: 'success',
+      data,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { login, getAuth };
