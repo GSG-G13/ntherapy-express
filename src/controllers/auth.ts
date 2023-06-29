@@ -7,6 +7,7 @@ import { loginByEmail } from '../services';
 import { TherapistAndUser, IPayload } from '../types';
 import { registerTherapist, registerUser } from '../services/auth';
 import mailer from '../services/nodemailer';
+import Mailgen from 'mailgen';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -58,17 +59,28 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     await userRegisterSchema.validate(body);
     if (body.role === 'therapist') {
       const user = await registerTherapist(body);
+      const mailGenerator = new Mailgen({
+        theme: 'salted',
+        product: {
+          name: 'Ntherapy',
+          link: 'https://ntherapy.com/',
+        },
+      });
+      const email = {
+        body: {
+          name: user.fullName,
+          intro: 'Welcome to Ntherapy! We\'re very excited to have you on board. \n we will review your application and get back to you as soon as possible.',
+          outro: 'Need help, or have questions? Just reply to this email, we\'d love to help.',
+        },
+      };
+      const emailBody = mailGenerator.generate(email);
+      const emailText = mailGenerator.generatePlaintext(email);
       await mailer({
         from: 'ntherapypro@gmail.com',
         to: user.email,
         subject: 'Account Activation',
-        text: `
-         Hello ${user.fullName}, 
-         Your Account Created Successfully 
-         We will Review Your Account And Let You Know When You Are Activated
-         Thank You
-         Ntherapy Team
-         `,
+        text: emailText,
+        html: emailBody,
       });
       return res.json({
         message: 'User registered successfully',
