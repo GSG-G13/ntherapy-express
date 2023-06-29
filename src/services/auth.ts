@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import { User, Therapist } from '../models';
 import { templateErrors } from '../helpers';
+import { IUser, ITherapist } from '../types';
 
 const loginByEmail = async (email: string) => {
   const user = await User.findOne({
@@ -14,7 +15,7 @@ const loginByEmail = async (email: string) => {
 };
 const registerUser = async ({
   fullName, email, password, role, phoneNumber,
-}: any) => {
+}: IUser) => {
   const userExist = await User.findOne({ where: { email } });
   if (userExist) {
     throw templateErrors.BAD_REQUEST('user already exist, please login instead');
@@ -28,14 +29,14 @@ const registerUser = async ({
 
 const registerTherapist = async ({
   fullName, email, password, cvLink, profileImg, major, hourlyRate, role, phoneNumber,
-}: any) => {
+}: ITherapist) => {
   const user = await registerUser({
     fullName, email, password, role, phoneNumber,
   });
-  await Therapist.create({
+  const therapist = await Therapist.create({
     cvLink, profileImg, major, hourlyRate, userId: user.id,
   });
-  return user;
+  return therapist;
 };
 
 export { loginByEmail, registerTherapist, registerUser };
