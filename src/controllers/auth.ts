@@ -4,10 +4,10 @@ import * as yup from 'yup';
 import Mailgen from 'mailgen';
 import { userLoginSchema, userRegisterSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
-import { loginByEmail } from '../services';
 import { TherapistAndUser, IPayload } from '../types';
-import { registerTherapist, registerUser } from '../services/auth';
-import mailer from '../services/nodemailer';
+import {
+  registerTherapist, registerUser, loginByEmail, mailer,
+} from '../services';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
