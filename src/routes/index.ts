@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import appointmentsRouter from './appointment';
 import therapistRouter from './therapist';
+import adminRouter from './admin';
 import userRouter from './auth';
 import { findClientSecret } from '../controllers';
 import { RolesForSelect } from '../types';
@@ -11,6 +12,7 @@ const router = Router();
 
 router.use('/appointments', appointmentsRouter);
 router.use('/therapists', therapistRouter);
+router.use('/admin', adminRouter);
 router.use('/auth', userRouter);
 router.post('/payment-intent', checkAuth(RolesForSelect.user), findClientSecret);
 router.use('/session', sessionRouter);
