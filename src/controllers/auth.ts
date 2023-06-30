@@ -7,7 +7,7 @@ import { loginByEmail } from '../services';
 import {
   TherapistAndUser, IPayload, RequestWithUserRole,
 } from '../types';
-import { Therapist, User } from '../models';
+import { Admin, Therapist, User } from '../models';
 
 const login = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -61,16 +61,14 @@ const getAuth = async (
   if (req.user?.role === 'therapist') {
     const therapist = await Therapist.findOne({
       attributes: ['profileImg', 'id'],
-
       where: {
         id: req.user?.userId,
       },
       include: {
         model: User,
         attributes: ['fullName', 'role', 'id'],
-
       },
-    }); // image, name, role, userID, therapistId
+    });
     data = therapist;
   } else if (req.user?.role === 'user') {
     const user = await User.findOne({
@@ -80,6 +78,14 @@ const getAuth = async (
       },
     });
     data = user;
+  } else {
+    const admin = await Admin.findOne({
+      attributes: ['username', 'id'],
+      where: {
+        id: req.user?.userId,
+      },
+    });
+    data = admin;
   }
   try {
     res.json({
