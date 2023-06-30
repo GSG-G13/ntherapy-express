@@ -60,12 +60,17 @@ const getAuth = async (
   let data;
   if (req.user?.role === 'therapist') {
     const therapist = await Therapist.findOne({
-      attributes: ['id', 'profileImg'],
+      attributes: ['profileImg', 'id'],
 
       where: {
         id: req.user?.userId,
       },
-    });
+      include: {
+        model: User,
+        attributes: ['fullName', 'role', 'id'],
+
+      },
+    }); // image, name, role, userID, therapistId
     data = therapist;
   } else if (req.user?.role === 'user') {
     const user = await User.findOne({
