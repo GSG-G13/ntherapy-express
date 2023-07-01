@@ -57,37 +57,38 @@ const getAuth = async (
   res: Response,
   next: NextFunction,
 ) => {
-  let data;
-  if (req.user?.role === RolesForSelect.therapist) {
-    const therapist = await Therapist.findOne({
-      attributes: ['profileImg', 'id'],
-      where: {
-        id: req.user?.userId,
-      },
-      include: {
-        model: User,
-        attributes: ['fullName', 'role', 'id'],
-      },
-    });
-    data = therapist;
-  } else if (req.user?.role === RolesForSelect.user) {
-    const user = await User.findOne({
-      attributes: ['fullName', 'role', 'id'],
-      where: {
-        id: req.user?.userId,
-      },
-    });
-    data = user;
-  } else {
-    const admin = await Admin.findOne({
-      attributes: ['username', 'id'],
-      where: {
-        id: req.user?.userId,
-      },
-    });
-    data = admin;
-  }
   try {
+    let data;
+    if (req.user?.role === RolesForSelect.therapist) {
+      const therapist = await Therapist.findOne({
+        attributes: ['profileImg', 'id'],
+        where: {
+          id: req.user?.userId,
+        },
+        include: {
+          model: User,
+          attributes: ['fullName', 'role', 'id'],
+        },
+      });
+      data = therapist;
+    } else if (req.user?.role === RolesForSelect.user) {
+      const user = await User.findOne({
+        attributes: ['fullName', 'role', 'id'],
+        where: {
+          id: req.user?.userId,
+        },
+      });
+      data = user;
+    } else {
+      const admin = await Admin.findOne({
+        attributes: ['username', 'id'],
+        where: {
+          id: req.user?.userId,
+        },
+      });
+      data = admin;
+    }
+
     res.json({
       msg: 'success',
       data,
