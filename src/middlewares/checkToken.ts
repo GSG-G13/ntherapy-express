@@ -3,7 +3,7 @@ import { templateErrors } from '../helpers';
 import { verifyToken } from '../helpers/jwt';
 import { Decode, RequestWithUserRole } from '../types';
 
-const checkTokenForLogin = () => async (
+const checkToken = async (
   req: RequestWithUserRole,
   res: Response,
   next: NextFunction,
@@ -22,4 +22,4 @@ const checkTokenForLogin = () => async (
   }
 };
 
-export default checkTokenForLogin;
+export default checkToken;
