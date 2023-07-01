@@ -7,7 +7,6 @@ const userRegisterSchema = Yup.object().shape({
   password: Yup.string()
     .required('Password is required')
     .min(8, 'Password must be at least 8 characters long'),
-  confirmPassword: Yup.string().required('Confirm password is required').oneOf([Yup.ref('password')], 'Passwords must match'),
   major: Yup.string().when('role', {
     is: 'therapist',
     then: (fieldSchema) => fieldSchema.required('Major is required'),
