@@ -1,12 +1,13 @@
 import Mailgen from 'mailgen';
 import { IMailBuilder } from '../types';
+import config from '../config';
 
 const generateMail = ({ theme, body }:IMailBuilder) => {
   const mailGenerator = new Mailgen({
-    theme: theme || 'default',
+    theme: theme || config.THEME as string || 'salted',
     product: {
-      name: 'Ntherapy',
-      link: 'https://ntherapy.com/',
+      name: config.PRODUCTNAME as string,
+      link: config.PRODUCTLINK as string,
     },
   });
   const email = {

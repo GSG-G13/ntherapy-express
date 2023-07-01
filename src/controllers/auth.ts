@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import * as yup from 'yup';
 import { userLoginSchema, userRegisterSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
-import { TherapistAndUser, IPayload } from '../types';
+import { TherapistAndUser, IPayload, RolesForSelect } from '../types';
 import {
   registerTherapist, registerUser, loginByEmail, mailer, generateEmail,
 } from '../services';
@@ -56,7 +56,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { body } = req;
     await userRegisterSchema.validate(body);
-    if (body.role === 'therapist') {
+    if (body.role === RolesForSelect.therapist) {
       const user = await registerTherapist(body);
 
       const { emailBody, emailText } = generateEmail({
@@ -75,13 +75,13 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
         html: emailBody,
       });
 
-      return res.json({
+      return res.status(201).json({
         message: 'Therapist registered successfully , please check your email for more details',
       });
     // eslint-disable-next-line no-else-return
     } else {
       await registerUser(body);
-      return res.json({
+      return res.status(201).json({
         message: 'User registered successfully',
       });
     }
