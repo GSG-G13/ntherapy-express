@@ -4,6 +4,7 @@ interface IUser {
   password: string;
   role: string;
   phoneNumber?: string;
+  isActive?: boolean;
 }
 
 // eslint-disable-next-line import/prefer-default-export

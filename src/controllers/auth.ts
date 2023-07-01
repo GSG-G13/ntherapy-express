@@ -1,12 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import * as yup from 'yup';
-import Mailgen from 'mailgen';
 import { userLoginSchema, userRegisterSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
 import { TherapistAndUser, IPayload } from '../types';
 import {
-  registerTherapist, registerUser, loginByEmail, mailer,
+  registerTherapist, registerUser, loginByEmail, mailer, generateEmail,
 } from '../services';
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -59,36 +58,33 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
     await userRegisterSchema.validate(body);
     if (body.role === 'therapist') {
       const user = await registerTherapist(body);
-      const mailGenerator = new Mailgen({
+
+      const { emailBody, emailText } = generateEmail({
         theme: 'salted',
-        product: {
-          name: 'Ntherapy',
-          link: 'https://ntherapy.com/',
-        },
-      });
-      const email = {
         body: {
           name: user.fullName,
           intro: 'Welcome to Ntherapy! We\'re very excited to have you on board. \n we will review your application and get back to you as soon as possible.',
           outro: 'Need help, or have questions? Just reply to this email, we\'d love to help.',
         },
-      };
-      const emailBody = mailGenerator.generate(email);
-      const emailText = mailGenerator.generatePlaintext(email);
+      });
+
       await mailer({
         to: user.email,
         subject: 'Account Activation',
         text: emailText,
         html: emailBody,
       });
+
       return res.json({
         message: 'Therapist registered successfully , please check your email for more details',
       });
+    // eslint-disable-next-line no-else-return
+    } else {
+      await registerUser(body);
+      return res.json({
+        message: 'User registered successfully',
+      });
     }
-    await registerUser(body);
-    return res.json({
-      message: 'User registered successfully',
-    });
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return next(templateErrors.BAD_REQUEST(error.message));

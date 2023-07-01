@@ -9,10 +9,11 @@ import bookAppointment from './session';
 import getAdmin from './admin';
 import createPresignedUrl from './S3Service';
 import mailer from './nodemailer';
+import generateEmail from './mailBuilder';
 
 export {
   getTherapistById, getAllTherapist, getAppointmentsPerDateService, getAppointmentById
   , updateIsAvailable, addAppointment, updateTherapist, getClientSecret, bookAppointment, getAdmin,
-  createPresignedUrl, mailer,
+  createPresignedUrl, mailer, generateEmail,
   loginByEmail, registerTherapist, registerUser,
 };
