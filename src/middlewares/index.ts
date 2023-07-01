@@ -1,6 +1,5 @@
 import { clientError, serverError } from './ErrorMiddleware';
-import checkAuth from './checkauth';
-import checkToken from './checkToken';
+import { checkAuth, checkToken } from './checkauth';
 
 export {
   clientError, serverError, checkAuth, checkToken,

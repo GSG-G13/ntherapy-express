@@ -5,7 +5,7 @@ import { userLoginSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
 import { loginByEmail } from '../services';
 import {
-  TherapistAndUser, IPayload, RequestWithUserRole,
+  TherapistAndUser, IPayload, RequestWithUserRole, RolesForSelect,
 } from '../types';
 import { Admin, Therapist, User } from '../models';
 
@@ -15,7 +15,7 @@ const login = async (req: RequestWithUserRole, res: Response, next: NextFunction
   try {
     await userLoginSchema.validate({ email, password });
 
-    const user:TherapistAndUser | null = await loginByEmail(email);
+    const user: TherapistAndUser | null = await loginByEmail(email);
 
     if (!user) {
       throw templateErrors.BAD_REQUEST('Wrong email or password');
@@ -58,7 +58,7 @@ const getAuth = async (
   next: NextFunction,
 ) => {
   let data;
-  if (req.user?.role === 'therapist') {
+  if (req.user?.role === RolesForSelect.therapist) {
     const therapist = await Therapist.findOne({
       attributes: ['profileImg', 'id'],
       where: {
@@ -70,7 +70,7 @@ const getAuth = async (
       },
     });
     data = therapist;
-  } else if (req.user?.role === 'user') {
+  } else if (req.user?.role === RolesForSelect.user) {
     const user = await User.findOne({
       attributes: ['fullName', 'role', 'id'],
       where: {
