@@ -1,8 +1,8 @@
 name: Assign Reviewer
 on:
   pull_request:
-    types:
-      - opened
+    branches: [main]
+    types: [opened, reopened, ready_for_review]
 # @LinaYahya @YasserAmro0 @raghdarizq @MohannadSabaa @ahmedmurtaja
 jobs:
   assign_reviewer:
