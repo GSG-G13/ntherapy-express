@@ -9,7 +9,7 @@ const {
   TOKEN_TYPE, EXPIRY_DATE, REDIRECT_URIS, PROJECT_ID, AUTH_URI, TOKEN_URI,
   AUTH_PROVIDER_X509_CERT_URL, SECRET_KEY, TOKEN_TEST_THERAPIST, API_KEY, MAILERUSER, MAILERPASS,
   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, REGION,
-  BUCKET_NAME,
+  BUCKET_NAME, PRODUCTNAME, PRODUCTLINK, THEME,
 } = process.env;
 
 interface ICONFIG {
@@ -39,7 +39,10 @@ interface ICONFIG {
   AWS_ACCESS_KEY_ID:string | undefined,
   AWS_SECRET_ACCESS_KEY:string | undefined,
   REGION:string | undefined,
-  BUCKET_NAME:string | undefined
+  BUCKET_NAME:string | undefined,
+  PRODUCTNAME:string | undefined,
+  PRODUCTLINK:string | undefined,
+  THEME:string | undefined,
 }
 const config: ICONFIG = {
   DB_URL: {
@@ -72,6 +75,9 @@ const config: ICONFIG = {
   AWS_SECRET_ACCESS_KEY,
   REGION,
   BUCKET_NAME,
+  PRODUCTNAME,
+  PRODUCTLINK,
+  THEME,
 
 };
 

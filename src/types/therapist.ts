@@ -36,7 +36,19 @@ interface TherapistAndUser extends UsersAttributes {
   therapist?:TherapistAttributes
 }
 
+interface ITherapist {
+  fullName: string;
+  email: string;
+  password: string;
+  cvLink: string;
+  profileImg: string;
+  major: string;
+  hourlyRate: number;
+  role: string;
+  phoneNumber: string;
+}
+
 export {
   TherapistWithUserOptional, Imeeting, Appointment,
-  TimeRange, AddAppointment, AppointmentWithTherapistOptional, TherapistAndUser,
+  TimeRange, AddAppointment, AppointmentWithTherapistOptional, TherapistAndUser, ITherapist,
 };
