@@ -16,13 +16,22 @@ jobs:
           script: |
             const reviewers = ['LinaYahya', 'YasserAmro0', 'raghdarizq', 'MohannadSabaa', 'ahmedmurtaja'];
             const issue_number = context.payload.pull_request.number;
-            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 
             for (const reviewer of reviewers) {
-              octokit.rest.pulls.requestReviewers({
+              const result = await octokit.pulls.createReviewRequest({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: issue_number,
                 reviewers: [reviewer]
               });
+              console.log(`Reviewer "${reviewer}" assigned.`);
             }
+
+            const assignedReviewers = reviewers.join(', ');
+            const commentBody = `Reviewers assigned: ${assignedReviewers}`;
+            await octokit.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: commentBody
+            });
