@@ -11,7 +11,7 @@ import {
   registerTherapist, registerUser, loginByEmail, mailer, generateEmail,
 } from '../services';
 
-const login = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
 
   try {
