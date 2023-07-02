@@ -1,4 +1,4 @@
-import { NextFunction, Response } from 'express';
+import { NextFunction, Response, Request } from 'express';
 import bcrypt from 'bcrypt';
 import * as yup from 'yup';
 import { userLoginSchema, userRegisterSchema } from '../helpers/validation';
