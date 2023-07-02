@@ -1,9 +1,12 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Response, Request } from 'express';
 import bcrypt from 'bcrypt';
 import * as yup from 'yup';
 import { userLoginSchema, userRegisterSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
-import { TherapistAndUser, IPayload, RolesForSelect } from '../types';
+import { Admin, Therapist, User } from '../models';
+import {
+  TherapistAndUser, IPayload, RolesForSelect, RequestWithUserRole,
+} from '../types';
 import {
   registerTherapist, registerUser, loginByEmail, mailer, generateEmail,
 } from '../services';
@@ -14,7 +17,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     await userLoginSchema.validate({ email, password });
 
-    const user:TherapistAndUser | null = await loginByEmail(email);
+    const user: TherapistAndUser | null = await loginByEmail(email);
 
     if (!user) {
       throw templateErrors.BAD_REQUEST('Wrong email or password');
@@ -49,6 +52,51 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       return next(templateErrors.BAD_REQUEST(err.message));
     }
     next(err);
+  }
+};
+const getAuth = async (
+  req: RequestWithUserRole,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    let data;
+    if (req.user?.role === RolesForSelect.therapist) {
+      const therapist = await Therapist.findOne({
+        attributes: ['profileImg', 'id'],
+        where: {
+          id: req.user?.userId,
+        },
+        include: {
+          model: User,
+          attributes: ['fullName', 'role', 'id'],
+        },
+      });
+      data = therapist;
+    } else if (req.user?.role === RolesForSelect.user) {
+      const user = await User.findOne({
+        attributes: ['fullName', 'role', 'id'],
+        where: {
+          id: req.user?.userId,
+        },
+      });
+      data = user;
+    } else {
+      const admin = await Admin.findOne({
+        attributes: ['username', 'id'],
+        where: {
+          id: req.user?.userId,
+        },
+      });
+      data = admin;
+    }
+
+    res.json({
+      msg: 'success',
+      data,
+    });
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -93,4 +141,4 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { login, register };
+export { login, getAuth, register };
