@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
-import { templateErrors } from '../helpers';
-import { verifyToken } from '../helpers/jwt';
+import { templateErrors, verifyToken } from '../helpers';
+
 import { Decode, RequestWithUserRole, Roles } from '../types';
 
 const checkAuth = (role: Roles) => async (
