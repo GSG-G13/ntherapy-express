@@ -1,13 +1,15 @@
 import { NextFunction, Response } from 'express';
 import bcrypt from 'bcrypt';
 import * as yup from 'yup';
-import { userLoginSchema } from '../helpers/validation';
+import { userLoginSchema, userRegisterSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
-import { loginByEmail } from '../services';
-import {
-  TherapistAndUser, IPayload, RequestWithUserRole, RolesForSelect,
-} from '../types';
 import { Admin, Therapist, User } from '../models';
+import {
+  TherapistAndUser, IPayload, RolesForSelect, RequestWithUserRole,
+} from '../types';
+import {
+  registerTherapist, registerUser, loginByEmail, mailer, generateEmail,
+} from '../services';
 
 const login = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -98,4 +100,45 @@ const getAuth = async (
   }
 };
 
-export { login, getAuth };
+const register = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { body } = req;
+    await userRegisterSchema.validate(body);
+    if (body.role === RolesForSelect.therapist) {
+      const user = await registerTherapist(body);
+
+      const { emailBody, emailText } = generateEmail({
+        theme: 'salted',
+        body: {
+          name: user.fullName,
+          intro: 'Welcome to Ntherapy! We\'re very excited to have you on board. \n we will review your application and get back to you as soon as possible.',
+          outro: 'Need help, or have questions? Just reply to this email, we\'d love to help.',
+        },
+      });
+
+      await mailer({
+        to: user.email,
+        subject: 'Account Activation',
+        text: emailText,
+        html: emailBody,
+      });
+
+      return res.status(201).json({
+        message: 'Therapist registered successfully , please check your email for more details',
+      });
+    // eslint-disable-next-line no-else-return
+    } else {
+      await registerUser(body);
+      return res.status(201).json({
+        message: 'User registered successfully',
+      });
+    }
+  } catch (error) {
+    if (error instanceof yup.ValidationError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
+};
+
+export { login, getAuth, register };

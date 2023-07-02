@@ -12,7 +12,10 @@ const mailer = async (info:SendMailOptions) => {
       pass,
     },
   });
-  const email = await transporter.sendMail(info);
+  const email = await transporter.sendMail({
+    ...info,
+    from: user,
+  });
 
   return email;
 };

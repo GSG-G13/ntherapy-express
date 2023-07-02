@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import config from '../config';
 
-const { mailer: { user, pass } } = config;
+const { MAILER: { user, pass } } = config;
 
 const mailer = async (memEmail: string) => {
   const transporter = nodemailer.createTransport({
