@@ -12,6 +12,7 @@ const checkAuth = (role: Roles) => async (
     const { token } = req;
     if (token) {
       const decoded = await verifyToken(token) as Decode;
+      console.log(decoded);
       req.user = decoded;
       if (decoded.role !== role) {
         throw templateErrors.UNAUTHORIZED('Unauthorized');
