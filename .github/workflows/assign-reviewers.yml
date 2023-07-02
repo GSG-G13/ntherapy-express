@@ -3,22 +3,33 @@ on:
   pull_request:
     branches:
       - main
-# @LinaYahya @YasserAmro0 @raghdarizq @MohannadSabaa @ahmedmurtaja
+
 jobs:
   assign_reviewer:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install @actions/github
+
       - name: Assign Reviewer
         uses: actions/github-script@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
+            const { Octokit } = require("@octokit/core");
+            const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+
             const reviewers = ['LinaYahya', 'YasserAmro0', 'raghdarizq', 'MohannadSabaa', 'ahmedmurtaja'];
             const issue_number = context.payload.pull_request.number;
 
             for (const reviewer of reviewers) {
-              const result = await octokit.pulls.createReviewRequest({
+              const result = await octokit.request('POST /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers', {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: issue_number,
@@ -29,7 +40,7 @@ jobs:
 
             const assignedReviewers = reviewers.join(', ');
             const commentBody = `Reviewers assigned: ${assignedReviewers}`;
-            await octokit.issues.createComment({
+            await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue_number,
