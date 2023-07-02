@@ -1,0 +1,29 @@
+name: Assign Reviewer
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  assign_reviewer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign Reviewer
+        uses: actions/github-script@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            const reviewers = ['username1', 'username2'];
+            const issue_number = context.payload.pull_request.number;
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+
+            for (const reviewer of reviewers) {
+              octokit.rest.pulls.requestReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: issue_number,
+                reviewers: [reviewer]
+              });
+            }
+            
