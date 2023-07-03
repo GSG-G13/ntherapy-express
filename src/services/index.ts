@@ -6,7 +6,7 @@ import {
 import { loginByEmail, registerTherapist, registerUser } from './auth';
 import getClientSecret from './payment';
 import bookAppointment from './session';
-import { getAdmin, getTherapists } from './admin';
+import { getAdmin, getTherapists, patchTherapist } from './admin';
 import createPresignedUrl from './S3Service';
 import mailer from './nodemailer';
 import generateEmail from './mailBuilder';
@@ -15,5 +15,5 @@ export {
   getTherapistById, getAllTherapist, getAppointmentsPerDateService, getAppointmentById
   , updateIsAvailable, addAppointment, updateTherapist, getClientSecret, bookAppointment, getAdmin,
   createPresignedUrl, mailer, generateEmail, getTherapists,
-  loginByEmail, registerTherapist, registerUser,
+  loginByEmail, registerTherapist, registerUser, patchTherapist,
 };
