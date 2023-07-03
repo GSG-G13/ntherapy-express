@@ -49,6 +49,10 @@ const getTherapistsForAdmin = async (req: Request, res: Response, next: NextFunc
       throw templateErrors.BAD_REQUEST('Page number should be a valid number');
     }
 
+    if (active !== undefined && active !== 'true' && active !== 'false') {
+      throw templateErrors.BAD_REQUEST('Active should be a valid boolean');
+    }
+
     const { therapists, totalPages } = await getTherapists(q as string || '', pageNumber, active as boolean | undefined);
 
     res.json({
