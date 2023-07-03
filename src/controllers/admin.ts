@@ -2,7 +2,9 @@ import { Response, NextFunction, Request } from 'express';
 import * as yup from 'yup';
 import bcrypt from 'bcrypt';
 import { RequestWithUserRole } from '../types';
-import { adminLoginSchema, templateErrors, generateToken } from '../helpers';
+import {
+  adminLoginSchema, templateErrors, generateToken, updateTherapistActiveSchema,
+} from '../helpers';
 import {
   generateEmail, getAdmin, getTherapists, mailer, patchTherapist,
 } from '../services';
@@ -78,14 +80,7 @@ const updateTherapistActive = async (req: Request, res: Response, next: NextFunc
     const { userId, active } = req.body;
     const therapistId = Number(userId);
 
-    // eslint-disable-next-line no-restricted-globals
-    if (isNaN(therapistId)) {
-      throw templateErrors.BAD_REQUEST('Therapist id should be a valid number');
-    }
-
-    if (active !== 'true' && active !== 'false') {
-      throw templateErrors.BAD_REQUEST('Active should be a valid boolean');
-    }
+    await updateTherapistActiveSchema.validate({ userId, active });
 
     const therapist = await patchTherapist(therapistId, active === 'true');
 
@@ -119,6 +114,9 @@ const updateTherapistActive = async (req: Request, res: Response, next: NextFunc
       active,
     });
   } catch (error) {
+    if (error instanceof yup.ValidationError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
     next(error);
   }
 };

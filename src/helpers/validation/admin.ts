@@ -7,4 +7,9 @@ const adminLoginSchema = Yup.object().shape({
     .min(4, 'Password must be at least 4 characters long'),
 });
 
-export default adminLoginSchema;
+const updateTherapistActiveSchema = Yup.object().shape({
+  userId: Yup.number().required().integer().positive(),
+  active: Yup.boolean().required().oneOf([true, false]),
+});
+
+export { adminLoginSchema, updateTherapistActiveSchema };
