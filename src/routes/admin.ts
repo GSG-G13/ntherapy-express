@@ -7,6 +7,6 @@ const router = Router();
 
 router.post('/login', adminLogin);
 router.get('/therapists', checkAuth(RolesForSelect.admin), getTherapistsForAdmin);
-router.patch('/therapists/:id/:active', checkAuth(RolesForSelect.admin), updateTherapistActive);
+router.patch('/therapists/', checkAuth(RolesForSelect.admin), updateTherapistActive);
 
 export default router;

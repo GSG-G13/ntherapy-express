@@ -75,8 +75,8 @@ const getTherapistsForAdmin = async (req: Request, res: Response, next: NextFunc
 
 const updateTherapistActive = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id, active } = req.params;
-    const therapistId = Number(id);
+    const { userId, active } = req.body;
+    const therapistId = Number(userId);
 
     // eslint-disable-next-line no-restricted-globals
     if (isNaN(therapistId)) {
