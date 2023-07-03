@@ -1,9 +1,9 @@
-import { Response, NextFunction } from 'express';
+import { Response, NextFunction, Request } from 'express';
 import * as yup from 'yup';
 import bcrypt from 'bcrypt';
 import { RequestWithUserRole } from '../types';
 import { adminLoginSchema, templateErrors, generateToken } from '../helpers';
-import { getAdmin } from '../services';
+import { getAdmin, getTherapists } from '../services';
 
 const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
@@ -39,4 +39,35 @@ const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFun
   }
 };
 
-export default adminLogin;
+const getTherapistsForAdmin = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { q, page, active } = req.query;
+    const pageNumber = Number(page);
+
+    // eslint-disable-next-line no-restricted-globals
+    if (isNaN(pageNumber) || pageNumber < 1) {
+      throw templateErrors.BAD_REQUEST('Page number should be a valid number');
+    }
+
+    if (active !== undefined && active !== 'true' && active !== 'false') {
+      throw templateErrors.BAD_REQUEST('Active should be a valid boolean');
+    }
+
+    const { therapists, totalPages } = await getTherapists(q as string || '', pageNumber, active as boolean | undefined);
+
+    res.json({
+      message: 'Success',
+      data: {
+        ...therapists,
+        pagination: {
+          currentPage: pageNumber,
+          totalPages,
+        },
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { adminLogin, getTherapistsForAdmin };
