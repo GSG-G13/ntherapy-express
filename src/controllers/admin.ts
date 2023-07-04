@@ -2,8 +2,13 @@ import { Response, NextFunction, Request } from 'express';
 import * as yup from 'yup';
 import bcrypt from 'bcrypt';
 import { RequestWithUserRole } from '../types';
-import { adminLoginSchema, templateErrors, generateToken } from '../helpers';
-import { getAdmin, getTherapists } from '../services';
+import {
+  adminLoginSchema, templateErrors, generateToken, updateTherapistActiveSchema,
+} from '../helpers';
+import {
+  generateEmail, getAdmin, getTherapists, mailer, patchTherapist,
+} from '../services';
+import config from '../config';
 
 const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
@@ -70,4 +75,50 @@ const getTherapistsForAdmin = async (req: Request, res: Response, next: NextFunc
   }
 };
 
-export { adminLogin, getTherapistsForAdmin };
+const updateTherapistActive = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { userId, active } = req.body;
+    const therapistId = Number(userId);
+
+    await updateTherapistActiveSchema.validate({ userId, active });
+
+    const therapist = await patchTherapist(therapistId, active === 'true');
+
+    if (active === 'true') {
+      const { emailBody, emailText } = generateEmail({
+        theme: 'salted',
+        body: {
+          name: therapist.fullName,
+          intro: 'Congrats 🎉🎉, Your account has been activated. You can now login to your account.',
+          action: {
+            instructions: 'Click the button below to login to your account.',
+            button: {
+              color: '#22BC66',
+              text: 'Login to your account',
+              link: `${config.FRONT_END_URL}/login`,
+            },
+          },
+          outro: 'Need help, or have questions? Just reply to this email, we\'d love to help.',
+        },
+      });
+      mailer({
+        to: therapist.email,
+        subject: 'Account activated 🎉',
+        text: emailText,
+        html: emailBody,
+      });
+    }
+
+    res.json({
+      message: 'Success',
+      active,
+    });
+  } catch (error) {
+    if (error instanceof yup.ValidationError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
+};
+
+export { adminLogin, getTherapistsForAdmin, updateTherapistActive };

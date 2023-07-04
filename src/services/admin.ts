@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import { THERAPISTS_LIMIT } from '../config/constants';
 import { Admin, Therapist, User } from '../models';
+import { templateErrors } from '../helpers';
 
 const getAdmin = async (userName: string) => {
   const admin = await Admin.findOne({ where: { username: userName } });
@@ -41,4 +42,27 @@ const getTherapists = async (name: string, page: number, active?: boolean) => {
   };
 };
 
-export { getAdmin, getTherapists };
+const patchTherapist = async (id: number, active: boolean) => {
+  const therapist = await Therapist.findOne({ where: { userId: id } });
+
+  if (!therapist) {
+    throw templateErrors.NOT_FOUND('Therapist not found');
+  }
+
+  const user = await User.findOne({ where: { id } });
+
+  if (user?.isActive === active) {
+    throw templateErrors.BAD_REQUEST(`Therapist isActive property is already  ${active}`);
+  }
+
+  if (user?.isActive === undefined) {
+    throw templateErrors.BAD_REQUEST('Therapist isActive property is not defined');
+  }
+
+  user.isActive = active;
+  await user?.save({ fields: ['isActive'] });
+  const { email, fullName } = user;
+  return { email, fullName };
+};
+
+export { getAdmin, getTherapists, patchTherapist };

@@ -3,11 +3,12 @@ import { generateToken, verifyToken } from './jwt';
 
 import {
   getAppointmentSchema,
-  updateAvailableSchema, therapistInfoSchema, addAppointmentSchema, adminLoginSchema,
+  updateAvailableSchema, therapistInfoSchema, addAppointmentSchema,
+  adminLoginSchema, updateTherapistActiveSchema,
 } from './validation';
 
 export {
   CustomError, templateErrors, getAppointmentSchema, updateAvailableSchema, therapistInfoSchema,
   addAppointmentSchema, adminLoginSchema,
-  generateToken, verifyToken,
+  generateToken, verifyToken, updateTherapistActiveSchema,
 };
