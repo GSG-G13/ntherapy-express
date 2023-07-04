@@ -10,7 +10,6 @@ const getTherapistById = async (id: string) => {
     include: [{
       model: User,
       attributes: ['fullName', 'isActive', 'email'],
-
     },
     ],
   });
@@ -32,7 +31,7 @@ const getAllTherapist = async (name: string, page: number) => {
         },
       },
     ],
-    attributes: ['profileImg', 'major', 'hourlyRate', 'userId'],
+    attributes: ['profileImg', 'major', 'hourlyRate', 'userId', 'id'],
     limit: THERAPISTS_LIMIT,
     offset,
   });
