@@ -65,7 +65,7 @@ const getAuth = async (
       const therapist: any = await Therapist.findOne({
         attributes: ['profileImg', 'id'],
         where: {
-          id: req.user?.userId,
+          id: req.user?.therapistId,
         },
         include: {
           model: User,

@@ -2,9 +2,9 @@ import { getAppointmentSchema, updateAvailableSchema, addAppointmentSchema } fro
 import therapistInfoSchema from './therapist';
 import userLoginSchema from './userLogin';
 import userRegisterSchema from './userRegister';
-import adminLoginSchema from './admin';
+import { adminLoginSchema, updateTherapistActiveSchema } from './admin';
 
 export {
   getAppointmentSchema, updateAvailableSchema, therapistInfoSchema, addAppointmentSchema,
-  userLoginSchema, userRegisterSchema, adminLoginSchema,
+  userLoginSchema, userRegisterSchema, adminLoginSchema, updateTherapistActiveSchema,
 };
