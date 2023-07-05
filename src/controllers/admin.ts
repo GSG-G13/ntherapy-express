@@ -11,7 +11,7 @@ import {
 import config from '../config';
 
 const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
-  const { username, password } = req.body;
+  const { username, password } = req.body.data;
 
   try {
     await adminLoginSchema.validate({ username, password });
@@ -77,7 +77,9 @@ const getTherapistsForAdmin = async (req: Request, res: Response, next: NextFunc
 
 const updateTherapistActive = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    // console.log(req.body.data)
     const { userId, active } = req.body;
+    console.log(userId, active);
     const therapistId = Number(userId);
 
     await updateTherapistActiveSchema.validate({ userId, active });
