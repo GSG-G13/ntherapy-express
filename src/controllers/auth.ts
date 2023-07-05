@@ -62,7 +62,7 @@ const getAuth = async (
   try {
     let data;
     if (req.user?.role === RolesForSelect.therapist) {
-      const therapist = await Therapist.findOne({
+      const therapist: any = await Therapist.findOne({
         attributes: ['profileImg', 'id'],
         where: {
           id: req.user?.therapistId,
@@ -72,7 +72,8 @@ const getAuth = async (
           attributes: ['fullName', 'role', 'id'],
         },
       });
-      data = therapist;
+      const { id, profileImg, user } = therapist;
+      data = { id, profileImg, ...user.dataValues };
     } else if (req.user?.role === RolesForSelect.user) {
       const user = await User.findOne({
         attributes: ['fullName', 'role', 'id'],
