@@ -62,7 +62,7 @@ const updateAvailable = async (
       isAvailable,
     });
 
-    if (appointmentData?.therapistId?.toString() !== therapistId) {
+    if (appointmentData?.dataValues?.therapistId !== therapistId) {
       throw templateErrors.UNAUTHORIZED('Unauthorized ');
     }
 

@@ -73,7 +73,7 @@ const getAuth = async (
         },
       });
       const { id, profileImg, user } = therapist;
-      data = { id, profileImg, ...user.dataValues };
+      data = { therapistId: id, profileImg, ...user.dataValues };
     } else if (req.user?.role === RolesForSelect.user) {
       const user = await User.findOne({
         attributes: ['fullName', 'role', 'id'],
