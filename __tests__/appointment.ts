@@ -63,7 +63,7 @@ const appointmentRouteTest = () => {
       });
       })
     it('Should return This appointment is booked with status 400', async () => {
-        const id = '6';
+        const id = 6;
         const token = config.TOKEN_TEST_THERAPIST;
 
         const response = await request(app)
