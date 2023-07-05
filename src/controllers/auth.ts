@@ -5,7 +5,7 @@ import { userLoginSchema, userRegisterSchema } from '../helpers/validation';
 import { templateErrors, generateToken } from '../helpers';
 import { Admin, Therapist, User } from '../models';
 import {
-  TherapistAndUser, IPayload, RolesForSelect, RequestWithUserRole,
+  TherapistAndUser, IPayload, RolesForSelect, RequestWithUserRole, TherapistWithUserOptional,
 } from '../types';
 import {
   registerTherapist, registerUser, loginByEmail, mailer, generateEmail,
@@ -62,7 +62,7 @@ const getAuth = async (
   try {
     let data;
     if (req.user?.role === RolesForSelect.therapist) {
-      const therapist: any = await Therapist.findOne({
+      const therapist:TherapistWithUserOptional | null = await Therapist.findOne({
         attributes: ['profileImg', 'id'],
         where: {
           id: req.user?.therapistId,
@@ -72,8 +72,10 @@ const getAuth = async (
           attributes: ['fullName', 'role', 'id'],
         },
       });
+      if (!therapist) throw templateErrors.NOT_FOUND('Therapist not found');
       const { id, profileImg, user } = therapist;
-      data = { id, profileImg, ...user.dataValues };
+      if (!user) throw templateErrors.NOT_FOUND('User not found');
+      data = { therapistId: id, profileImg, ...user.dataValues };
     } else if (req.user?.role === RolesForSelect.user) {
       const user = await User.findOne({
         attributes: ['fullName', 'role', 'id'],
