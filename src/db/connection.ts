@@ -11,7 +11,9 @@ if (!DB_URL) {
 const sequelize = new Sequelize(DB_URL, {
   dialect: 'postgres',
   dialectOptions: {
-    ssl: false,
+    ssl: environment === 'production' ? {
+      rejectUnauthorized: false,
+    } : false,
   },
   logging: false,
 });
