@@ -11,8 +11,7 @@ import {
 import config from '../config';
 
 const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFunction) => {
-  const { username, password } = req.body.data;
-  console.log(username, password);
+  const { username, password } = req.body;
 
   try {
     await adminLoginSchema.validate({ username, password });
