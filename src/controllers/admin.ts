@@ -34,7 +34,7 @@ const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFun
     const token = await generateToken(payload);
     res.json({
       message: 'Login Successful',
-      data: { access_token: token },
+      data: { access_token: token, data: payload },
     });
   } catch (err) {
     if (err instanceof yup.ValidationError) {
