@@ -96,7 +96,7 @@ const getAuth = async (
 
     res.json({
       msg: 'success',
-      data: { ...data, role: 'admin', fullName: 'admin' },
+      data,
     });
   } catch (error) {
     next(error);
