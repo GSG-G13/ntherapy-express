@@ -82,9 +82,9 @@ const updateTherapistActive = async (req: Request, res: Response, next: NextFunc
 
     await updateTherapistActiveSchema.validate({ userId, active });
 
-    const therapist = await patchTherapist(therapistId, active === 'true');
+    const therapist = await patchTherapist(therapistId, active);
 
-    if (active === 'true') {
+    if (active) {
       const { emailBody, emailText } = generateEmail({
         theme: 'salted',
         body: {
