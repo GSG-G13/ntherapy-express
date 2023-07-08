@@ -86,7 +86,7 @@ const getAuth = async (
       data = user;
     } else {
       const admin = await Admin.findOne({
-        attributes: ['username', 'id'],
+        attributes: ['username', 'id', 'role'],
         where: {
           id: req.user?.adminId,
         },
