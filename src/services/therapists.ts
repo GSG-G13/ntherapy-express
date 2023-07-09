@@ -16,14 +16,26 @@ const getTherapistById = async (id: string) => {
   return therapistData;
 };
 
-const getAllTherapist = async (name: string, page: number, price:string) => {
+const getAllTherapist = async (name: string, page: number, minPrice:string, maxPrice:string) => {
   const offset = (page - 1) * THERAPISTS_LIMIT;
-  let priceFilter = {};
-  if (price !== 'all') {
-    const [minPrice, maxPrice] = price.split('-');
+  let priceFilter: any = {};
+
+  if (minPrice !== '' && maxPrice !== '') {
     priceFilter = {
       hourlyRate: {
         [Op.between]: [minPrice, maxPrice],
+      },
+    };
+  } else if (minPrice !== '') {
+    priceFilter = {
+      hourlyRate: {
+        [Op.gte]: minPrice,
+      },
+    };
+  } else if (maxPrice !== '') {
+    priceFilter = {
+      hourlyRate: {
+        [Op.lte]: maxPrice,
       },
     };
   }
