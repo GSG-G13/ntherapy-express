@@ -24,15 +24,15 @@ const therapistTest = () => {
     });
 
     it('should return  list of therapists  on the query ', async () => {
-        const response = await request(app).get('/api/v1/therapists').query({ q: 'Al', page: 1 });
+        const response = await request(app).get('/api/v1/therapists').query({ q: 'Al', page: 1,price:'all' });
         expect(response.status).toBe(200);
     });
     it('should return  list of the first 8  therapists  on the query ', async () => {
-        const response = await request(app).get('/api/v1/therapists').query({ q: '', page: 1 });
+        const response = await request(app).get('/api/v1/therapists').query({ q: '', page: 1 ,price:'0-50'});
         expect(response.status).toBe(200);
     });
     it('should return Page number should be a valid number ', async () => {
-        const response = await request(app).get('/api/v1/therapists').query({ q: '', page: "M" });
+        const response = await request(app).get('/api/v1/therapists').query({ q: '', page: "M" ,price:'100-200'});
         expect(response.status).toBe(400);
     });
     it('Should return Successful when the user is a therapist', async () => {
