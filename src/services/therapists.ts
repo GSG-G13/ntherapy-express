@@ -16,9 +16,21 @@ const getTherapistById = async (id: string) => {
   return therapistData;
 };
 
-const getAllTherapist = async (name: string, page: number) => {
+const getAllTherapist = async (name: string, page: number, price:string) => {
   const offset = (page - 1) * THERAPISTS_LIMIT;
+  let priceFilter = {};
+  if (price !== 'all') {
+    const [minPrice, maxPrice] = price.split('-');
+    priceFilter = {
+      hourlyRate: {
+        [Op.between]: [minPrice, maxPrice],
+      },
+    };
+  }
   const therapists = await Therapist.findAndCountAll({
+    where: {
+      ...priceFilter,
+    },
     include: [
       {
         model: User,
@@ -28,9 +40,11 @@ const getAllTherapist = async (name: string, page: number) => {
           fullName: {
             [Op.iLike]: `%${name}%`,
           },
+
         },
       },
     ],
+
     attributes: ['profileImg', 'major', 'hourlyRate', 'userId', 'id'],
     limit: THERAPISTS_LIMIT,
     offset,

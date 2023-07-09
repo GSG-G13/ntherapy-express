@@ -29,7 +29,7 @@ const findTherapistById = async (req: Request, res: Response, next: NextFunction
 
 const getAllTherapists = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { q, page } = req.query;
+    const { q, page, price } = req.query;
     const pageNumber = Number(page);
 
     // eslint-disable-next-line no-restricted-globals
@@ -37,7 +37,7 @@ const getAllTherapists = async (req: Request, res: Response, next: NextFunction)
       throw templateErrors.BAD_REQUEST('Page number should be a valid number');
     }
 
-    const { therapists, totalPages } = await getAllTherapist(q as string || '', pageNumber);
+    const { therapists, totalPages } = await getAllTherapist(q as string || '', pageNumber, price as string);
 
     res.json({
       message: 'Success',
