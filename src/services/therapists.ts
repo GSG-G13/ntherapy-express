@@ -16,9 +16,33 @@ const getTherapistById = async (id: string) => {
   return therapistData;
 };
 
-const getAllTherapist = async (name: string, page: number) => {
+const getAllTherapist = async (name: string, page: number, minPrice:string, maxPrice:string) => {
   const offset = (page - 1) * THERAPISTS_LIMIT;
+  let priceFilter: any = {};
+
+  if (minPrice !== '' && maxPrice !== '') {
+    priceFilter = {
+      hourlyRate: {
+        [Op.between]: [minPrice, maxPrice],
+      },
+    };
+  } else if (minPrice !== '') {
+    priceFilter = {
+      hourlyRate: {
+        [Op.gte]: minPrice,
+      },
+    };
+  } else if (maxPrice !== '') {
+    priceFilter = {
+      hourlyRate: {
+        [Op.lte]: maxPrice,
+      },
+    };
+  }
   const therapists = await Therapist.findAndCountAll({
+    where: {
+      ...priceFilter,
+    },
     include: [
       {
         model: User,
@@ -28,9 +52,11 @@ const getAllTherapist = async (name: string, page: number) => {
           fullName: {
             [Op.iLike]: `%${name}%`,
           },
+
         },
       },
     ],
+
     attributes: ['profileImg', 'major', 'hourlyRate', 'userId', 'id'],
     limit: THERAPISTS_LIMIT,
     offset,
