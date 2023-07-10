@@ -8,6 +8,10 @@ const Admin = sequelize.define<AdminAttributes>('admin', {
     autoIncrement: true,
     primaryKey: true,
   },
+  role: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   username: {
     type: DataTypes.STRING,
     allowNull: false,

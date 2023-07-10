@@ -172,6 +172,7 @@ const Admins = [
   {
     username: 'admin',
     password: '$2a$12$.4gCFbhK7VUUAED3n8GKsOZy/1qyNdi3Fhjm7frapQaxbzRyWzvBa',
+    role: 'admin',
   },
 ];
 const Therapists = [

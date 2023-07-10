@@ -46,6 +46,7 @@ InferCreationAttributes<AdminAttributes>> {
   id: CreationOptional<number>,
   username: string,
   password: string,
+  role: string,
   createdAt?: CreationOptional<Date>,
   updatedAt?: CreationOptional<Date>,
 }

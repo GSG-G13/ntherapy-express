@@ -52,7 +52,7 @@ const patchTherapist = async (id: number, active: boolean) => {
   const user = await User.findOne({ where: { id } });
 
   if (user?.isActive === active) {
-    throw templateErrors.BAD_REQUEST(`Therapist isActive property is already  ${active}`);
+    throw templateErrors.BAD_REQUEST(`Therapist isActive property is already ${active}`);
   }
 
   if (user?.isActive === undefined) {
