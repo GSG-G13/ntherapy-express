@@ -45,7 +45,7 @@ const therapistTest = () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
             "data": null,
-            "message": "Successful update"
+            "message": "Successfully updated"
         })
     })
     

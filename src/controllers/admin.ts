@@ -33,7 +33,7 @@ const adminLogin = async (req: RequestWithUserRole, res: Response, next: NextFun
 
     const token = await generateToken(payload);
     res.json({
-      message: 'Login Successful',
+      message: 'Login Successfully',
       data: { access_token: token, data: payload },
     });
   } catch (err) {

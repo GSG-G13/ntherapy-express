@@ -32,11 +32,11 @@ const getAppointments = async (
     }
     return res.json({
       data,
-      message: 'appointment successful',
+      message: 'appointment successfully retrieved',
     });
   } catch (err) {
     if (err instanceof ValidationError) {
-      return next(templateErrors.BAD_REQUEST('Validation Error'));
+      return next(templateErrors.BAD_REQUEST(err.message));
     }
     return next(err);
   }
@@ -63,7 +63,7 @@ const updateAvailable = async (
     });
 
     if (appointmentData?.therapistId?.toString() !== therapistId?.toString()) {
-      throw templateErrors.UNAUTHORIZED('Unauthorized ');
+      throw templateErrors.UNAUTHORIZED('Unauthorized');
     }
 
     if (appointmentData?.isBooked) {
@@ -71,10 +71,10 @@ const updateAvailable = async (
     }
 
     await updateIsAvailable(id, data.isAvailable);
-    return res.json({ data: null, message: 'update Available successful' });
+    return res.json({ data: null, message: 'Availability Successfully updated' });
   } catch (error) {
     if (error instanceof ValidationError) {
-      return next(templateErrors.BAD_REQUEST('Validation Error'));
+      return next(templateErrors.BAD_REQUEST(error.message));
     }
     next(error);
   }
@@ -99,7 +99,7 @@ const addAppointment = async (
     if (!data.length) {
       throw templateErrors.BAD_REQUEST('Invalid Range');
     }
-    return res.status(201).json({ data, message: 'appointments added successfuly' });
+    return res.status(201).json({ data, message: 'appointments added successfully' });
   } catch (error) {
     if (error instanceof ValidationError) {
       return next(templateErrors.BAD_REQUEST(error.message));
