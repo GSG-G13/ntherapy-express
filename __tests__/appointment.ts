@@ -89,7 +89,7 @@ const appointmentRouteTest = () => {
             message: 'Availability Successfully updated'
         });
     });
-    it('Should return  Unauthorizedif Therapist doesn’t own the appointment  and return  status 401', async () => {
+    it('Should return  Unauthorized if Therapist doesn’t own the appointment  and return  status 401', async () => {
         const id = '11';
         const token = config.TOKEN_TEST_THERAPIST;
 
