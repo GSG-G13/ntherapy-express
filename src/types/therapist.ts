@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import { AppointmentsAttributes, TherapistAttributes, UsersAttributes } from './models';
 
 interface TherapistWithUserOptional extends TherapistAttributes {
@@ -36,6 +37,14 @@ interface TherapistAndUser extends UsersAttributes {
   therapist?:TherapistAttributes
 }
 
+interface PriceFilter {
+  hourlyRate?: {
+    [Op.between]?: [string, string];
+    [Op.gte]?: string;
+    [Op.lte]?: string;
+  };
+}
+
 interface ITherapist {
   fullName: string;
   email: string;
@@ -51,4 +60,5 @@ interface ITherapist {
 export {
   TherapistWithUserOptional, Imeeting, Appointment,
   TimeRange, AddAppointment, AppointmentWithTherapistOptional, TherapistAndUser, ITherapist,
+  PriceFilter,
 };

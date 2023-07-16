@@ -1,8 +1,9 @@
+/* eslint-disable no-restricted-globals */
 import { Op } from 'sequelize';
 import { Therapist, User } from '../models';
 import { THERAPISTS_LIMIT } from '../config/constants';
 import therapist from '../models/therapist';
-import { Payload } from '../types';
+import { Payload, PriceFilter } from '../types';
 import { templateErrors } from '../helpers';
 
 const getTherapistById = async (id: string) => {
@@ -18,7 +19,12 @@ const getTherapistById = async (id: string) => {
 
 const getAllTherapist = async (name: string, page: number, minPrice:string, maxPrice:string) => {
   const offset = (page - 1) * THERAPISTS_LIMIT;
-  let priceFilter: any = {};
+  let priceFilter: PriceFilter = {};
+
+  if (isNaN(+minPrice)) throw templateErrors.BAD_REQUEST('minPrice param should be a number');
+  if (isNaN(+maxPrice)) throw templateErrors.BAD_REQUEST('maxPrice param should be a number');
+  if (minPrice === undefined) throw templateErrors.BAD_REQUEST('Missing Query Params : minPrice is required ');
+  if (maxPrice === undefined) throw templateErrors.BAD_REQUEST('Missing Query Params : maxPrice is required ');
 
   if (minPrice !== '' && maxPrice !== '') {
     priceFilter = {

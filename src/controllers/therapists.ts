@@ -73,7 +73,7 @@ const updateTherapistProfile = async (
     );
 
     if (isTherapistUpdated || isUserUpdated) {
-      return res.json({ data: null, message: 'Successful update' });
+      return res.json({ data: null, message: 'Successfully updated' });
     }
     res.json({ data: null, message: 'No Records Updated' });
   } catch (error) {
