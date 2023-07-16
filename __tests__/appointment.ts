@@ -75,7 +75,7 @@ const appointmentRouteTest = () => {
             message: 'this appointment is booked'
         });
     });
-    it('Should return update Available successful with status 200', async () => {
+    it('Should return Availability Successfully updated with status 200', async () => {
         const id = '9';
         const token = config.TOKEN_TEST_THERAPIST;
 
@@ -86,10 +86,10 @@ const appointmentRouteTest = () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
             data: null,
-            message: 'update Available successful'
+            message: 'Availability Successfully updated'
         });
     });
-    it('Should return  Unauthorized if Therapist doesn’t own the appointment  and return  status 401', async () => {
+    it('Should return  Unauthorizedif Therapist doesn’t own the appointment  and return  status 401', async () => {
         const id = '11';
         const token = config.TOKEN_TEST_THERAPIST;
 
@@ -99,7 +99,7 @@ const appointmentRouteTest = () => {
 
         expect(response.status).toBe(401);
         expect(response.body).toEqual({
-            message: 'Unauthorized '
+            message: 'Unauthorized'
         });
     });
 }
