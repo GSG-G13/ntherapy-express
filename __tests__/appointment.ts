@@ -49,7 +49,7 @@ const appointmentRouteTest = () => {
                     "isAvailable": true
                 }
             ],
-            "message": "appointment successful"
+            "message": "appointment successfully retrieved"
         });
       })
     
