@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
 import { ValidationError } from 'yup';
-import { getAllBugs as BugsService, createBug, updateBug } from '../services/bug';
-import { addBugSchema, updateBugSchema } from '../helpers/validation/bug';
+import { getAllBugs as BugsService, createBug, updateBug } from '../services';
+import { addBugSchema, updateBugSchema } from '../helpers/validation';
 import { templateErrors } from '../helpers';
 
 const getAllBugs = async (req: Request, res: Response, next: NextFunction) => {

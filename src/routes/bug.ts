@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { checkAuth } from '../middlewares';
 import { RolesForSelect } from '../types';
-import { getAllBugs, createNewBug, editBug } from '../controllers/bug';
+import { getAllBugs, createNewBug, editBug } from '../controllers';
 
 const router = Router();
 

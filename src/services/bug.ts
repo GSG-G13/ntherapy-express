@@ -1,5 +1,5 @@
-import Bug from '../models/bug';
-import { IGetAllBugs, Bug as BugType } from '../types/bug';
+import { Bug } from '../models';
+import { IGetAllBugs, Bug as BugType } from '../types';
 
 const getAllBugs = async ({ status, priority, assignedTo }:IGetAllBugs) => {
   const whereCondition = {
