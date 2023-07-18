@@ -62,6 +62,20 @@ InferCreationAttributes<SessionsAttributes>> {
 
 }
 
+interface BugsAttributes extends Model
+<InferAttributes<BugsAttributes>,
+InferCreationAttributes<BugsAttributes>> {
+  id: CreationOptional<number>,
+  title: string,
+  description: string,
+  priority: string,
+  status?: string,
+  assignedTo?: string | undefined,
+  createdAt?: CreationOptional<Date>,
+  updatedAt?: CreationOptional<Date>,
+}
+
 export {
   UsersAttributes, TherapistAttributes, AdminAttributes, AppointmentsAttributes, SessionsAttributes,
+  BugsAttributes,
 };

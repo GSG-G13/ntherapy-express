@@ -3,11 +3,13 @@ import sequelize from './connection';
 
 import {
   Users, Therapists, Sessions, Appointments, Admins,
+  Bugs,
 } from './fakeData';
 
 import {
   User, Therapist, Admin, Appointment, Session,
 } from '../models';
+import Bug from '../models/bug';
 
 const buildDB = async () => {
   log('Building database...');
@@ -23,6 +25,8 @@ const buildDB = async () => {
   log('Appointments created');
   await Session.bulkCreate(Sessions);
   log('Sessions created');
+  await Bug.bulkCreate(Bugs);
+  log('Bugs created');
   if (process.env.BUILD) {
     process.exit();
   }
