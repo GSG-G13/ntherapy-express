@@ -8,12 +8,12 @@ import findClientSecret from './payment';
 import s3upload from './s3upload';
 import { adminLogin, getTherapistsForAdmin, updateTherapistActive } from './admin';
 import {
-  getAllBugs, editBug, createNewBug, createIssue, deleteBug,
+  getAllBugs, editBug, createNewBug, createIssue, deleteBug, getContributors,
 } from './bug';
 
 export {
   findTherapistById, getAllTherapists, updateTherapistProfile, getAppointments, updateAvailable,
   getAuth, addAppointment, findClientSecret, createSessionController, updateProfileImg,
   login, s3upload, adminLogin, register, getTherapistsForAdmin, updateTherapistActive,
-  getAllBugs, editBug, createNewBug, createIssue, deleteBug,
+  getAllBugs, editBug, createNewBug, createIssue, deleteBug, getContributors,
 };

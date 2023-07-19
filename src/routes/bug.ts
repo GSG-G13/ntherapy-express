@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { checkAuth } from '../middlewares';
 import { RolesForSelect } from '../types';
 import {
-  getAllBugs, createNewBug, editBug, createIssue, deleteBug,
+  getAllBugs, createNewBug, editBug, createIssue, deleteBug, getContributors,
 } from '../controllers';
 
 const router = Router();
@@ -12,5 +12,6 @@ router.post('/', createNewBug);
 router.patch('/', checkAuth(RolesForSelect.admin), editBug);
 router.post('/github', checkAuth(RolesForSelect.admin), createIssue);
 router.delete('/', checkAuth(RolesForSelect.admin), deleteBug);
+router.get('/contributors', checkAuth(RolesForSelect.admin), getContributors);
 
 export default router;
