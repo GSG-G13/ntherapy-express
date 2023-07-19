@@ -477,6 +477,31 @@ const Sessions = [
   },
 ];
 
+const Bugs = [
+  {
+    title: 'Bug 1',
+    description: 'Bug 1 description',
+    priority: 'low',
+    status: 'new',
+    assignedTo: 'unassigned',
+  },
+  {
+    title: 'Bug 2',
+    description: 'Bug 2 description',
+    priority: 'medium',
+    status: 'in progress',
+    assignedTo: 'unassigned',
+  },
+  {
+    title: 'Bug 3',
+    description: 'Bug 3 description',
+    priority: 'high',
+    status: 'resolved',
+    assignedTo: 'unassigned',
+  },
+];
+
 export {
   Users, Therapists, Appointments, Sessions, Admins,
+  Bugs,
 };
