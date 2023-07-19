@@ -1,12 +1,13 @@
 import { NextFunction, Response, Request } from 'express';
 import { ValidationError } from 'yup';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 import {
   getAllBugs as BugsService, createBug, updateBug, addBugToGithub,
 } from '../services';
 import { addBugSchema, updateBugSchema } from '../helpers/validation';
 import { templateErrors } from '../helpers';
 import { Bug } from '../models';
+import config from '../config';
 
 const getAllBugs = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -99,6 +100,30 @@ const deleteBug = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+const getContributors = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const requestOption = {
+      headers: {
+        Authorization: `Bearer ${config.GITHUB_TOKEN}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      'https://api.github.com/repos/GSG-G13/ntherapy-express/contributors',
+      requestOption,
+    );
+    const contributors = data.map((contributor:{ login:string; }) => contributor.login);
+    res.json({
+      message: 'success',
+      contributors,
+    });
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
+};
 export {
-  getAllBugs, createNewBug, editBug, createIssue, deleteBug,
+  getAllBugs, createNewBug, editBug, createIssue, deleteBug, getContributors,
 };
