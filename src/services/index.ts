@@ -10,12 +10,14 @@ import { getAdmin, getTherapists, patchTherapist } from './admin';
 import createPresignedUrl from './S3Service';
 import mailer from './nodemailer';
 import generateEmail from './mailBuilder';
-import { getAllBugs, createBug, updateBug } from './bug';
+import {
+  getAllBugs, createBug, updateBug, addBugToGithub,
+} from './bug';
 
 export {
   getTherapistById, getAllTherapist, getAppointmentsPerDateService, getAppointmentById
   , updateIsAvailable, addAppointment, updateTherapist, getClientSecret, bookAppointment, getAdmin,
   createPresignedUrl, mailer, generateEmail, getTherapists,
   loginByEmail, registerTherapist, registerUser, patchTherapist,
-  getAllBugs, createBug, updateBug,
+  getAllBugs, createBug, updateBug, addBugToGithub,
 };

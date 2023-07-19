@@ -1,8 +1,12 @@
 import { NextFunction, Response, Request } from 'express';
 import { ValidationError } from 'yup';
-import { getAllBugs as BugsService, createBug, updateBug } from '../services';
+import { AxiosError } from 'axios';
+import {
+  getAllBugs as BugsService, createBug, updateBug, addBugToGithub,
+} from '../services';
 import { addBugSchema, updateBugSchema } from '../helpers/validation';
 import { templateErrors } from '../helpers';
+import { Bug } from '../models';
 
 const getAllBugs = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -54,4 +58,47 @@ const editBug = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { getAllBugs, createNewBug, editBug };
+const createIssue = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id, assignedTo } = req.body;
+    // eslint-disable-next-line no-restricted-globals
+    if (isNaN(id)) throw templateErrors.BAD_REQUEST('id must be a number');
+    const bug = await addBugToGithub(id, assignedTo);
+    res.json({
+      message: 'success',
+      data: bug,
+    });
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
+};
+
+const deleteBug = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.body;
+    // eslint-disable-next-line no-restricted-globals
+    if (isNaN(id)) throw templateErrors.BAD_REQUEST('id must be a number');
+    const bug = await Bug.destroy({
+      where: {
+        id,
+      },
+    });
+
+    res.json({
+      message: 'success',
+      data: bug,
+    });
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return next(templateErrors.BAD_REQUEST(error.message));
+    }
+    next(error);
+  }
+};
+
+export {
+  getAllBugs, createNewBug, editBug, createIssue, deleteBug,
+};
