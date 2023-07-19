@@ -1,5 +1,8 @@
+import axios from 'axios';
+import config from '../config';
 import { Bug } from '../models';
 import { IGetAllBugs, Bug as BugType } from '../types';
+import { templateErrors } from '../helpers';
 
 const getAllBugs = async ({ status, priority, assignedTo }:IGetAllBugs) => {
   const whereCondition = {
@@ -39,8 +42,40 @@ const updateBug = async (id:number, {
   return updatedBug;
 };
 
+const addBugToGithub = async (id:number, assignedTo:string) => {
+  const bug = await Bug.findByPk(id);
+  const requestOption = {
+    headers: {
+      Authorization: `Bearer ${config.GITHUB_TOKEN}`,
+    },
+  };
+
+  const { data } = await axios.get(
+    'https://api.github.com/repos/GSG-G13/ntherapy-express/contributors',
+    requestOption,
+  );
+  if (assignedTo !== 'unassigned') {
+    const isContributor = data.some((contributor:{
+      login:string; }) => contributor.login === assignedTo);
+    if (!isContributor) throw templateErrors.BAD_REQUEST('You are not a contributor to this repo and you can not create an issue for this repo');
+  }
+  if (!bug) throw templateErrors.NOT_FOUND('Bug not found');
+  await axios.post(
+    'https://api.github.com/repos/GSG-G13/ntherapy-express/issues',
+    {
+      title: bug.title,
+      body: bug.description,
+      labels: ['bug'],
+      assignees: [assignedTo === 'unassigned' ? '' : assignedTo],
+    },
+    requestOption,
+  );
+  return bug;
+};
+
 export {
   getAllBugs,
   createBug,
   updateBug,
+  addBugToGithub,
 };

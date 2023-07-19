@@ -10,6 +10,7 @@ const {
   AUTH_PROVIDER_X509_CERT_URL, SECRET_KEY, TOKEN_TEST_THERAPIST, API_KEY, MAILERUSER, MAILERPASS,
   AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, REGION,
   BUCKET_NAME, PRODUCTNAME, PRODUCTLINK, THEME, FRONT_END_URL,
+  GITHUB_TOKEN,
 } = process.env;
 
 interface ICONFIG {
@@ -44,6 +45,7 @@ interface ICONFIG {
   PRODUCTLINK:string | undefined,
   THEME:string | undefined,
   FRONT_END_URL:string | undefined,
+  GITHUB_TOKEN:string | undefined,
 }
 const config: ICONFIG = {
   DB_URL: {
@@ -80,6 +82,7 @@ const config: ICONFIG = {
   PRODUCTLINK,
   THEME,
   FRONT_END_URL,
+  GITHUB_TOKEN,
 
 };
 
