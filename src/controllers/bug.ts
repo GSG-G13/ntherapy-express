@@ -79,9 +79,12 @@ const createIssue = async (req: Request, res: Response, next: NextFunction) => {
 
 const deleteBug = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
+
     // eslint-disable-next-line no-restricted-globals
-    if (isNaN(id)) throw templateErrors.BAD_REQUEST('id must be a number');
+    if (isNaN(Number(id))) {
+      throw templateErrors.BAD_REQUEST('id must be a number');
+    }
     const bug = await Bug.destroy({
       where: {
         id,

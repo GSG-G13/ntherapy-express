@@ -11,7 +11,7 @@ router.get('/', checkAuth(RolesForSelect.admin), getAllBugs);
 router.post('/', createNewBug);
 router.patch('/', checkAuth(RolesForSelect.admin), editBug);
 router.post('/github', checkAuth(RolesForSelect.admin), createIssue);
-router.delete('/', checkAuth(RolesForSelect.admin), deleteBug);
+router.delete('/:id', checkAuth(RolesForSelect.admin), deleteBug);
 router.get('/contributors', checkAuth(RolesForSelect.admin), getContributors);
 
 export default router;
