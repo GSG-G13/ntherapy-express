@@ -115,7 +115,7 @@ const getContributors = async (req: Request, res: Response, next: NextFunction) 
     const contributors = data.map((contributor:{ login:string; }) => contributor.login);
     res.json({
       message: 'success',
-      contributors,
+      data: contributors,
     });
   } catch (error) {
     if (error instanceof AxiosError) {
